@@ -40,12 +40,12 @@ defaultContentLanguage = "fr"
 [Languages]
   [Languages.fr]
     title = "Mehdi LATIF | CV Numérique"
-    contentDir = 'content/fre'
+    contentDir = 'content/fr'
     languageName = 'Fr'
     weight = 1
   [Languages.en]
     title = "Mehdi LATIF | Digital Resume"
-    contentDir = 'content/eng'
+    contentDir = 'content/en'
     languageName = 'En'
     weight = 2
 
