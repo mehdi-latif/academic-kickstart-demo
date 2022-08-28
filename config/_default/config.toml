@@ -11,10 +11,12 @@
 # The URL of your site.
 # End your URL with a `/` trailing slash, e.g. `https://example.com/`.
 baseurl = "/"
+# #TODO
+# baseurl = "https://mehdi-latif.github.io/"
 
 # Enter a copyright notice to display in the site footer.
 # To display a copyright symbol, type `&copy;`. For current year, type `{year}`.
-copyright = ""
+copyright = "{year} &copy;"
 
 ############################
 ## Advanced options below ##
@@ -24,7 +26,10 @@ copyright = ""
 theme = "academic"
 
 # Get last modified date for content from Git?
-enableGitInfo = false
+enableGitInfo = true
+
+# Create your one Hugo Shortcode : https://gohugo.io/templates/shortcode-templates/
+enableInlineShortcodes = true
 
 # Default language to use (if you setup multilingual support)
 defaultContentLanguage = "fr"
@@ -34,15 +39,17 @@ defaultContentLanguage = "fr"
 
 [Languages]
   [Languages.fr]
-    title = "Mon blog en fr"
+    title = "Mehdi LATIF | CV Numérique"
     contentDir = 'content/fre'
     languageName = 'Fr'
     weight = 1
   [Languages.en]
-    title = "My blog in eng"
+    title = "Mehdi LATIF | Digital Resume"
     contentDir = 'content/eng'
     languageName = 'En'
     weight = 2
+
+
 
 hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.
 defaultContentLanguageInSubdir = true
