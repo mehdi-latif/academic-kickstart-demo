@@ -1,7 +1,13 @@
 Tuto de base pour la redef :
   - https://lakemper.eu/blog/getting-started-with-hugo-academic-and-github-pages/
 
+hugoDocs
+  - https://github.com/gohugoio/hugoDocs
+
 Multilingual Mode
   - https://gohugo.io/content-management/multilingual/
   - https://www.regisphilibert.com/blog/2018/08/hugo-multilingual-part-1-managing-content-translation/ (pointé par la ref 1)
   - https://bwaycer.github.io/hugo_tutorial.hugo/content/multilingual/
+
+Multilingual Menu
+  - https://github.com/gohugoio/hugoDocs/tree/master/config/_default
