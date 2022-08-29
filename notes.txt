@@ -73,3 +73,214 @@ Remarque :
   info_sup_tag = ""
   info_sup = """
 """
+
+
+
+#############################
+#############################
+#############################
+
+
+Tout ce qui est en dessous n'est pas pris en compte
+[[experience]]
+  title = "Auxiliaire d'été - Service *Chargés d'Affaires Clientèle Emetteurs*"
+  company = "Société Générale - Département titres et bourses, Nantes"
+  company_url = ""
+  location = "Nantes"
+  date_start = "2018-07-01"
+  date_end = "2018-08-01"
+  description = """
+  Conception et mise à jour de systèmes d'information.
+  """
+  info_sup_tag = 1
+  info_sup = """
+  Mon travail consistait en :
+  - la mise à jour des systèmes d'informations.
+  - la conception d'outils automatisés pour les besoins du service.
+  - la conception d'un outil de CRM pour la gestion des portefeuilles clients
+  """
+
+  [[experience]]
+    title = "Étudiant entrepreneur - Porteur de projet"
+    company = "PEPITE, Nantes"
+    company_url = ""
+    location = "Nantes"
+    date_start = "2015-09-01"
+    date_end = "2016-07-01"
+    description = """
+    Intégration du PEPITE (Pôle Étudiant Pour l’Innovation, le Transfert et l’Entrepreneuriat) en tant qu'étudiant bénéficiant du [Statut National Etudiant Entrepreneur](http://www.enseignementsup-recherche.gouv.fr/cid79926/statut-national-etudiant-entrepreneur.html).
+    """
+    info_sup_tag = 1
+    info_sup = """
+    - Porteur du Projet *Veckevent* : Application mobile proposant une transmission ciblée de l'information culturelle et évènementielle sur la ville de Nantes.
+    - Lauréat du [Passeport Armorique pour Entreprendre](https://www.passeport-armorique.com/).<br>
+    - Management de 11 étudiants participant à l'élaboration du business model, à la stratégie de communication et au développement technique de l'application (5 étudiants de Licence 3 IAE, 5 étudiants de Master 2 IAE, 1 étudiant du département informatique de Polytech Nantes)
+    """
+
+
+
+[[experience]]
+  title = "Auxiliaire d'été - Service *Assemblées Générales*"
+  company = "Société Générale - Département titres et bourses"
+  company_url = ""
+  location = "Nantes"
+  date_start = "2015-07-01"
+  date_end = "2015-08-31"
+  description = """
+  Gestion de la maintenance assistée par ordinateur.
+  """
+  info_sup_tag = 1
+  info_sup = """
+  Mon travail consistait en :
+  - Gestion de la chaine logistique pour la réception du matériel de vote assisté par ordinateur et préparation de l'année suivante.
+  - Gestion de la maintenance du matériel de vote.
+  """
+  [[experience]]
+    title = "Stagiaire logisticien"
+    company = "Groupe PILOTE SAS - CAS Gérard"
+    company_url = ""
+    location = "Sainte Luce sur Loire"
+    date_start = "2015-03-01"
+    date_end = "2015-06-30"
+    description = """
+    Stage d'amélioration industrielle.
+    """
+    info_sup_tag = 1
+    info_sup = """
+    L'objectif principal de ce stage fut de mettre en place des méthodes logistique dans une entreprise aux process artisanaux.<br>
+    Les principales étapes de mon action au sein de l'entreprise ont été :
+    - Analyse de l'existant et écriture d'un rapport de synthèse.
+    - Développement et mise en place d'un ERP dédié aux besoins de l'entreprise.
+    - Mise en place d'une solution de gestion des stocks basées sur les méthodes Kanban.
+    - Conduite au changement.
+    """
+
+  [[experience]]
+    title = "Porteur de projet"
+    company = "Les Entrepreneuriales"
+    company_url = ""
+    location = "Nantes"
+    date_start = "2015-07-01"
+    date_end = "2014-10-01"
+    description = """
+    Sensibilisation au monde de l'entrepreneuriat, [Les Entreps](https://www.lesentrep.fr/).
+    """
+    info_sup_tag = 1
+    info_sup = """
+    - Porteur du Projet *Veckevent* : Application mobile proposant une transmission ciblée de l'information culturelle et évènementielle sur la ville de Nantes.
+    - Apprentissage sur le terrain et élaboration d'un business plan présenté à un jury de professionels.
+    - Constitution d'une équipe interdisciplinaire composée de 4 personnes (Audencia SciencesCom, Institut des Mines Télécom, département informatique de l'IUT de Nantes).
+    """
+
+
+  [[experience]]
+    title = "Stagiaire logisticien et qualiticien"
+    company = "Airbus Operation SAS"
+    company_url = ""
+    location = "Nantes"
+    date_start = "2014-01-01"
+    date_end = "2014-02-01"
+    description = """
+    Stage de découverte du milieu industriel.
+    """
+    info_sup_tag = 1
+    info_sup = """
+    Ce stage a été réalisé dans l'unité des composites produisant les caissons centraux de voilure, radômes et ailerons pour les modèles ATR, A330, A380.<br>
+    Mes missions dans le cadre de cette entreprise ont été :
+    - Analyse des systèmes de production, processus logistique et qualité.
+    - Découverte des métiers supports à la production (qualiticien, logisticien, assistant de production, ingénieur méthodes).
+    """
+
+
+
+  [[experience]]
+    title = "Stagiaire développeur informatique"
+    company = "Dadeyo"
+    company_url = ""
+    location = "Nantes"
+    date_start = "2013-06-15"
+    date_end = "2013-07-15"
+    description = """
+    Stage réalisé dans une entreprise spécialisée dans le développement d'application web.
+    """
+    info_sup_tag = 1
+    info_sup = """
+    - Développement d'un Kanban Board en Ruby.
+    - Participation aux Rencontres Mondiales du Logiciel Libre 2013 sur Bruxelles.
+    """
+
+
+  [[experience]]
+    title = "Stagiaire ingenieur réseau"
+    company = "Orange Business Services"
+    company_url = ""
+    location = "Nantes"
+    date_start = "2012-06-15"
+    date_end = "2012-07-15"
+    description = """
+
+    """
+    info_sup_tag = 1
+    info_sup = """
+    Stage réalisé au sein du service CSP-BAM en charge du déploiement de sondes applicatives sur les réseaux de grande entreprises domiciliées en France ou à l'étranger.
+    - Mise à jour d'applications et de systèmes d'informations internes.
+    - Déploiement de sondes sur les réseaux d'entreprises.
+    """
+
+
+    #############################
+    #############################
+    #############################
+
+
+    +++
+    # A Skills section created with the Featurette widget.
+    widget = "skills"  # See https://sourcethemes.com/academic/docs/page-builder/
+    headless = true  # This file represents a page section.
+    active = true  # Activate this widget? true/false
+    weight = 100  # Order that this section will appear.
+
+    title = "Skills"
+    subtitle = "Compétences"
+
+    # Showcase personal skills or business features.
+    #
+    # Add/remove as many `[[feature]]` blocks below as you like.
+    #
+    # For available icons, see: https://sourcethemes.com/academic/docs/widgets/#icons
+    [[skill]]
+      icon = "globe"
+      icon_pack = "fa"
+      name = "Linguistique"
+      description = "Français, Anglais, Allemand, Arabe."
+    [[skill]]
+      icon = "code"
+      icon_pack = "fas"
+      name = "Développement"
+      description = "C++, Git, HTML/CSS, Java, Julia, Matlab, Lua, Ocaml, Prolog."
+    [[skill]]
+      icon = "calculator"
+      icon_pack = "fa"
+      name = "Calcul et conception"
+      description = "Access, MS Project, Matlab, R."
+    [[skill]]
+      icon = "file"
+      icon_pack = "fa"
+      name = "Bureautique"
+      description = "Latex, Microsoft Office, Open Office."
+    [[skill]]
+      icon = "pencil-ruler"
+      icon_pack = "fa"
+      name = "PAO et 3D"
+      description = "Adobe Photoshop, InDesign, Illustrator, Trimble Sketchup."
+    [[skill]]
+      icon = "desktop"
+      icon_pack = "fa"
+      name = "Systèmes d'exploitation"
+      description = "Linux, Mac, Windows."
+    [[skill]]
+      icon = "briefcase"
+      icon_pack = "fa"
+      name= "Gestion de projets"
+      description = "Management, Entrepreneuriat, Conception de business plan, Conduite au changement."
+    +++
