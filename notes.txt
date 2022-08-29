@@ -16,3 +16,60 @@ Change webpage icon
   - https://spectrum.chat/academic/help/how-to-change-the-favicon~6cfd2955-04c3-4dba-a18e-e51deb89d609
   => Se placer dans assets/images/
   => Dupliquer le fichier icon-512.png et le renommer en icon.png
+
+Remarque :
+  => Dans le cas de fichier en langue en, mettre le chemin st.   url = "../files/CV_LM.pdf"
+
+Remarque :
+  => https://academic-demo.netlify.app/ ce que ça donne
+
+
+
+
+
+
+
+#############################
+#############################
+[[experience]]
+  title = "Diplôme Universitaire de Technologie"
+  company = " Institut Universitaire de Technologie de la Fleuryaie."
+  company_url = ""
+  location = "Carquefou"
+  date_start = "2013-09-01"
+  date_end = "2015-07-01"
+  description = """
+  DUT mention Qualité, Logistique Industrielle et Organisation option poursuite d'études longues.
+  Participation aux [Entrepreneuriales](https://www.lesentrep.fr/) durant la seconde année de DUT.<br>
+  """
+  info_sup_tag = 0
+  info_sup = """
+  """
+
+[[experience]]
+  title = "Parcours des écoles d'ingénieurs Polytech"
+  company = "École polytechnique des universités."
+  company_url = ""
+  location = "Tours"
+  date_start = "2011-09-01"
+  date_end = "2013-07-01"
+  description = """
+  Licence 1 et 2 du parcours Mathématiques et Informatique proposé par le PEIP.
+  """
+  info_sup_tag = ""
+  info_sup = """
+  """
+
+[[experience]]
+  title = "Baccalauréat scientifique"
+  company = " Lycée Clemenceau."
+  company_url = ""
+  location = "Nantes."
+  date_start = "2007-09-01"
+  date_end = "2011-07-01"
+  description = """
+  Baccalauréat scientifique spécialité Mathématiques, option Arabe (LV3).
+  """
+  info_sup_tag = ""
+  info_sup = """
+"""
