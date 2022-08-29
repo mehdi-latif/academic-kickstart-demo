@@ -20,7 +20,7 @@
 
 [[main]]
   name = "Resume"
-  url = "files/CV_LM.pdf"
+  url = "../files/CV_LM.pdf"
   weight = 40
 
   #[[main]]
