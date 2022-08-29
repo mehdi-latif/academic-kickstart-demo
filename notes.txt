@@ -11,3 +11,8 @@ Multilingual Mode
 
 Multilingual Menu
   - https://github.com/gohugoio/hugoDocs/tree/master/config/_default
+
+Change webpage icon
+  - https://spectrum.chat/academic/help/how-to-change-the-favicon~6cfd2955-04c3-4dba-a18e-e51deb89d609
+  => Se placer dans assets/images/
+  => Dupliquer le fichier icon-512.png et le renommer en icon.png
