@@ -8,9 +8,9 @@ authors:
 # Is this the primary user of the site?
 superuser: true
 # Role/position
-role: Doctorant - Algorithmique et Traitement du signal.
+role: PhD student - Algorithmics & Signal processing.
 
-job: Doctorant.
+job: PhD student.
 
 # Organizations/Affiliations
 organizations:
@@ -55,7 +55,7 @@ social:
   link: https://www.linkedin.com/in/mehdilatif/
 - icon: envelope
   icon_pack: fas
-  link: "mailto:latifm.pro@gmail.com"
+  link: "mailto:mehdi.latif@ls2n.fr?cc=latifm.pro@gmail.com"
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
