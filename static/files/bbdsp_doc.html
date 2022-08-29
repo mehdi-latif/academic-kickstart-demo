@@ -1,0 +1,1086 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOC_MAIN</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#bbdsp--protocole-dutilisation-de-la-version-light-du-code.">BBDSP : Protocole d’utilisation de la version light du code.</a>
+<ul>
+<li>
+<ul>
+<li></li>
+<li><a href="#structure-de-la-version-light-du-code-">Structure de la version light du code :</a></li>
+<li><a href="#méthodes---combinaisons-pré-implémentées">Méthodes - combinaisons pré-implémentées</a></li>
+<li><a href="#paramètres-du-main.m-à-faire-varier">Paramètres du main.m à faire varier</a></li>
+<li><a href="#formulations-du-problème">Formulations du problème</a></li>
+<li><a href="#sous-fonctions-dans-les-fichiers">Sous fonctions dans les fichiers</a></li>
+</ul>
+</li>
+<li><a href="#précisions-sur-lobjet-solution-retourné-par-les-branch-and-bound">Précisions sur l’objet solution retourné par les Branch and bound</a></li>
+<li><a href="#notes-de-codes">Notes de codes</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="bbdsp--protocole-dutilisation-de-la-version-light-du-code.">BBDSP : Protocole d’utilisation de la version <em>light</em> du code.</h1>
+<p><strong>Stagiaire:</strong>  <a href="https://www.mlatif.fr">M.Latif</a>;<br>
+<strong>Promoteurs</strong> :  S. Bourguignon, R. Ben Mhenni, J. Ninin ;<br>
+<strong>Documents :</strong> <a href="https://mlatif.fr/files/LATIFM_M2_BBHS.pdf">mémoire</a>, <a href="https://mlatif.fr/files/LATIFM_M2_BBHS_PRES.pdf">planches</a>.</p>
+<hr>
+<h4 id="abstract-">Abstract :</h4>
+<p>Le problème de démélange spectral vise à déterminer la composition, en termes de matériaux, d’une surface planétaire à partir de la mesure de la réflectance lumineuse sur plusieurs canaux spectraux. Un modèle classique considère que le spectre mesuré pour chaque un pixel peut être expliqué comme un mélange de spectres associés aux composants présents dans la matière et qui peut être exprimé comme une combinaison linéaire de signatures spectrales pures.</p>
+<p>Une contrainte physique, appelée contrainte de parcimonie, stipule que qu’un faible nombre de composants dans le mélange suffit à décrire la composition de chaque spectre mesuré. Par ailleurs, les réflectances mesurées correspondant à une proportion de la lumière éclairant la scène, les coefficients du mélange, représentant des pourcentages, sont positifs et de somme unité.</p>
+<p>Le code présenté est le résultat des travaux de recherche visant à proposer une méthode de résolution exacte pour le problème de démélange parcimonieux intégrant ces contraintes et reposent sur la formulation en nombres mixtes du problème de démélange parcimonieux et de sa résolution par un algorithme de branch-and-bound dédié.</p>
+<h4 id="keywords-">Keywords :</h4>
+<p>Démélange spectral, Parcimonie, Optimisation exacte, Branch-and-bound.</p>
+<hr>
+<h3 id="structure-de-la-version-light-du-code-">Structure de la version light du code :</h3>
+<pre class=" language-matlab"><code class="prism  language-matlab">main<span class="token punctuation">.</span>m  				<span class="token comment">% Interface utilisateur</span>
+pandoraBox<span class="token punctuation">.</span>m  			<span class="token comment">% Tambouille interne</span>
+usgs_library<span class="token punctuation">.</span>mat  		<span class="token comment">% Données</span>
+<span class="token operator">./</span>B<span class="token operator">&amp;</span>B_DEDIE  			<span class="token comment">% Implémentation du branch-and-bound dédié</span>
+	BNB_OptL2_CstrL0<span class="token punctuation">.</span>m
+	MIP_BNB_OptL2_CstrL0<span class="token punctuation">.</span>m
+	sub_BNB_solve_Cstr<span class="token punctuation">.</span>m
+<span class="token operator">./</span>B<span class="token operator">&amp;</span>B_CPLEX  			<span class="token comment">% Construction et résolution du MIP</span>
+MIP_CPLEX_OptL2_CstrL0<span class="token punctuation">.</span>m
+</code></pre>
+<hr>
+<h3 id="méthodes---combinaisons-pré-implémentées">Méthodes - combinaisons pré-implémentées</h3>
+<p><em>Procédure :</em> Renseigner le numéro correspondant à la combinaisons que l’on souhaite lancer :</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">no Méthode</th>
+<th align="center">BNBmethod</th>
+<th align="center">preCalcul</th>
+<th align="center">restCandidat</th>
+<th align="center">solverUsed</th>
+<th align="center">dualThreshold</th>
+<th align="center">Nom</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">BBD_slv1</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">BBD_slv2</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">BBD_slv3</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">BBD_slv4</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">BBD_slv1_R</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">BBD_slv2_R</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">BBD_slv3_R</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">BBD_slv4_R</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">BBD_slv1_PC</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">BBD_slv2_PC</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">0</td>
+<td align="center">BBD_slv1_R_PC</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">0</td>
+<td align="center">BBD_slv2_R_PC</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1,00E-04</td>
+<td align="center">BBC_DT04</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1,00E-05</td>
+<td align="center">BBC_DT05</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1,00E-06</td>
+<td align="center">BBC_DT06</td>
+</tr>
+<tr>
+<td align="center">16</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1,00E-07</td>
+<td align="center">BBC_DT07</td>
+</tr>
+<tr>
+<td align="center">17</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1,00E-08</td>
+<td align="center">BBC_DT08</td>
+</tr>
+<tr>
+<td align="center">18</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">5</td>
+<td align="center">0</td>
+<td align="center">BBD_slv5_R_PC</td>
+</tr>
+<tr>
+<td align="center">19</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">6</td>
+<td align="center">0</td>
+<td align="center">BBD_slv6_R_PC</td>
+</tr>
+</tbody>
+</table><p>avec les variables utilisées pour les phases expérimentales :</p>
+<ul>
+<li><strong>BNBmethod</strong> <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo><mo stretchy="false">{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\in \{1,2\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">2</span><span class="mclose">}</span></span></span></span></span>
+<ul>
+<li>1 : BBD - Branch and bound dédié (voir solverUsed)</li>
+<li>2 : BBC - Branch and bound CPLEX MIQP</li>
+</ul>
+</li>
+<li><strong>PreCalcul</strong> <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\in\{0,1\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mclose">}</span></span></span></span></span>
+<ul>
+<li>1 : lancement du pré-calcul des matrices
+<ul>
+<li>cas <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo>&lt;</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">Q&lt;N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.10903em;">N</span></span></span></span></span> : précalcul des matrices <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="bold">H</mi><mi mathvariant="normal">⊤</mi></msup><mi mathvariant="bold">H</mi></mrow><annotation encoding="application/x-tex">\mathbf{H}^\top \mathbf{H}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.849108em; vertical-align: 0em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">H</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.849108em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span></span></span></span></span>, <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="bold-italic">y</mi><mi mathvariant="normal">⊤</mi></msup><mi mathvariant="bold">H</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}^\top \mathbf{H}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1.04355em; vertical-align: -0.19444em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.849108em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span></span></span></span></span> avec possibilité de restriction aux sous-ensembles de variables <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi mathvariant="bold">H</mi><mi>K</mi><mi mathvariant="normal">⊤</mi></msubsup><msub><mi mathvariant="bold">H</mi><mi>K</mi></msub></mrow><annotation encoding="application/x-tex">\mathbf{H}^\top_{K} \mathbf{H}_{K}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1.12444em; vertical-align: -0.275331em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.849108em;"><span class="" style="top: -2.42467em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.07153em;">K</span></span></span></span><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">⊤</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.275331em;"><span class=""></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathbf">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.07153em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span></span></span></span></span>, <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="bold-italic">y</mi><mi mathvariant="normal">⊤</mi></msup><msub><mi mathvariant="bold">H</mi><mi>K</mi></msub></mrow><annotation encoding="application/x-tex">\boldsymbol{y}^\top \mathbf{H}_{K}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1.04355em; vertical-align: -0.19444em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.849108em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathbf">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.07153em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span></span></span></span></span></li>
+<li>cas <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo>≥</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">Q\geq N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.10903em;">N</span></span></span></span></span> pré calcul possible du vecteur <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="bold-italic">y</mi><mi mathvariant="normal">⊤</mi></msup><mi mathvariant="bold">H</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{y}^\top \mathbf{H}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1.04355em; vertical-align: -0.19444em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.849108em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span></span></span></span></span> avec adaptation de ce vecteur dans la formulation du problème (concaténation de <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span></span></span></span></span> zéros et du vecteur <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="bold-italic">y</mi><mi mathvariant="normal">⊤</mi></msup><msub><mi mathvariant="bold">H</mi><mi>K</mi></msub></mrow><annotation encoding="application/x-tex">\boldsymbol{y}^\top \mathbf{H}_{K}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1.04355em; vertical-align: -0.19444em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.849108em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">⊤</span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord mathbf">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.07153em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span></span></span></span></span> ).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>restCandidat</strong> :<span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\in\{0,1\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen">{</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mclose">}</span></span></span></span></span>
+<ul>
+<li>0 : Résolution du problème entier en chaque nœud de l’arbre</li>
+<li>1 : Restriction à des sous ensemble de variables “actives” (ou candidates) dans les nœuds de l’arbre.</li>
+</ul>
+</li>
+<li><strong>solverUsed</strong> <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo><mi mathvariant="normal">⟦</mi><mn>1</mn><mo separator="true">,</mo><mn>6</mn><mi mathvariant="normal">⟧</mi></mrow><annotation encoding="application/x-tex">\in\llbracket 1,6 \rrbracket</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen"><span class="mopen">[</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mopen">[</span></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">6</span><span class="mclose"><span class="mclose">]</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mclose">]</span></span></span></span></span></span>
+<ul>
+<li><em>cas 1</em> : CPLEX QP</li>
+<li><em>cas 2</em> : Matlab Quadprog</li>
+<li><em>cas 3</em> : CPLEX LSQLin</li>
+<li><em>cas 4</em> : Matlab LSQLin</li>
+<li><em>cas 5</em> : Homotopie</li>
+<li><em>cas 6</em> : FCLS</li>
+</ul>
+</li>
+<li><strong>dualThreshold</strong> <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo><mo stretchy="false">{</mo><mn>1</mn><mi>e</mi><mo>−</mo><mn>04</mn><mo separator="true">,</mo><mn>1</mn><mi>e</mi><mo>−</mo><mn>05</mn><mo separator="true">,</mo><mn>1</mn><mi>e</mi><mo>−</mo><mn>06</mn><mo separator="true">,</mo><mn>1</mn><mi>e</mi><mo>−</mo><mn>07</mn><mo separator="true">,</mo><mn>1</mn><mi>e</mi><mo>−</mo><mn>08</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\in\{1e-04,1e-05,1e-06,1e-07,1e-08\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 0.83888em; vertical-align: -0.19444em;"></span><span class="mord">0</span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 0.83888em; vertical-align: -0.19444em;"></span><span class="mord">0</span><span class="mord">5</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 0.83888em; vertical-align: -0.19444em;"></span><span class="mord">0</span><span class="mord">6</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 0.83888em; vertical-align: -0.19444em;"></span><span class="mord">0</span><span class="mord">7</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mord mathdefault">e</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">0</span><span class="mord">8</span><span class="mclose">}</span></span></span></span></span>, implémenté dans le cas où BNBmethod = 2, variation du saut de dualité (<em>aka</em> MIP GAP Tolerance -cf. doc p61) du solveur CPLEXMIQP</li>
+</ul>
+<p>Les dénominations des méthodes de résolution que nous allons présenter sont les suivantes :</p>
+<ul>
+<li><strong>Méthodes 13 à 17</strong> - <strong>MIP_Cplex_DT_<span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.43056em; vertical-align: 0em;"></span><span class="mord mathdefault">x</span></span></span></span></span></strong>  correspond à la résolution du problème  en utilisant le solveur MIP Cplex où DT correspond au saut de dualité <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>δ</mi></mrow><annotation encoding="application/x-tex">\delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.03785em;">δ</span></span></span></span></span> que nous faisons varier tel que <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>δ</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mrow><mo>−</mo><mi>x</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\delta = 10^{-x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.03785em;">δ</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.771331em; vertical-align: 0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.771331em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathdefault mtight">x</span></span></span></span></span></span></span></span></span></span></span></span></span>  avec  <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>∈</mo><mi mathvariant="normal">⟦</mi><mn>4</mn><mo separator="true">,</mo><mn>8</mn><mi mathvariant="normal">⟧</mi></mrow><annotation encoding="application/x-tex">x \in \llbracket 4,8\rrbracket</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen"><span class="mopen">[</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mopen">[</span></span><span class="mord">4</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">8</span><span class="mclose"><span class="mclose">]</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mclose">]</span></span></span></span></span></span> - ;</li>
+<li><strong>Méthode 12</strong> - <strong>BB_R_Cplex_QP</strong> correspond à la résolution des problèmes relâchés en utilisant le solveur Cplex QP;</li>
+<li><strong>Méthode 18</strong> - <strong>BB_R_Hom</strong> correspond à la résolution des problèmes relâchés en utilisant la méthode Homotopique sauf sur les nœuds de types feuilles pour lesquels nous utilisons le solveur Cplex QP ;</li>
+<li><strong>Méthode 19</strong> - <strong>BB_R_FCLS</strong> correspond à la résolution des problèmes relâchés en utilisant l’algorithme FCLS.</li>
+</ul>
+<hr>
+<h3 id="paramètres-du-main.m-à-faire-varier">Paramètres du main.m à faire varier</h3>
+<p>Champs au début de la fonction <em>main.m</em> à renseigner :</p>
+<ul>
+<li>OS : Choix de l’OS tel que :
+<ul>
+<li>1 - Windows</li>
+<li>2 - Linux</li>
+<li>3 - Mac<br>
+<strong>Remarque(s) :</strong> si besoin, modifier les appels à CPLEX en fonction de votre machine.</li>
+</ul>
+</li>
+<li>mySeed : graine pour le générateur aléatoire. Mis à “default”.</li>
+<li>N : Nombre d’observations souhaité</li>
+<li>Q : Nombre d’atomes souhaité.</li>
+<li>K : Le coefficient de parcimonie souhaité.</li>
+<li>SNR : Le SNR souhaité.</li>
+<li><em>nMethBBD</em> : indice de la combinaison de paramètre souhaitée pour le branch and bound dédié : <em>nMethBBD</em> <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo><mi mathvariant="normal">⟦</mi><mn>1</mn><mo separator="true">,</mo><mn>12</mn><mi mathvariant="normal">⟧</mi><mo>∪</mo><mo stretchy="false">{</mo><mn>18</mn><mo separator="true">,</mo><mn>19</mn><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\in \llbracket 1,12 \rrbracket \cup \{18,19\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen"><span class="mopen">[</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mopen">[</span></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mclose"><span class="mclose">]</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mclose">]</span></span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mord">8</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mord">9</span><span class="mclose">}</span></span></span></span></span>.</li>
+<li><em>nMethBBC</em> : indice de la combinaison de paramètre souhaitée pour le branch and bound CPLEX : <em>nMethBBC</em> <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∈</mo><mi mathvariant="normal">⟦</mi><mn>13</mn><mo separator="true">,</mo><mn>17</mn><mi mathvariant="normal">⟧</mi></mrow><annotation encoding="application/x-tex">\in \llbracket 13,17 \rrbracket</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.5782em; vertical-align: -0.0391em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen"><span class="mopen">[</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mopen">[</span></span><span class="mord">1</span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">1</span><span class="mord">7</span><span class="mclose"><span class="mclose">]</span><span class="mspace" style="margin-right: -0.177778em;"></span><span class="mclose">]</span></span></span></span></span></span></li>
+</ul>
+<p><strong>Remarque :</strong> Il faut bien renseigner les deux champs avec les valeurs du tableau précédent si l’on veut comparer les résultats obtenus avec les deux méthodes BBD et BBC.</p>
+<ul>
+<li><em>sel_heuristic</em> : Indicateur stratégie de sélection des variables (ici 1 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> argmax(xi))</li>
+<li><em>sep_heuristic;</em> : Indicateur stratégie de séparation des branches (ici 1 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> bi&lt;-1 d’abord)</li>
+<li><em>form_withBi ;</em> : Pas utile pour le moment (préciser si la formulation que l’on passe possède de variables binaires (forcée à 1 dans le cas <em>BNBmethod = 2</em>)</li>
+<li><em>withChrono</em> : Booléen pour lancer le chrono sur les avec tic toc Matlab</li>
+<li><em>intTolerance</em> : Specifies the amount by which an integer variable can be different from an integer and still be considered feasible.</li>
+<li><em>optimalityTolerance</em> : OptimalityTolerance is a tolerance for the first-order optimality measure. If the optimality measure is less than OptimalityTolerance, the iterations end.</li>
+</ul>
+<pre class=" language-matlab"><code class="prism  language-matlab">OS <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token comment">% Paramètres expérimentaux</span>
+mySeed <span class="token operator">=</span> <span class="token string">'default'</span><span class="token punctuation">;</span>
+N <span class="token operator">=</span> <span class="token number">224</span><span class="token punctuation">;</span>
+Q <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+K <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+SNR <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+<span class="token comment">% Lancer les deux méthodes</span>
+nMethBBD <span class="token operator">=</span> <span class="token number">11</span><span class="token punctuation">;</span> <span class="token comment">% De 1 à 12 et 18 à 19</span>
+nMethBBC <span class="token operator">=</span> <span class="token number">13</span><span class="token punctuation">;</span>  <span class="token comment">% De 13 à 17</span>
+<span class="token comment">% Pour la création des objets nécessaires à la résolution.</span>
+sel_heuristic <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">% Argmax(x_i)</span>
+sep_heuristic <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">% brancher bi&lt;-1</span>
+form_withBi <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">% Sans binaires</span>
+withChrono <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">% Chronométrages</span>
+intTolerance <span class="token operator">=</span> <span class="token number">1e-8</span><span class="token punctuation">;</span>
+optimalityTolerance <span class="token operator">=</span> <span class="token number">1e-9</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token punctuation">...</span><span class="token punctuation">]</span>
+<span class="token comment">% Renseigner les chemins vers CPLEX.</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>OS<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span>
+	<span class="token function">addpath</span><span class="token punctuation">(</span><span class="token string">'C:\Program\Files\IBM\ILOG\CPLEX_Studio126\cplex\matlab\x64_win64'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token function">addpath</span><span class="token punctuation">(</span><span class="token string">'C:\Program Files\IBM\ILOG\CPLEX_Studio126\cplex\examples\src\matlab'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">elseif</span> <span class="token punctuation">(</span>OS<span class="token operator">==</span><span class="token number">2</span><span class="token punctuation">)</span>
+	<span class="token function">addpath</span><span class="token punctuation">(</span><span class="token function">genpath</span><span class="token punctuation">(</span><span class="token string">'/opt/ibm/ILOG/CPLEX_Studio128/cplex/matlab'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">elseif</span><span class="token punctuation">(</span>OS<span class="token operator">==</span><span class="token number">3</span><span class="token punctuation">)</span>
+	<span class="token function">addpath</span><span class="token punctuation">(</span><span class="token function">genpath</span><span class="token punctuation">(</span><span class="token string">'/Users/mehdilatif/opt/ibm/ILOG/CPLEX_Studio1210/cplex/matlab'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+</code></pre>
+<p><strong>Retour :</strong> trois graphiques associés à cette expérimentation à savoir :</p>
+<ul>
+<li><strong>figure 1 :</strong>  La composition du mélange <em>i.e.</em> la visualisation des solutions proposées par les solveurs BBC et BBD sur un même graphique</li>
+<li><strong>figure 2 :</strong> Les spectres comparés</li>
+<li><strong>figure 3 :</strong> l’évolution des bornes primale et duale pendant l’expérimentation.<br>
+Et l’affichage console :</li>
+</ul>
+<pre class=" language-matlab"><code class="prism  language-matlab"><span class="token operator">&gt;</span><span class="token operator">&gt;</span> main
+	Nom <span class="token operator">:</span> BB_R_Hom_R_PC
+	Nom <span class="token operator">:</span> MIP_Cplex_DT<span class="token number">-05</span>
+<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
+Synthèse <span class="token operator">:</span>
+Instance <span class="token operator">:</span> K <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> Q <span class="token operator">=</span> <span class="token number">200</span><span class="token punctuation">,</span> SNR <span class="token operator">=</span> <span class="token number">15</span>
+	Méthode <span class="token operator">:</span> BB_R_Hom_R_PC
+		<span class="token operator">||</span>x<span class="token operator">||</span>_0 <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token operator">||</span>x<span class="token operator">&gt;</span><span class="token number">1e-2</span><span class="token operator">||</span>_0 <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> T1 <span class="token operator">=</span> <span class="token number">0.0174735</span> <span class="token punctuation">(</span>sec<span class="token punctuation">)</span>
+	Méthode <span class="token operator">:</span> MIP_Cplex_DT<span class="token number">-05</span>
+		<span class="token operator">||</span>x<span class="token operator">||</span>_0 <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token operator">||</span>x<span class="token operator">&gt;</span><span class="token number">1e-2</span><span class="token operator">||</span>_0 <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">,</span> T2 <span class="token operator">=</span> <span class="token number">0.555148</span> <span class="token punctuation">(</span>sec<span class="token punctuation">)</span>
+	Erreurs <span class="token operator">:</span>
+		Donné<span class="token function">es</span><span class="token punctuation">(</span>xt<span class="token punctuation">)</span> <span class="token operator">-</span>  <span class="token number">1.071214e+00</span>
+		<span class="token function">BB_R_Hom_R_PC</span><span class="token punctuation">(</span>x1<span class="token punctuation">)</span> <span class="token operator">:</span>  <span class="token number">1.038094e+00</span>  <span class="token function">delta</span><span class="token punctuation">(</span>x1<span class="token operator">/</span>xt<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">3.311973e-02</span>
+		MIP_Cplex_DT<span class="token number">-05</span><span class="token punctuation">(</span>x2<span class="token punctuation">)</span> <span class="token operator">:</span>  <span class="token number">1.038094e+00</span>  <span class="token function">delta</span><span class="token punctuation">(</span>x2<span class="token operator">/</span>xt<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">3.311975e-02</span>
+</code></pre>
+<p><img src="https://i.imgur.com/CLen514.png" alt="Mélange obtenu"><br>
+<img src="https://i.imgur.com/AtHNusd.png" alt="Spectres comparés"><br>
+<img src="https://i.imgur.com/46QXsJw.png" alt="Evolution des bornes"><br>
+<strong>Remarque(s) :</strong></p>
+<ul>
+<li>
+<p>N,Q est utilisé pour extraire les données du fichier USGS (dans <em>main.m,</em> fonction <em>[H] =loadUSGSMatrix(N,Q)</em> - voir plus bas dans le fichier <em>main.m</em>) et dans le générateur d’instance (dans <em>main.m,</em> fonction <em>[x_Truth,y] = getInstance(H,N,Q,K,SNR,mySeed)</em> - voir plus bas dans le fichier <em>main.m</em>)</p>
+</li>
+<li>
+<p><strong>Aucun fichier auxiliaire n’est généré</strong>, tout est dans la mémoire courante de ton workspace (e.g : Q,N,K,SNR,y,x_Truth,…)</p>
+</li>
+<li>
+<p>sel_heuristic, sep_heuristic, … sont utilisés dans la fonction permettant de générer les paramètres pour la résolution des deux BNB (dans <em>main.m,</em> fonction <em>[solveur,heuristic,debug] = param_Exp(…)</em> )</p>
+</li>
+</ul>
+<h3 id="formulations-du-problème">Formulations du problème</h3>
+<h4 id="formulations">Formulations</h4>
+<p>Trois cas possibles sont à étudiés. Soient N le nombre d’observations et Q le nombre d’atomes</p>
+<ol>
+<li>Branch and Bound CPLEX :<br>
+<span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munder><mo><mi>min</mi><mo>⁡</mo></mo><mrow><mi>x</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mi>Q</mi></msup><mo separator="true">,</mo><mi>b</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><msup><mo stretchy="false">}</mo><mi>Q</mi></msup></mrow></munder><mfrac><mn>1</mn><mn>2</mn></mfrac><mi mathvariant="normal">∥</mi><mi mathvariant="bold">H</mi><mi>x</mi><mo>−</mo><mi mathvariant="bold-italic">y</mi><msubsup><mi mathvariant="normal">∥</mi><mn>2</mn><mn>2</mn></msubsup><mtext>&nbsp;st&nbsp;</mtext><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>Q</mi></mrow></munder><msub><mi>b</mi><mi>i</mi></msub><mo>≤</mo><mi>K</mi><mo separator="true">,</mo><mn>0</mn><mo>≤</mo><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn><mtext>&nbsp;</mtext><mi mathvariant="normal">∀</mi><mi>i</mi><mo>∈</mo><mi>Q</mi><mo separator="true">,</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>Q</mi></mrow></munder><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\min_{x\in \mathbb{R}^{Q},b \in \{0,1\}^{Q}} \frac{1}{2} \|\mathbf{H}x-\boldsymbol{y}\|_{2}^{2} \textrm{ st } \sum_{i \in Q} b_{i} \leq K, 0 \leq x_{i} \leq 1 \textrm{ } \forall i \in Q, \sum_{i\in Q} x_{i}  \leq 1
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 2.3043em; vertical-align: -0.982865em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.66786em;"><span class="" style="top: -1.99214em; margin-left: 0em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">∈</span><span class="mord mtight"><span class="mord mtight"><span class="mord mathbb mtight">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.774093em;"><span class="" style="top: -2.786em; margin-right: 0.0714286em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">Q</span></span></span></span></span></span></span></span></span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight">b</span><span class="mrel mtight">∈</span><span class="mopen mtight">{</span><span class="mord mtight">0</span><span class="mpunct mtight">,</span><span class="mord mtight">1</span><span class="mclose mtight"><span class="mclose mtight">}</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.774093em;"><span class="" style="top: -2.786em; margin-right: 0.0714286em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">Q</span></span></span></span></span></span></span></span></span></span></span></span><span class="" style="top: -2.7em;"><span class="pstrut" style="height: 2.7em;"></span><span class=""><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.982865em;"><span class=""></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.32144em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord">∥</span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 2.48045em; vertical-align: -1.43044em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.864108em;"><span class="" style="top: -2.453em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.247em;"><span class=""></span></span></span></span></span></span><span class="mord text"><span class="mord textrm">&nbsp;st&nbsp;</span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.05001em;"><span class="" style="top: -1.85566em; margin-left: 0em;"><span class="pstrut" style="height: 3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight">Q</span></span></span></span><span class="" style="top: -3.05em;"><span class="pstrut" style="height: 3.05em;"></span><span class=""><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 1.43044em;"><span class=""></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.311664em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault" style="margin-right: 0.07153em;">K</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">0</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.78597em; vertical-align: -0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.311664em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.73354em; vertical-align: -0.0391em;"></span><span class="mord">1</span><span class="mord text"><span class="mord textrm">&nbsp;</span></span><span class="mord">∀</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 2.48045em; vertical-align: -1.43044em;"></span><span class="mord mathdefault">Q</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.05001em;"><span class="" style="top: -1.85566em; margin-left: 0em;"><span class="pstrut" style="height: 3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight">Q</span></span></span></span><span class="" style="top: -3.05em;"><span class="pstrut" style="height: 3.05em;"></span><span class=""><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 1.43044em;"><span class=""></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.311664em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.64444em; vertical-align: 0em;"></span><span class="mord">1</span></span></span></span></span></span></li>
+<li>Branch and Bound dédié :</li>
+</ol>
+<ul>
+<li>Cas <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>&gt;</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">N&gt;Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.72243em; vertical-align: -0.0391em;"></span><span class="mord mathdefault" style="margin-right: 0.10903em;">N</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span></span></span></span></span> :<br>
+<span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munder><mo><mi>min</mi><mo>⁡</mo></mo><mrow><mi>x</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mi>S</mi></msup></mrow></munder><mfrac><mn>1</mn><mn>2</mn></mfrac><mi mathvariant="normal">∥</mi><msub><mi mathvariant="bold">H</mi><mi>S</mi></msub><msub><mi>x</mi><mi>S</mi></msub><mo>−</mo><mi mathvariant="bold-italic">y</mi><msubsup><mi mathvariant="normal">∥</mi><mn>2</mn><mn>2</mn></msubsup><mtext>&nbsp;st&nbsp;</mtext><mn>0</mn><mo>≤</mo><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn><mtext>&nbsp;</mtext><mi mathvariant="normal">∀</mi><mi>i</mi><mo>∈</mo><mi>S</mi><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\min_{x\in \mathbb{R}^{S}} \frac{1}{2} \|\mathbf{H}_{S}x_{S}-\boldsymbol{y}\|_{2}^{2} \textrm{ st }  0 \leq x_{i} \leq 1 \textrm{ } \forall i \in S  \sum_{i\in S } x_{i}  \leq 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 2.15667em; vertical-align: -0.835235em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.66786em;"><span class="" style="top: -1.99214em; margin-left: 0em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">∈</span><span class="mord mtight"><span class="mord mtight"><span class="mord mathbb mtight">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.774093em;"><span class="" style="top: -2.786em; margin-right: 0.0714286em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span></span></span></span></span></span></span></span></span><span class="" style="top: -2.7em;"><span class="pstrut" style="height: 2.7em;"></span><span class=""><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.835235em;"><span class=""></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.32144em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord">∥</span><span class="mord"><span class="mord"><span class="mord mathbf">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1.11411em; vertical-align: -0.25em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.864108em;"><span class="" style="top: -2.453em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.247em;"><span class=""></span></span></span></span></span></span><span class="mord text"><span class="mord textrm">&nbsp;st&nbsp;</span></span><span class="mord">0</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.78597em; vertical-align: -0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.311664em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.73354em; vertical-align: -0.0391em;"></span><span class="mord">1</span><span class="mord text"><span class="mord textrm">&nbsp;</span></span><span class="mord">∀</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 2.37171em; vertical-align: -1.32171em;"></span><span class="mord mathdefault" style="margin-right: 0.05764em;">S</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.05001em;"><span class="" style="top: -1.85566em; margin-left: 0em;"><span class="pstrut" style="height: 3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span><span class="" style="top: -3.05em;"><span class="pstrut" style="height: 3.05em;"></span><span class=""><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 1.32171em;"><span class=""></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.311664em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.64444em; vertical-align: 0em;"></span><span class="mord">1</span></span></span></span></span></span><br>
+où <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>⊆</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">S\subseteq Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8193em; vertical-align: -0.13597em;"></span><span class="mord mathdefault" style="margin-right: 0.05764em;">S</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span></span></span></span></span> désigne une restriction de l’ensemble des candidats en un nœud donné.</li>
+<li>Cas <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>≤</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">N\leq Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8193em; vertical-align: -0.13597em;"></span><span class="mord mathdefault" style="margin-right: 0.10903em;">N</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span></span></span></span></span> :<br>
+<span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munder><mo><mi>min</mi><mo>⁡</mo></mo><mrow><mi>x</mi><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mi>S</mi></msup></mrow></munder><mfrac><mn>1</mn><mn>2</mn></mfrac><mi mathvariant="normal">∥</mi><mi mathvariant="bold-italic">z</mi><mo>−</mo><mi mathvariant="bold-italic">y</mi><msubsup><mi mathvariant="normal">∥</mi><mn>2</mn><mn>2</mn></msubsup><mtext>&nbsp;st&nbsp;</mtext><mn>0</mn><mo>≤</mo><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn><mtext>&nbsp;</mtext><mi mathvariant="normal">∀</mi><mi>i</mi><mo>∈</mo><mi>S</mi><mo separator="true">,</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mi>x</mi><mi>i</mi></msub><mo>≤</mo><mn>1</mn><mo separator="true">,</mo><mi mathvariant="bold-italic">z</mi><mo>=</mo><msub><mi mathvariant="bold">H</mi><mi>S</mi></msub><msub><mi>x</mi><mi>S</mi></msub><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">\min_{x\in \mathbb{R}^{S}} \frac{1}{2} \|\boldsymbol{z}-\boldsymbol{y}\|_{2}^{2} \textrm{ st }  0 \leq x_{i} \leq 1 \textrm{ } \forall i \in S , \sum_{i\in S } x_{i} \leq 1, \boldsymbol{z}  = \mathbf{H}_{S}x_{S}.
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 2.15667em; vertical-align: -0.835235em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.66786em;"><span class="" style="top: -1.99214em; margin-left: 0em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mrel mtight">∈</span><span class="mord mtight"><span class="mord mtight"><span class="mord mathbb mtight">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.774093em;"><span class="" style="top: -2.786em; margin-right: 0.0714286em;"><span class="pstrut" style="height: 2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span></span></span></span></span></span></span></span></span><span class="" style="top: -2.7em;"><span class="pstrut" style="height: 2.7em;"></span><span class=""><span class="mop">min</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.835235em;"><span class=""></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.32144em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord">∥</span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.04213em;">z</span></span></span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1.11411em; vertical-align: -0.25em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.864108em;"><span class="" style="top: -2.453em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.247em;"><span class=""></span></span></span></span></span></span><span class="mord text"><span class="mord textrm">&nbsp;st&nbsp;</span></span><span class="mord">0</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.78597em; vertical-align: -0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.311664em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.73354em; vertical-align: -0.0391em;"></span><span class="mord">1</span><span class="mord text"><span class="mord textrm">&nbsp;</span></span><span class="mord">∀</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 2.37171em; vertical-align: -1.32171em;"></span><span class="mord mathdefault" style="margin-right: 0.05764em;">S</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.05001em;"><span class="" style="top: -1.85566em; margin-left: 0em;"><span class="pstrut" style="height: 3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span><span class="" style="top: -3.05em;"><span class="pstrut" style="height: 3.05em;"></span><span class=""><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 1.32171em;"><span class=""></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.311664em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.83888em; vertical-align: -0.19444em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.04213em;">z</span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.83611em; vertical-align: -0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">H</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mord">.</span></span></span></span></span></span> où <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>⊆</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">S\subseteq Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.8193em; vertical-align: -0.13597em;"></span><span class="mord mathdefault" style="margin-right: 0.05764em;">S</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">⊆</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span></span></span></span></span> désigne une restriction de l’ensemble des candidats en un nœud donné.</li>
+</ul>
+<p><em>Remarque :</em> formulation alternative mise en place pour éviter les erreur de type CPLEX 5002 not convex (quand CPLEX est pas content car la matrice est semie définie positive et non définie positive - voir notes maths).</p>
+<h4 id="précisions-sur-les-retours-solveurs.">Précisions sur les retours solveurs.</h4>
+<p>Pour les quatre solveurs que nous utilisons, nous dénombrons trois formulations différentes  des fonctions objectif. Il nous faut donc établir une forme de base et en fonction de laquelle nous allons modifier les valeurs des fonctions objectif trouvées par les deux autres solveurs.</p>
+<p>Nous avons décidé de fixer comme fonction objectif de référence, celle partagée par CPLEXQP et Quadprog à savoir :</p>
+<p><span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mo>⊺</mo></msup><mi mathvariant="bold">H</mi><msup><mrow></mrow><mo>⊺</mo></msup><mi mathvariant="bold">H</mi><mi>x</mi><mo>−</mo><msup><mi mathvariant="bold-italic">y</mi><mo>⊺</mo></msup><mi mathvariant="bold">H</mi></mrow><annotation encoding="application/x-tex"> f(x) = \frac{1}{2} x^{\intercal}\mathbf{H}{^{\intercal}} \mathbf{H}x - \boldsymbol{y}^{\intercal}\mathbf{H}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathdefault" style="margin-right: 0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 2.00744em; vertical-align: -0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.32144em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.714392em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord amsrm mtight">⊺</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord"><span class="mord"><span class=""></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.714392em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord amsrm mtight">⊺</span></span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 0.908832em; vertical-align: -0.19444em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.714392em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord amsrm mtight">⊺</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span></span></span></span></span></span></p>
+<p>Les deux autres formulations de la fonction objectif peuvent dont être formuler de la manière suivante :</p>
+<ul>
+<li>Pour CPLEX LSQLIN :<br>
+<span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∥</mi><mi mathvariant="bold">H</mi><mi>x</mi><mo>−</mo><mi mathvariant="bold-italic">y</mi><msup><mi mathvariant="normal">∥</mi><mn>2</mn></msup><mo>⇔</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo fence="true">(</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><msup><mi mathvariant="bold-italic">y</mi><mo>⊺</mo></msup><mi mathvariant="bold-italic">y</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\|\mathbf{H}x-\boldsymbol{y}\|^{2}  \Leftrightarrow \frac{1}{2}\left(f(x)-\boldsymbol{y}^{\intercal}\boldsymbol{y}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">∥</span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1.11411em; vertical-align: -0.25em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.864108em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">⇔</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 2.00744em; vertical-align: -0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.32144em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="minner"><span class="mopen delimcenter" style="top: 0em;">(</span><span class="mord mathdefault" style="margin-right: 0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.714392em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord amsrm mtight">⊺</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="mclose delimcenter" style="top: 0em;">)</span></span></span></span></span></span></span></li>
+<li>Pour Matlab LSQLIN :<br>
+<span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mi mathvariant="normal">∥</mi><mi mathvariant="bold">H</mi><mi>x</mi><mo>−</mo><mi mathvariant="bold-italic">y</mi><msup><mi mathvariant="normal">∥</mi><mn>2</mn></msup><mo>⇔</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi mathvariant="bold-italic">y</mi><mo>⊺</mo></msup><mi mathvariant="bold-italic">y</mi></mrow><annotation encoding="application/x-tex">\frac{1}{2}\|\mathbf{H}x-\boldsymbol{y}\|^{2}  \Leftrightarrow f(x)-\frac{1}{2}\boldsymbol{y}^{\intercal}\boldsymbol{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 2.00744em; vertical-align: -0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.32144em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord">∥</span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1.11411em; vertical-align: -0.25em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.864108em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">⇔</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathdefault" style="margin-right: 0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 2.00744em; vertical-align: -0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.32144em;"><span class="" style="top: -2.314em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">2</span></span></span><span class="" style="top: -3.23em;"><span class="pstrut" style="height: 3em;"></span><span class="frac-line" style="border-bottom-width: 0.04em;"></span></span><span class="" style="top: -3.677em;"><span class="pstrut" style="height: 3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.686em;"><span class=""></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.714392em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord amsrm mtight">⊺</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span></span></span></span></span></span></li>
+</ul>
+<h4 id="détails-de-la-construction-du-modèle-">Détails de la construction du modèle :</h4>
+<pre class=" language-matlab"><code class="prism  language-matlab"><span class="token comment">% Création de la solution initiale au (P) - Q fois pour chaque atome</span>
+x0 <span class="token operator">=</span> <span class="token function">zeros</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% Membre gauche des contraintes d'inégalité</span>
+Aineq <span class="token operator">=</span> <span class="token function">ones</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>Q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% Membre droit des contraintes d'inégalité</span>
+bineq <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% Membre gauche des contraintes d’Egalite</span>
+Aeq <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">% Membre droit des contraintes d’égalité</span>
+beq <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">% Vecteur de bornes inf. sur les variables du modèle (Qx pour les x et 0 pour les b (bah oui ils sont plus dedans par hypothèse))</span>
+lb <span class="token operator">=</span> <span class="token function">zeros</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% Vecteur de bornes sup sur les variables du modèle (Qx pour les x )</span>
+ub <span class="token operator">=</span> <span class="token function">ones</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% Globalement inutile dans le cas présent</span>
+<span class="token function">z0</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span>Q<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span>  x0<span class="token punctuation">;</span>
+<span class="token comment">% Structure générale d'un solution - 1 indique les variables sur lesquelles on effectue les opérations de branchement, 0 sinon (voir dans le cas withBi)</span>
+params<span class="token punctuation">.</span>v0 <span class="token operator">=</span> x0<span class="token punctuation">;</span>
+params<span class="token punctuation">.</span>xstatus<span class="token operator">=</span> <span class="token function">ones</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="sous-fonctions-dans-les-fichiers">Sous fonctions dans les fichiers</h3>
+<h4 id="main.m"><em>main.m</em></h4>
+<p>Rien, Interface utilisateur</p>
+<h4 id="pandorabox.m"><em>pandoraBox.m</em></h4>
+<ul>
+<li>loadUSGSMatrix(N,Q)</li>
+<li>getInstance(H,N,Q,K,SNR,mySeed)</li>
+<li>param_Exp(…)</li>
+<li>getParam(typeMeth)</li>
+<li>localPlotSpectrum(K,SNR,Q,N,y)</li>
+<li>localPlotCompo(x_Truth,x1,x2,myTitle)</li>
+<li>localPlotBoundEvol(solution,typeBB1)</li>
+</ul>
+<h4 id="bb_cplexmip_cplex_optl2_cstrl0.m"><em>B&amp;B_CPLEX/MIP_CPLEX_OptL2_CstrL0.m</em></h4>
+<p>Rien  - appel au solveur MIP</p>
+<h4 id="bb_dediemip_bnb_optl2_cstrl0.m"><em>B&amp;B_DEDIE/MIP_BNB_OptL2_CstrL0.m</em></h4>
+<p>Construction du modèle pour le branch-and-bound dédié et appel à notre algorithme.</p>
+<h4 id="bb_dediebnb_optl2_cstrl0.m"><em>B&amp;B_DEDIE/BNB_OptL2_CstrL0.m</em></h4>
+<ul>
+<li>sub_BNB_input_Checking(x0,xtype,modele,verbose)</li>
+<li>sub_BNB_fixGlobBsup(H,y,Aineq,bineq,x0)</li>
+<li>getCandidat(typeNode,lb,ub,debug,heuristic,xstatus)</li>
+<li>sub_BNB_select_branch(x,isep,domain,choice)</li>
+<li>sub_BNB_select_var(heuristic,V,x,debug,xstatus)</li>
+</ul>
+<h4 id="bb_dediesub_bnb_solve_cstr.m"><em>B&amp;B_DEDIE/sub_BNB_solve_Cstr.m</em></h4>
+<ul>
+<li>sub_solve_genereModel(i,modele,xLb,xUb,heuristic,debug,cdtList)</li>
+<li>sub_BNB_solMeth_FCLS(X,A) - Heinz 2001, code fourni par Saïd Moussaoui</li>
+<li>sub_BNB_solMeth_HP(HtH,ytH,heuristic,debug)</li>
+</ul>
+<hr>
+<h2 id="précisions-sur-lobjet-solution-retourné-par-les-branch-and-bound">Précisions sur l’objet <em>solution</em> retourné par les Branch and bound</h2>
+<p>Wrap up final permettant de stocker tous les éléments obtenus lors de la résolution des différents B&amp;B.<br>
+<strong>Notations :</strong> Certains objets de <em>solution</em> sont laissés vides car dépendent du type de B&amp;B utilisés. Pour différencier les objets qui sont utilisés dans l’un ou l’autres des B&amp;B, je mets BBD (resp. BBC) pour spécifier que l’objet est non vide après la résolution du Branch and bound Dédié (resp. Branch and Bound Cplex).</p>
+<ul>
+<li>
+<p><em>X</em>  la meilleure composition trouvée (BBD,BBC)</p>
+</li>
+<li>
+<p><em>B</em> les valeurs des variables booléennes associées si elles existent (BBD,BBC)</p>
+</li>
+<li>
+<p><em>Z</em> la meilleure valeur de fonction objectif trouvée</p>
+</li>
+<li>
+<p><em>nbNodes</em> le nombre de nœuds explores (BBD),</p>
+</li>
+<li>
+<p><em>Fail</em> : le nombre de problèmes non résolus a l’optimalité (BBD,BBC)</p>
+</li>
+<li>
+<p><em>S0</em> : l’ensemble des indices des variables fixées a 0 (BBD,BBC)</p>
+</li>
+<li>
+<p><em>S1</em> : l’ensemble des indices des variables fixées a ~= 0 (BBD,BBC)</p>
+</li>
+<li>
+<p><em>xtruth</em> : la solution au problème (si elle est connue) (BBD,BBC)</p>
+</li>
+<li>
+<p><em>noIterSol</em> : le numéro de l’itération à laquelle un problème a été résolu (BBD)</p>
+</li>
+<li>
+<p><em>noNodeSol</em> : l’indice du nœud auquel un problème a été résolu (BBD)</p>
+</li>
+<li>
+<p><em>nbIter</em> : le nombre d’itérations réalisées par l’algorithme (BBD : Nombre de nœuds explores, BBC : Tambouille Cplex ne donnant pas le nombre de nœud (It’s the number of iterations of the Primal QP Simplex algorithm are Simplex pivots, or, eqivalent, QP Simplex basis changes.))</p>
+</li>
+<li>
+<p><em>unitResTime :</em> vecteur permettant de stocker (individuellement) le temps de chaque résolution en un nœud. (BBD)</p>
+</li>
+<li>
+<p><em>unitObjValue :</em> vecteur permettant de stocker (individuellement) les valeurs des fonctions objectif en chaque nœuds ou le problème est résolu (BBD)</p>
+</li>
+<li>
+<p><em>unitCompSol :</em> vecteur permettant de stocker (individuellement) la composition du vecteur solution - à chaque résolution de l’arbre (qu’elle soit mauvaise ou non) (BBD)</p>
+</li>
+<li>
+<p><em>branchVarIdx :</em> vecteur permettant de stocker les indices des variables sur lesquelles nous avons branche (BBD)</p>
+</li>
+<li>
+<p><em>timeRelax :</em> le temps total cumule d’exécution de l’algorithme (BBD)</p>
+</li>
+<li>
+<p><em>chronoTicToc</em> temps obtenu avec les fonctions tic toc de matlab (BBD, BBC)</p>
+</li>
+<li>
+<p><em>cpt_Bo1</em> : nombre de nœuds sondés par non réalisabilité (BBD)</p>
+</li>
+<li>
+<p><em>cpt_Bo2</em> : nombre de nœuds sondés par dominance (BBD)</p>
+</li>
+<li>
+<p><em>cpt_Bo3 :</em> nombre de nœuds sondés par optimalité (BBD)</p>
+</li>
+<li>
+<p><em>cpt_Br :</em> nombre d’opération de branchements (BBD)</p>
+</li>
+<li>
+<p><em>traceRoute :</em> Matrice permettant d’étudier le comportement du B&amp;B tout le long de son exécution (BBD)</p>
+</li>
+<li>
+<p>traceRoute(:,1) : numéro de l’itération (on indice l’itération au nœud à 0)</p>
+</li>
+<li>
+<p>traceRoute(:,2) : numéro du nœud étudié</p>
+</li>
+<li>
+<p>traceRoute(:,3) : nombre de composantes fixées Ã 1 (compteur K)</p>
+</li>
+<li>
+<p>traceRoute(:,4) : type de nœud</p>
+<ul>
+<li>0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Root</li>
+<li>1 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Leaf (activation de la contrainte de parcimonie)</li>
+<li>2 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Explore</li>
+<li>3 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Nœud non précisé (non type 0,1,2</li>
+</ul>
+</li>
+<li>
+<p>traceRoute(:,5) : Booléen 1 si il y a eu résolution en ce nœud, 0 sinon</p>
+</li>
+<li>
+<p>traceRoute(:,6) : type d’opération de d’évaluation (bound)</p>
+<ul>
+<li>0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> pas d’opération de bound</li>
+<li>1 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> nœud sondé par non réalisabilité</li>
+<li>2 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> nœud sondé par dominance</li>
+<li>3 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> nœud sondé par optimalité</li>
+</ul>
+</li>
+<li>
+<p>traceRoute(:,7) : indice de branchement</p>
+<ul>
+<li>0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> pas d’opération de branchement</li>
+<li>x <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> idx de branchement</li>
+</ul>
+</li>
+<li>
+<p>traceRoute(:,8) : les lower bounds en chaque itération de l’algorithme</p>
+</li>
+<li>
+<p>traceRoute(:,9) : les upper bounds en chaque itération de l’algorithme</p>
+</li>
+<li>
+<p>traceRoute(:,10) : le dualité gap (en %) à chaque itérations tel que :</p>
+<ul>
+<li>gap &lt; 0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Branch</li>
+<li>gap = 0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Bound by Opt</li>
+<li>gap &gt; 0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Bound by Dom</li>
+</ul>
+</li>
+<li>
+<p>traceRoute(:,11) : l’exitflag retourné par le solveur à chaque itération</p>
+</li>
+<li>
+<p>traceRoute(:,12) : le nombre de candidat à chaque itération (si on active le paramètre restriction.</p>
+</li>
+<li>
+<p>nbCd : Nombre de vraies composantes détectées (BBD,BBC)</p>
+</li>
+<li>
+<p>nbCnd : Nombre de vraies composantes non détectées (BBD,BBC)</p>
+</li>
+<li>
+<p>err_l2 :  Erreur en norme l2 sur x (BBD,BBC)</p>
+</li>
+<li>
+<p>err_support : Erreur du Support (BBC,BBD)</p>
+</li>
+<li>
+<p>Residual : Résidu obtenu par le modèle cplexlsqmilp (BBC)</p>
+</li>
+<li>
+<p>SolveurOutput : output du modèle cplexlsqmilp (BBC)</p>
+</li>
+<li>
+<p>exitflag : exitflag  du modèle cplexlsqmilp (BBC)</p>
+</li>
+<li>
+<p>lambdaVec : ensemble des valeurs de pénalité dans le cas de la résolution par homotopie positive.</p>
+</li>
+<li>
+<p>HP_detectNegX : vecteur permettant d’étudier les cas où l’homotopie retourne des solutions avec composantes négatives.</p>
+</li>
+</ul>
+<h2 id="notes-de-codes">Notes de codes</h2>
+<p>Détails des implémentations des codes  développées</p>
+<h3 id="bnb_optl2_cstrl0.m">BNB_OptL2_CstrL0.m</h3>
+<ul>
+<li>
+<p>STEP 0 - Récupération des informations stockées dans les structs</p>
+</li>
+<li>
+<p>x0=params.z0;  fonction B&amp;B/MIP_OptL2_CstrL0 pour la taille de z0 (aka x0 modifie pour entrer dans le modèle)</p>
+</li>
+<li>
+<p>nbNode = 0; fail = 0;  Compteurs - Nombre de nœuds parcourus et nombres de nœuds pour lequel la résolution est hors limite imposées dans le solveur (CF main.m/struct solveur)</p>
+</li>
+<li>
+<p>z_incumbent = 0; x_incumbent = [];  Bornes sup globale (incubent) et sa solution associée</p>
+</li>
+<li>
+<p>timeCritReached; Booléen permettant de savoir si le temps alloué est atteint</p>
+</li>
+<li>
+<p>STEP 1 - Vérification de l’intégrité des variables et données passées en paramètres du modèle. Construction du <em>modeleC</em> <em>ie</em> le modèle sur lequel nous allons lancer le branch and bound (voir</p>
+</li>
+</ul>
+<pre class=" language-matlab"><code class="prism  language-matlab"><span class="token comment">% sub_BNB_input_Checking(x0,xtype,modele,verbose)</span>
+<span class="token comment">% [...]</span>
+modeleC<span class="token punctuation">.</span>H <span class="token operator">=</span> modele<span class="token punctuation">.</span>H<span class="token punctuation">;</span>
+modeleC<span class="token punctuation">.</span>y <span class="token operator">=</span> modele<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+modeleC<span class="token punctuation">.</span>Aineq <span class="token operator">=</span> Ai<span class="token punctuation">;</span>
+modeleC<span class="token punctuation">.</span>bineq <span class="token operator">=</span> Bi<span class="token punctuation">;</span>
+modeleC<span class="token punctuation">.</span>Aeq <span class="token operator">=</span> Ae <span class="token punctuation">;</span>
+modeleC<span class="token punctuation">.</span>beq <span class="token operator">=</span> Be<span class="token punctuation">;</span>
+modeleC<span class="token punctuation">.</span>x0 <span class="token operator">=</span> x0<span class="token punctuation">;</span>
+<span class="token punctuation">[</span>N<span class="token punctuation">,</span>Q<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">size</span><span class="token punctuation">(</span>modele<span class="token punctuation">.</span>H<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>N<span class="token operator">&gt;</span>Q<span class="token punctuation">)</span>
+	modeleC<span class="token punctuation">.</span>HtH <span class="token operator">=</span> modele<span class="token punctuation">.</span>H<span class="token operator">'</span><span class="token operator">*</span>modele<span class="token punctuation">.</span>H<span class="token punctuation">;</span>
+	modeleC<span class="token punctuation">.</span>ytH <span class="token operator">=</span> modele<span class="token punctuation">.</span>y<span class="token operator">'</span><span class="token operator">*</span>modele<span class="token punctuation">.</span>H<span class="token punctuation">;</span>
+	modeleC<span class="token punctuation">.</span>nz_ytH <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">else</span>  <span class="token comment">% Formulation alternative du Pb avec contraintes d'égalités - Tentative pour gagner quelques points et éviter d'avoir à tout recalculer</span>
+	C <span class="token operator">=</span> <span class="token function">sparse</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token function">zeros</span><span class="token punctuation">(</span>N<span class="token punctuation">,</span>Q<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">speye</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	modeleC<span class="token punctuation">.</span>HtH <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+	modeleC<span class="token punctuation">.</span>ytH <span class="token operator">=</span> modele<span class="token punctuation">.</span>y<span class="token operator">'</span><span class="token operator">*</span>C<span class="token punctuation">;</span>
+	modeleC<span class="token punctuation">.</span>nz_ytH <span class="token operator">=</span> modeleC<span class="token punctuation">.</span><span class="token function">ytH</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">,</span><span class="token function">find</span><span class="token punctuation">(</span>modele<span class="token punctuation">.</span>y<span class="token operator">'</span><span class="token operator">*</span>C<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+</code></pre>
+<ul>
+<li>STEP 2 - Exécution du BB (ssi stopFlag = 0)</li>
+</ul>
+<pre class=" language-matlab"><code class="prism  language-matlab">lx <span class="token operator">=</span> <span class="token function">size</span><span class="token punctuation">(</span>x0<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">% Récupération de la taille de x0</span>
+<span class="token function">x0</span><span class="token punctuation">(</span>x0<span class="token operator">&lt;</span>bLb<span class="token punctuation">)</span><span class="token operator">=</span><span class="token function">bLb</span><span class="token punctuation">(</span>x0<span class="token operator">&lt;</span>bLb<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">x0</span><span class="token punctuation">(</span>x0<span class="token operator">&gt;</span>bUb<span class="token punctuation">)</span><span class="token operator">=</span><span class="token function">bUb</span><span class="token punctuation">(</span>x0<span class="token operator">&gt;</span>bUb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><em>Dixit SB : Si le vecteur initial dépasse les bornes inf. ou sup, ou le ramène a la borne : ainsi, les valeurs en-dessous de la borne inf. (bLb) sont ramenées a bLb, c’est de l’indexation vectorielle à la sauce Matlab.</em></p>
+<ul>
+<li>
+<p>STEP 2.1 : Initialisation de la solution courante et de la valeur de la borne sup a la racine de l’arbre<br>
+<em>Note :</em> z_incumbent est la borne sup <strong>GLOBALE</strong> que l’on va tenter de faire descendre.</p>
+</li>
+<li>
+<p>STEP 2.2 :</p>
+<ul>
+<li>I <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Déclaration de la BB liste d’attente (K+1 voir la feuille de notes) et des stacks ub et lb</li>
+<li>stackbLb :  stack pour les lb de dim. Q*|type(s) de var| et initialise avec les lb des variables du nœud racine en tête de pile</li>
+<li>stackbUb :  stack pour les ub de dim. Q*|type(s) de var| et initialise avec les ub des variables du nœud racine en tête de pile</li>
+<li>stackdepth :  stack générale du BB initialisée avec le nœud racine en tête (et de taille 1).</li>
+<li>stackCptDepthK = zeros(1,I); : Sauvegarde du niveau d’un nœud - Nous permet de connaître à chaque nœud, le nombre de variables booléennes mises à 1</li>
+</ul>
+</li>
+<li>
+<p>STEP 2.3 : Execution de l’algorithme de branch and bound</p>
+<ul>
+<li>timeRelax <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> initialisation du chrono de résolution</li>
+<li>cardCpt <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Compteur de variable mises à 1</li>
+<li>isRoot <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> booléen spécifiant si l’on est à la racine du nœud (ou non)</li>
+<li>isLeaf <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Résolution après avoir branche K fois vers 1</li>
+<li>isExplore <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Résolution associe stratégie d’exploration</li>
+<li>nbIter <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Par convention, la relaxation à la racine de l’arbre est l’itération 0</li>
+<li>iSepStack <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Vecteur juste pour l’affichage.  % Suivi des indices de branchements</li>
+<li>nbCdt = []; Pour le suivi du nombre de candidat à chaque itérations</li>
+</ul>
+</li>
+<li>
+<p>STEP 2.3.0 : Stockage du nombre d’itérations dans l’objet traceRoute. cdtList initialisé à vide (par sécurité) et unitResFlag à 0 (sécurité)</p>
+</li>
+<li>
+<p>STEP 2.3.1 : Récupération des bornes du problème courant :<br>
+<em>Note :</em> Sens de lecture de la stack <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span></p>
+<ul>
+<li>node=stackdepth(1,stacksize);  Récupération du nœud courant (nœud d’étude)</li>
+<li>stackDepthPrint = stackdepth; % Copie de la pile pour le mode verbose</li>
+<li>stackdepth(1,stacksize) = 0;  Pour le suivi de la pile en mode débogage</li>
+<li>iSepStack(1,stacksize)=0;  Suivi de l’historique de branchement.</li>
+<li>séparation = 1; Nœud candidat à la séparation (Par défaut, au début, tout nœud est candidat à la séparation)</li>
+<li>cptKDepth = stackCptDepthK(1,stacksize);  profondeur/cptCard du nœud courant;</li>
+<li>stackCptDepthK(1,stacksize) = 0;  Pour l’affichage</li>
+<li>Juste pour se balader dans l’arbre, savoir qu’elle est le dernier indice qu’on a branché à 1 :</li>
+</ul>
+</li>
+</ul>
+<pre class=" language-matlab"><code class="prism  language-matlab"><span class="token keyword">if</span> <span class="token punctuation">(</span>stacksize <span class="token operator">&lt;=</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> idxSep <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token keyword">else</span> idxSep <span class="token operator">=</span> <span class="token function">iSepStack</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>stacksize<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">end</span>
+</code></pre>
+<ul>
+<li>STEP 2.3.2.1 : détermination de la nature du nœud.</li>
+</ul>
+<p>Test de la parité du nœud - Détermination du cas d’exploration, Si a atteint un nœud pair dans l’ABR, alors on est dans une stratégie d’exploration pure (Variante branchement bi&lt;-1)</p>
+<p><em>Remarque :</em> Par hypothèse du Pb, on retire une unité de cardCpt lors que l’on est dans un nœud d’exploration</p>
+<p><em>if (cardCpt == params.K)</em> Dans le cas où l’on a branche K fois sur bi &lt;- 1, On obtient un nœud feuille</p>
+<ul>
+<li>
+<p>STEP 2.3.2.2 : Gros affichage</p>
+</li>
+<li>
+<p>STEP 2.3.2.3 : Stockage du numéro du nœud rencontré pour suivre le comportement (et les chemins) du B&amp;B dans la matrice traceRoute</p>
+</li>
+<li>
+<p>STEP 2.3.2.4 : Stockage du type de nœud rencontré (toujours pour traceRoute) - Voir doc pour détail indexation</p>
+</li>
+<li>
+<p>STEP 2.3.3 : Résolution du problème courant - en fonction de la nature du nœud</p>
+</li>
+<li>
+<p>typeNodeInfo ="";  Informations pour le stemPlot pour spécifier le type de nœud sur lequel la résolution effectuée</p>
+</li>
+<li>
+<p>resol = 0;  booléen permettant d’indiquer si une résolution a été réalisée</p>
+</li>
+<li>
+<p>STEP 2.3.3.a Résolution au nœud racine</p>
+</li>
+</ul>
+<p><strong>ATTENTION :</strong> La résolution au nœud racine ne met pas obligatoirement à jour les valeur z_inc et x_inc.</p>
+<p><em>Remarque :</em>  Au nœud racine, la restriction a un sous ensemble de variables candidates valides est impossible.</p>
+<ul>
+<li>STEP 2.3.3.b Résolution au nœud feuille i.e. après avoir branche K fois.</li>
+</ul>
+<p>Ne sont autorisées pour la résolution de ce problème que les variables que l’on a branche a 1 lors de la descente.</p>
+<p><strong>ATTENTION</strong> : isLeaf  <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> séparation = 0;  On s’arrête ici, on ne lance pas de séparation sur un nœud feuille;</p>
+<p>Si on applique une restriction des variables aux nœuds, on calcule les variables candidates :</p>
+<pre class=" language-matlab"><code class="prism  language-matlab"><span class="token keyword">if</span><span class="token punctuation">(</span>heuristic<span class="token punctuation">.</span>resCdd<span class="token punctuation">)</span>
+	<span class="token punctuation">[</span>cdtList<span class="token punctuation">,</span><span class="token operator">~</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">getCandidat</span><span class="token punctuation">(</span>typeNodeInfo<span class="token punctuation">,</span>bLbP<span class="token punctuation">,</span>bUbP<span class="token punctuation">,</span>debug<span class="token punctuation">,</span>heuristic<span class="token punctuation">,</span>xstatus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+</code></pre>
+<p>Voir la fonction getCandidat</p>
+
+<table>
+<thead>
+<tr>
+<th>lb</th>
+<th>ub</th>
+<th>Cas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>Cas variable exclue</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>Ok</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>Cas impossible (lb &lt;= ub)</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table><p>Seule la variable ub nous intéresse pour détecter les variables candidates (puisque les deux valeurs de lb sont admissibles).</p>
+<pre class=" language-matlab"><code class="prism  language-matlab">
+<span class="token keyword">function</span> <span class="token punctuation">[</span>cdtList<span class="token punctuation">,</span>excList<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">getCandidat</span><span class="token punctuation">(</span>typeNode<span class="token punctuation">,</span>lb<span class="token punctuation">,</span>ub<span class="token punctuation">,</span>debug<span class="token punctuation">,</span>heuristic<span class="token punctuation">,</span>xstatus<span class="token punctuation">)</span>
+	<span class="token comment">% [...]</span>
+	cdtList <span class="token operator">=</span> <span class="token function">find</span><span class="token punctuation">(</span>ub<span class="token operator">~=</span><span class="token number">0</span> <span class="token operator">&amp;</span> ub <span class="token operator">~=</span> <span class="token operator">+</span>Inf <span class="token operator">&amp;</span> lb <span class="token operator">~=</span> <span class="token operator">-</span>Inf<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">% redondant avec la définition de find, mais on est jamais à l'abris d'une bêtise</span>
+<span class="token keyword">end</span>
+</code></pre>
+<ul>
+<li>STEP 2.3.3.c Résolution au nœud exploration i.e. après un backtrack réalise suite à la résolution dans une feuille</li>
+</ul>
+<p><strong>ATTENTION :</strong> isExplore <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> séparation = 1;  Un nœud d’exploration peut être séparé par la suite.</p>
+<p>Si on applique une restriction des variables aux nœuds, on calcule les variables candidates (Cf. STEP 2.3.3.b).</p>
+<ul>
+<li>
+<p>STEP 2.3.3.d  Compteur de Fail - nb fois où l’on a atteint la limite de résolution (voir spécification solveur) ou que le P est non réalisable</p>
+</li>
+<li>
+<p>STEP 2.3.3.e : Si on veut voir l’évolution des composition en fonction des itérations du BB (bloqué si  Q &gt; debug.plotThreshold)</p>
+</li>
+<li>
+<p>STEP 2.3.3.f : Affichage alternatif (mode non verbeux)</p>
+</li>
+<li>
+<p>STEP 2.3.3.g : Stockage de l’information : “est ce qu’il y a eu une résolution en ce nœud de l’arbre ?” (Toujours pour traceRoute)</p>
+</li>
+<li>
+<p>STEP 2.3.3.h : Stockage des bornes inf. pour compléter le traceRoute</p>
+</li>
+<li>
+<p>STEP 2.3.3.i : Stockage des exitflag unitaires pour compléter le traceRoute</p>
+</li>
+<li>
+<p>STEP 2.3.3.j : Stockage du nombre de variables candidates en un nœud pour compléter le traceRoute (ssi on a activé la restriction au nœud).</p>
+</li>
+<li>
+<p>STEP 2.3.4 : Sélection des variables actives pour les opérations de branchement ou de dominance (i.e. <em>binf(x_i)~= bsup(x_i)</em>).</p>
+</li>
+<li>
+<p>STEP 2.3.5 : Bound - Test de dominance</p>
+</li>
+</ul>
+<p><em>Note :</em> Rendu inactif pour la relaxation au nœud racine MAIS une feuille/exploration peut être sondée</p>
+<ul>
+<li>
+<p>STEP 2.3.5.a : Nœud sondé par non réalisabilité (the relax has no feasible solution)</p>
+</li>
+<li>
+<p>STEP 2.3.5.b : Nœud sondé par dominance (the relax has an optimal solution that is worst than the incumbent (<em>ie</em> the global upperbound found so far))</p>
+</li>
+</ul>
+<p>La valeur de la solution courante est plus grande que la meilleur borne sup trouvée jusqu’alors. On élague car on sait qu’on arrivera pas a baisser la borne sup ici</p>
+<ul>
+<li>STEP 2.3.5.c : Nœud sondé par optimalité (the relax has an integer solution (here, a epsilon-good solution) <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Compare the optSol with the incumbent i.e. the best we known and update if necessary)</li>
+</ul>
+<p>Valeur de la solution courante modifiée si meilleure que la borne sup trouvée jusque là - Composition de la solution courante modifiée si meilleure.</p>
+<p><em>Note :</em> epsilon est ici le paramètre <em>intTolerance = 1e-8;</em> (page 62/Cplex UserGuide) Specifies the amount by which an integer variable can be different from an integer and still be considered feasible.</p>
+<ul>
+<li>
+<p>STEP 2.3.5.d : Stockage du type d’opération de bound rencontrée (toujours dans traceRoute)</p>
+</li>
+<li>
+<p>STEP 2.3.5.e : Stockage des bsup pour étude des variation (toujours dans traceRoute)</p>
+</li>
+<li>
+<p>STEP 2.3.5.f : Calcul du duality gap - A afficher dans les cas verbeux et non verbeux.<br>
+(z_inc,100), (z_cur,x) <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Règle de trois et calcul de l’opposé pour arriver en %</p>
+</li>
+</ul>
+<p><em>Note :</em> gap &lt; 0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Branch;	gap = 0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Bound by Opt; gap &gt; 0 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Bound by Dom.</p>
+<ul>
+<li>
+<p>STEP 2.3.5.g : Stockage du duality gap (toujours dans traceRoute)</p>
+</li>
+<li>
+<p>STEP 2.3.6 : Branch (ssi le Nœud est toujours candidat après le test de dominance i.e. séparation == 1)</p>
+</li>
+<li>
+<p>if(isRoot), isRoot = 0;end <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> On précisé ici que l’on a déjà géré le cas de la relaxation à la racine</p>
+</li>
+<li>
+<p>Cas particulier de notre problème :*</p>
+</li>
+<li>
+<p>Si on n’a PAS atteint de feuille (~isLeaf) oe card_cpt == K, alors on continu e brancher sur b_i &lt;- 1</p>
+</li>
+<li>
+<p>Sinon, c’est une feuille de l’arbre ie on a activé la contrainte de parcimonie.</p>
+</li>
+<li>
+<p>STEP 2.3.7 : Procédure de branchement</p>
+</li>
+<li>
+<p>STEP 2.3.7.a : Calcul des domaines après branchement sur la variable x(isep)</p>
+</li>
+<li>
+<p>STEP 2.3.7.b : Update des stacks stockant les binf et bsup  - Branchement sur fils droit</p>
+</li>
+<li>
+<p>stackCptDepthK(1,stacksize) = cptKDepth;  % On branche sur bi&lt;-0 :  On a donc pas fixé de variable à 1. Le compteur K a donc la même valeur que celle du Nœud parent</p>
+</li>
+<li>
+<p>STEP 2.3.7.c : Update des stacks stockant les binf et bsup  - Branchement sur fils gauche</p>
+</li>
+<li>
+<p>stackbLb(isep,stacksize)=domainG(1); dans la stack et binf fixation à la valeur du domaine pour l’indice de branchement choisi</p>
+</li>
+<li>
+<p>stackbUb(isep,stacksize)=domainG(2);  dans la stack et bsup fixation à la valeur du domaine pour l’indice de branchement choisi</p>
+</li>
+<li>
+<p>stackCptDepthK(1,stacksize) = cptKDepth+1;  On branche sur bi&lt;-1 <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> On a donc fixé de variable à 1. Le compteur K a donc la valeur du Nœud parent + 1</p>
+</li>
+<li>
+<p>STEP 2.3.7.d : Stockage de l’indice de branchement (toujours dans traceRoute)</p>
+</li>
+<li>
+<p>STEP 2.3.8 : Sécurités pour l’itération suivante</p>
+</li>
+<li>
+<p>STEP 2.3.9 :  Stockage des temps de résolution en chaque Nœud et dans l’objet traceRoute.</p>
+</li>
+</ul>
+<p><em>Hypothèse sur le chronométrages</em> : On ne s’intéresse qu’aux valeurs de résolutions aux Nœuds et on se fiche des autres temps d’exécutions (branchement et autres gestions des affectations) le différentiel est géré par le chrono tictoc mais timeRelax = timeRelax + output.time;</p>
+<pre class=" language-matlab"><code class="prism  language-matlab"><span class="token keyword">if</span> <span class="token punctuation">(</span>resol<span class="token punctuation">)</span>
+	timeRelax <span class="token operator">=</span> timeRelax <span class="token operator">+</span> debug<span class="token punctuation">.</span><span class="token function">unitResTime</span><span class="token punctuation">(</span><span class="token function">length</span><span class="token punctuation">(</span>debug<span class="token punctuation">.</span>unitResTime<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+</code></pre>
+<ul>
+<li>STEP 2.3.10 : stockage des fails (voir les fails possibles mais principalement, si on a réussi à résoudre, l’exitFlag sera strictement positif).</li>
+</ul>
+<p>Dans chaque solveur utilisé, 0 correspond à un problème dans lequel on a atteint le nombre max d’itérations.</p>
+<pre class=" language-matlab"><code class="prism  language-matlab"><span class="token keyword">if</span> <span class="token punctuation">(</span>debug<span class="token punctuation">.</span><span class="token function">unitExitFlag</span><span class="token punctuation">(</span><span class="token function">length</span><span class="token punctuation">(</span>debug<span class="token punctuation">.</span>unitExitFlag<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span><span class="token number">0</span><span class="token punctuation">)</span>
+	fail <span class="token operator">=</span> fail <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+</code></pre>
+<ul>
+<li>
+<p>STEP 2.3.11 : Affichage de l’état courant de la pile de Nœuds et du temps de résolution restant.</p>
+</li>
+<li>
+<p>STEP 3 :  Fin de l’algorithme - Création de l’objet solution retourne</p>
+</li>
+<li>
+<p>STEP 3.1 : Récupération des données directement accessibles depuis les objets du branch and bound ou de la structure de déboggage</p>
+</li>
+</ul>
+<p><em>Note :</em> Pour harmoniser le retour de l’objet solution - Solution.B est un champs remplis uniquement dans B&amp;B_CPLEX</p>
+<ul>
+<li>
+<p>STEP 3.2 : Calcul des indicateurs pour l’analyse numérique de la solution (qualité et différentes erreurs)</p>
+</li>
+<li>
+<p>solution.nbCd = length(intersect(S1_t,solution.S1)); % Nombre de vraies composantes détectées</p>
+</li>
+<li>
+<p>solution.nbCnd = length(setdiff(S1_t,solution.S1));  % Nombre de vraies composantes non détectées</p>
+</li>
+<li>
+<p>solution.err_l2 = solution.Z;  % Erreur en norme l2 sur x</p>
+</li>
+<li>
+<p>STEP 3.3 : Calcul de l’erreur du support :</p>
+</li>
+</ul>
+<pre class=" language-matlab"><code class="prism  language-matlab">	b_exp <span class="token operator">=</span> <span class="token punctuation">(</span>solution<span class="token punctuation">.</span>X <span class="token operator">~=</span> <span class="token number">0</span> <span class="token operator">&amp;</span> solution<span class="token punctuation">.</span>X <span class="token operator">&gt;</span> <span class="token number">10e-4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	b_exp <span class="token operator">=</span> <span class="token function">b_exp</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token function">size</span><span class="token punctuation">(</span>debug<span class="token punctuation">.</span>xtruth<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	b_truth <span class="token operator">=</span> <span class="token punctuation">(</span>debug<span class="token punctuation">.</span>xtruth <span class="token operator">~=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p><em>Dixit SB</em> ex : x_truth = {1,2,3,4} , x_exp = {1,2,3,5}<br>
+x_exp ne detecte pas 4 de x_truth <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Non-détection<br>
+x_exp detecte 5 qui n’est pas dans x_truth <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> fausse détection.</p>
+<ul>
+<li>
+<p>STEP 3.4 : Champs uniquement remplis par cplex <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> fixé à la valeur vide (cf param_Exp)</p>
+</li>
+<li>
+<p>STEP 3.5 : Création de l’objet traceRoute tel que :</p>
+</li>
+<li>
+<p>traceRoute : Matrice permettant d’étudier le comportement du B&amp;B tout le long de son exécution.</p>
+</li>
+<li>
+<p>STEP 3.6 : Compteurs des opérations de branch et de bounds - données calculées à partir de traceRoute</p>
+</li>
+<li>
+<p>STEP 3.7 : Divers compteurs, stopFlag (si erreur pendant l’exécutions) et temps d’execution tictoc</p>
+</li>
+</ul>
+<h3 id="sub_bnb_solve_cstr.m">sub_BNB_solve_Cstr.m</h3>
+<ul>
+<li>STEP 0 : Déclaration des chronomètres pour la résolution et d’une variable contenant le flag de sortie à la fin de la résolution (voir les spécifications des solveurs).</li>
+</ul>
+<p><em>Hypothèse sur les chronomètres</em></p>
+<ul>
+<li>
+<p>CPLEX, dans ces méthodes, propose un output.time</p>
+</li>
+<li>
+<p>Matlab, dans ces méthodes, ne propose pas time. On doit utiliser les fonctions tic et toc.</p>
+</li>
+<li>
+<p>Les méthodes homotopique et FCLS ne propose pas time. On doit utiliser les fonctions tic et toc.</p>
+</li>
+</ul>
+<p>Puisque l’objectif est de comparer le plus finement possible les résultats numériques obtenus par les deux grandes familles de solveurs, je prends la décision de n’utiliser que les tic et toc. Les tests montrent un <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">\Delta_{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.83333em; vertical-align: -0.15em;"></span><span class="mord"><span class="mord">Δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.328331em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right: 0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span></span></span></span></span> de l’ordre de <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><msup><mn>0</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">10^{-3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.814108em; vertical-align: 0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.814108em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span></span> secondes entre les chronométrages output.time et les tic-toc.</p>
+<ul>
+<li>
+<p>STEP 1 : Déclaration local de la taille d’une solution pour que par la suite, dans le cas d’une cdtList non vide, on n’ait pas de nom à rallonge pour connaitre le nombre de variable dans la solution i.e. Q</p>
+</li>
+<li>
+<p>STEP 2 : Juste un verbose pour savoir où on est</p>
+</li>
+<li>
+<p>STEP 3 : Appel au constructeur de modèle (détails après)</p>
+</li>
+<li>
+<p>STEP 4 : Choix du solveur à utiliser</p>
+</li>
+<li>
+<p>STEP 5 : Mise à jour du stopflag pour arrêter la procédure (toute la procédure) dans le cas où on a rencontré une erreur (ATTENTION LE MAX ITER REACHED n’est pas considéré comme une erreur).</p>
+</li>
+<li>
+<p>STEP 6 : Extraction des valeurs de <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.43056em; vertical-align: 0em;"></span><span class="mord mathdefault">x</span></span></span></span></span> - dans le cas où  <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi><mo>≥</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">Q\geq N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.10903em;">N</span></span></span></span></span> pour lequel on a posé la contrainte <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi><mo>=</mo><mi mathvariant="bold">H</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">z = \mathbf{H}x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.43056em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.04398em;">z</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.68611em; vertical-align: 0em;"></span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord mathdefault">x</span></span></span></span></span>, les <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.10903em;">N</span></span></span></span></span> valeurs de <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.43056em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.04398em;">z</span></span></span></span></span> sont à la suite de la solution retournée par le solveur et ne doivent pas être prise en compte.</p>
+</li>
+<li>
+<p>STEP 7 : Affichage pour tester l’hypothèse des chrono (cf STEP 0).</p>
+</li>
+<li>
+<p>STEP 8 : Mise a jour du x_tmp (solution obtenue au point 6) dans le cas de la restriction. Disjonction des cas pour harmoniser le retour des solutions et le stockage dans la structure de debug (on aura nécessairement cdtList non vide et x_out de taille &lt; a la vraie taille de <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Q</mi></mrow><annotation encoding="application/x-tex">Q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.87777em; vertical-align: -0.19444em;"></span><span class="mord mathdefault">Q</span></span></span></span></span>. Du coup, dans le cas d’une restriction cette boucle n’est pas empruntée lors de la resolution du Nœud racine (car cdtList = []);</p>
+</li>
+<li>
+<p>STEP 9 : Dans les cas particulier de la résolution par Homotopie positive et FCLS, calcul de l’erreur en norme <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">ℓ</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\ell_{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.84444em; vertical-align: -0.15em;"></span><span class="mord"><span class="mord">ℓ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.301108em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span></span></span></span></span>.</p>
+</li>
+<li>
+<p>STEP 10 : Stockage des informations de résolution unitaire si il n’y a pas eu d’arrêt de procédure (cf. STEP 5).</p>
+</li>
+</ul>
+<p><em>Remarque :</em> dans debugUnitCompoSol, une ligne <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇔</mo></mrow><annotation encoding="application/x-tex">\Leftrightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇔</span></span></span></span></span> une résolution</p>
+<h3 id="sub_bnb_solmeth_fcls">sub_BNB_solMeth_FCLS()</h3>
+<p>Algorithme de Heinz 2001 dédié au problème de type FCLS. Code fournit par S.Moussaoui et utilisé comme boîte noire.</p>
+<p><strong>Informations:</strong></p>
+<p>Least squares optimization under non-negativity and sum-to-one constraints</p>
+<p>USAGE: C = fcls(X,S) with</p>
+<ul>
+<li>
+<p>X : data matrix of size Nf bands x Np pixels</p>
+</li>
+<li>
+<p>S : endmember spectra matrix of size Nf bands x Ns components</p>
+</li>
+<li>
+<p>C : abundance matrix of size [Ns x Np]</p>
+</li>
+</ul>
+<p>Application à notre algorithme de branch-and-bound : application à une instance Q = 20 et N = 224.</p>
+<ul>
+<li>
+<p>S = H, <strong>size :</strong> [Nf = nbObs, Ns = nbAtoms]. Nf = 224, Ns = 20;</p>
+</li>
+<li>
+<p>X = y, <strong>size :</strong> [Nf = nbObs, Np = 1];  Nf = 224, Ns = 1;</p>
+</li>
+<li>
+<p>C = x; <strong>size :</strong> [Ns = nbAtoms, Np = 1];  Ns = 20, Np = 1;</p>
+</li>
+</ul>
+<h3 id="sub_bnb_solmeth_hp">sub_BNB_solMeth_HP()</h3>
+<p>Algorithme de continuation homotopique. Code fournit par R. Ben Mhenni et adapté dans le cadre les contraintes de positivité et de somme unitaire.</p>
+<p><strong>Critère d’arrêt :</strong> saturation de la contrainte de somme unitaire <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo><mi>τ</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\Rightarrow \tau = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.43056em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.1132em;">τ</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.64444em; vertical-align: 0em;"></span><span class="mord">1</span></span></span></span></span>.</p>
+<p><strong>Nombre d’itérations</strong> fixé à 1000.</p>
+<p>STEP 1 :  Initialisation <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi><mo>=</mo><mi mathvariant="normal">∥</mi><msup><mi mathvariant="bold-italic">y</mi><mo>⊺</mo></msup><mi mathvariant="bold">H</mi><msub><mi mathvariant="normal">∥</mi><mi mathvariant="normal">∞</mi></msub></mrow><annotation encoding="application/x-tex">\lambda = \|\boldsymbol{y}^{\intercal}\mathbf{H}\|_{\infty}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord mathdefault">λ</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">∥</span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.664392em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord amsrm mtight">⊺</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.151392em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span></span></span></span></span> et <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>=</mo><mtext>argmax</mtext><mo stretchy="false">(</mo><mi mathvariant="normal">∥</mi><msup><mi mathvariant="bold-italic">y</mi><mo>⊺</mo></msup><mi mathvariant="bold">H</mi><msub><mi mathvariant="normal">∥</mi><mi mathvariant="normal">∞</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">I = \textrm{argmax}(\|\boldsymbol{y}^{\intercal}\mathbf{H}\|_{\infty})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.07847em;">I</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord text"><span class="mord textrm">argmax</span></span><span class="mopen">(</span><span class="mord">∥</span><span class="mord"><span class="mord"><span class="mord"><span class="mord boldsymbol" style="margin-right: 0.03704em;">y</span></span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.664392em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord amsrm mtight">⊺</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathbf">H</span></span><span class="mord"><span class="mord">∥</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 0.151392em;"><span class="" style="top: -2.55em; margin-left: 0em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.15em;"><span class=""></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>STEP 2 :  Retrait des indices dans <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.07847em;">I</span></span></span></span></span> pour obtenir <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>J</mi></mrow><annotation encoding="application/x-tex">J</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.09618em;">J</span></span></span></span></span> le support complémentaire.</p>
+<p>STEP 3 : Calcul des corrélation (??) <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∼</mo></mrow><annotation encoding="application/x-tex">\sim</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">∼</span></span></span></span></span> mesure de la différence d’approximation.</p>
+<p>STEP 4 : Mise à jour des directions <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord mathdefault">d</span></span></span></span></span>.</p>
+<p><em>Note:</em> mldivide, \ <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> Solve systems of linear equations Ax = B for x</p>
+<p>STEP 5 : Calcul d’un vecteur permettant de simplifier la suite de l’exécution <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.43056em; vertical-align: 0em;"></span><span class="mord mathdefault" style="margin-right: 0.03588em;">v</span></span></span></span></span></p>
+<p>STEP 6 : Compute minimum |<span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>γ</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.625em; vertical-align: -0.19444em;"></span><span class="mord mathdefault" style="margin-right: 0.05556em;">γ</span></span></span></span></span>| so that situation 1) is in force <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> L’indice de la variable qui peut entrer en base (de la solution x)</p>
+<p>STEP 7 : Compute minimum |<span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>γ</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.625em; vertical-align: -0.19444em;"></span><span class="mord mathdefault" style="margin-right: 0.05556em;">γ</span></span></span></span></span>| so that situation 3) is in force <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>⇒</mo></mrow><annotation encoding="application/x-tex">\Rightarrow</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.36687em; vertical-align: 0em;"></span><span class="mrel">⇒</span></span></span></span></span> L’indice de la variable qui peut sortir de base (de la solution x)</p>
+<p>STEP 8 : Synthèse des modifications du support</p>
+<p>STEP 9 : Cas d’arrêt lorsque le support est <em>stable</em></p>
+<p>STEP 10 : Mise à jour de la solution si non STEP 9</p>
+<p>STEP 11 : Cas d’arrêt lorsque la contrainte de somme unitaire est saturée.</p>
+<p>STEP 12 : Mise à jour de <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord mathdefault">λ</span></span></span></span></span>, cas d’arrêt si <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi><mo>&lt;</mo><mn>10</mn><msup><mi>e</mi><mrow><mo>−</mo><mn>8</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\lambda &lt; 10e^{-8}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.73354em; vertical-align: -0.0391em;"></span><span class="mord mathdefault">λ</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.814108em; vertical-align: 0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.814108em;"><span class="" style="top: -3.063em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">8</span></span></span></span></span></span></span></span></span></span></span></span></span>.</p>
+<p>STEP 13 : Collecte des informations sur <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold-italic">x</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.44444em; vertical-align: 0em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">x</span></span></span></span></span></span></span> et <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.69444em; vertical-align: 0em;"></span><span class="mord mathdefault">λ</span></span></span></span></span> pour l’itération courante.</p>
+<p>STEP 14 : Mise à jour du support - <em>Note :</em> Force small value to be null (eg 10e-17,  10e-19)</p>
+
+    </div>
+  </div>
+</body>
+
+</html>
