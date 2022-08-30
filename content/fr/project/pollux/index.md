@@ -1,13 +1,12 @@
 ---
 title: POLLUX
-summary: Simulateur TEP 3 photons.
+summary: Simulateur TEP 3 photons implémenté en Matlab.
 tags:
-  - Tomographie par émission de positon (TEP)
-  - Simulation
+  - Project
 date: '2022-07-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: ''
+external_link: 'https://gitlab.com/mlatif/tep3g-pollux/'
 
 image:
   caption:
@@ -18,7 +17,7 @@ links:
 #    icon_pack: fab
 #    name: Follow
 #    url: https://twitter.com/georgecushen
-url_code: 'https://gitlab.com/mlatif/tep3g-pollux/'
+url_code: ''
 url_pdf: ''
 url_slides: ''
 url_video: ''
@@ -30,5 +29,3 @@ url_video: ''
 #   Otherwise, set `slides = ""`.
 slides: ""
 ---
-
-*En cours*
