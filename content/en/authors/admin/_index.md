@@ -53,9 +53,13 @@ social:
 - icon: linkedin-in
   icon_pack: fab
   link: https://www.linkedin.com/in/mehdilatif/
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/MehdiLatif
 - icon: envelope
   icon_pack: fas
   link: "mailto:mehdi.latif@ls2n.fr?cc=latifm.pro@gmail.com"
+
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
@@ -65,9 +69,7 @@ social:
 # - icon: researchgate
 #  icon_pack: ai
 #  link: https://www.researchgate.net/profile/Mehdi_Latif
-# - icon: twitter
-#  icon_pack: fab
-#  link: https://twitter.com/MehdiLatif
+
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""
@@ -77,9 +79,8 @@ user_groups:
 - Researchers
 - Visitors
 ---
-Soon
-<!-- Actuellement étudiant en thèse de doctorat, mon sujet de recherche se situe à l'intersection des domaines de l'imagerie médicale, du traitement des signaux et de la physique. -->
+Actuellement étudiant en thèse de doctorat, mon sujet de recherche se situe à l'intersection des domaines de l'imagerie médicale, du traitement des signaux et de la physique.
 
-<!-- Avant ça, j'ai obtenu un diplôme du Master en informatique spécialisé en [Optimisation et Recherche Opérationnelle](http://oro.univ-nantes.fr/) proposé par l'université de Nantes ainsi que du Master Optimisation et Algorithmique de l'Université Libre de Bruxelles. -->
+Avant ça, j'ai obtenu un diplôme du Master en informatique spécialisé en [Optimisation et Recherche Opérationnelle](http://oro.univ-nantes.fr/) proposé par l'université de Nantes ainsi que du Master Optimisation et Algorithmique de l'Université Libre de Bruxelles.
 
-<!-- Curieux de nature, passionné et dynamique, je m'intéresse à de nombreux domaines des mathématiques et de l'informatique théorique. -->
+Curieux de nature, passionné et dynamique, je m'intéresse à de nombreux domaines des mathématiques et de l'informatique théorique.

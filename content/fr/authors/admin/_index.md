@@ -53,9 +53,13 @@ social:
 - icon: linkedin-in
   icon_pack: fab
   link: https://www.linkedin.com/in/mehdilatif/
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/mehdilatif
 - icon: envelope
   icon_pack: fas
   link: "mailto:mehdi.latif@ls2n.fr?cc=latifm.pro@gmail.com"
+
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
@@ -65,9 +69,7 @@ social:
 # - icon: researchgate
 #  icon_pack: ai
 #  link: https://www.researchgate.net/profile/Mehdi_Latif
-# - icon: twitter
-#  icon_pack: fab
-#  link: https://twitter.com/MehdiLatif
+
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ""
