@@ -2,6 +2,9 @@
 title: POLLUX
 summary: Simulateur TEP 3 photons implémenté en Matlab.
 tags:
+  - TEP
+  - 3 Photons
+  - Xemis2
   - Project
 date: '2022-07-01T00:00:00Z'
 
