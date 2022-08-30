@@ -1,6 +1,7 @@
 Tuto de base pour la redef :
   - https://lakemper.eu/blog/getting-started-with-hugo-academic-and-github-pages/
-
+Templates des pages (types Project)
+  - https://github.com/wowchemy/starter-hugo-academic (aller dans content )
 hugoDocs
   - https://github.com/gohugoio/hugoDocs
 
