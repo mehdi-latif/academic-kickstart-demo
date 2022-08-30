@@ -1,6 +1,6 @@
 ---
-title: MIMOSA Unmix
-summary: Algorithme branch-and-bound pour le démélange spectral parcimonieux sous contraintes de somme unitaire et de non négativité.
+title: MIMOSA Unmix - Planches
+summary: Séminaire SiMS 09/23 - Algorithme branch-and-bound pour le démélange spectral parcimonieux sous contraintes de somme unitaire et de non négativité.
 tags:
   - Branch-and-bound
   - Parcimonie
@@ -8,19 +8,19 @@ tags:
   - Démélange spectral
   - Solveur libre
   - Slides
-date: '2021-11-30T00:00:00Z'
+date: '2021-09-23T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: ''
+external_link: '' # https://gitlab.com/mlatif/bbhs_ext_cpp
 
 image:
   caption:
   focal_point: Smart
 
 links:
+url_slides: '/files/LATIFM_MIMOSA_UNMIX_SLIDES.pdf'
 url_code: 'https://gitlab.com/mlatif/bbhs_ext_cpp'
 url_pdf: ''
-url_slides: '/files/LATIFM_MIMOSA_UNMIX_SLIDES.pdf'
 url_video: ''
 
 # Slides (optional).
@@ -30,9 +30,10 @@ url_video: ''
 #   Otherwise, set `slides = ""`.
 slides: ""
 ---
-$$\\min_{ \\boldsymbol{x} \\in [0,1]^{Q}} \quad \frac{1}{2}\big\|\big\| \boldsymbol{y}-\mathbf{H}\boldsymbol{x}\big\|\big\|_{2}^{2}\quad \textrm{ st. } \big\|\big\|\boldsymbol{x}\big\|\big\|_{0} \leq K, \quad \boldsymbol{1}_{Q}^{\intercal}\boldsymbol{x} =1$$
 
-**Collaborateurs:** S.Bourguignon, G.Samain, J.Ninin.
+$$\min_{\boldsymbol{x}\in [0,1]^{Q}}\quad \frac{1}{2}\big\|\big\| \boldsymbol{y}-\mathbf{H}\boldsymbol{x}\big\|\big\|_{2}^{2}\quad  \textrm{st. } \big\|\big\|\boldsymbol{x}\big\|\big\| _{0} \leq K, \quad\boldsymbol{1} _{Q} ^{\intercal}  \boldsymbol{x} =1$$
+
+**Séminaire équipe SiMS - 23/09/2021**
 
 L’imagerie hyperspectrale concerne l’acquisition simultanée d’images dans un grand nombre de longueurs d’onde. Une problématique récurrente de traitement de ces données consiste à résoudre un problème de séparation de sources : en raison d’une faible résolution spatiale des instruments, le spectre de réflectance lumineuse mesuré en une position donnée résulte de la superposition de spectres élémentaires, i.e. un mélange dont il s’agit de retrouver les proportions.
 
