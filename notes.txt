@@ -2,6 +2,7 @@ Tuto de base pour la redef :
   - https://lakemper.eu/blog/getting-started-with-hugo-academic-and-github-pages/
 Templates des pages (types Project)
   - https://github.com/wowchemy/starter-hugo-academic (aller dans content )
+  - Téléchargé en zip : starter-hugo-academic-main.zip
 hugoDocs
   - https://github.com/gohugoio/hugoDocs
 
@@ -23,10 +24,6 @@ Remarque :
 
 Remarque :
   => https://academic-demo.netlify.app/ ce que ça donne
-
-
-
-
 
 
 
