@@ -1,5 +1,5 @@
 ---
-title: POLLUX
+title: POLLUX - Simulateur TEP $3\gamma$
 summary: Simulateur TEP 3 photons implémenté en Matlab.
 tags:
   - TEP
