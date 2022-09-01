@@ -1,6 +1,6 @@
 ---
-title: MIMOSA Unmix - Planches
-summary: Séminaire SiMS 09/23 - Algorithme branch-and-bound pour le démélange spectral parcimonieux sous contraintes de somme unitaire et de non négativité.
+title: Exact resolution of the sparse spectral unmixing problem
+summary: 09/2021 - Séminaire d'équipe SiMS.
 tags:
   - Branch-and-bound
   - Parcimonie
@@ -11,14 +11,14 @@ tags:
 date: '2021-09-23T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: '' # https://gitlab.com/mlatif/bbhs_ext_cpp
+external_link: '/files/LATIFM_MIMOSA_UNMIX_SLIDES.pdf'
 
 image:
   caption:
   focal_point: Smart
 
 links:
-url_slides: '/files/LATIFM_MIMOSA_UNMIX_SLIDES.pdf'
+url_slides: ''
 url_code: 'https://gitlab.com/mlatif/bbhs_ext_cpp'
 url_pdf: ''
 url_video: ''
@@ -35,17 +35,7 @@ $$\min_{\boldsymbol{x}\in [0,1]^{Q}}\quad \frac{1}{2}\big\|\big\| \boldsymbol{y}
 
 **Séminaire équipe SiMS - 23/09/2021**
 
-L’imagerie hyperspectrale concerne l’acquisition simultanée d’images dans un grand nombre de longueurs d’onde. Une problématique récurrente de traitement de ces données consiste à résoudre un problème de séparation de sources : en raison d’une faible résolution spatiale des instruments, le spectre de réflectance lumineuse mesuré en une position donnée résulte de la superposition de spectres élémentaires, i.e. un mélange dont il s’agit de retrouver les proportions.
 
-En démélange dit supervisé, le mélange est recherché dans un « dictionnaire » connu de spectres de référence. Une contrainte physique, dite de parcimonie, stipule alors qu’un faible nombre de composants dans le mélange suffit à décrire chaque spectre observé. Mathématiquement, il s’agit d’ajuster un modèle linéaire au sens des moindres carrés, sous la contrainte que le vecteur de coefficients recherchés possède peu de composantes non-nulles, i.e. une faible « norme » $\\ell_0$. C’est un problème NP-difficile relevant essentiellement de l’optimisation combinatoire.
-
-Alors que la plupart des travaux dans le domaine considèrent des approches relâchées, privilégiant un faible temps de calcul, nous proposons une méthode de résolution exacte garantissant l’optimalité des solutions obtenues.
-
-Dans sa thèse de doctorat, Ramzi Ben Mhenni a développé des algorithmes de type branch-and-bound pour l’optimisation parcimonieuse exacte. Nous en proposons ici une version spécifique au problème de démélange. En effet, les coefficients du mélange sont positifs et de somme unité, contraintes qui requièrent une architecture algorithmique spécifique.
-
-Lorsque le mélange est composé d’un nombre restreint de spectres, ce qui est généralement le cas lorsque ces spectres sont « appris » d’un jeu d’observations, nous montrons que cette approche reste peu coûteuse en calcul et fournit des meilleures solutions en comparaison avec les méthodes de la littérature. Lorsque la taille du dictionnaire augmente, e.g. pour un dictionnaire composé d’un grand nombre de spectres mesurés en laboratoire, les solutions obtenues restent de meilleure qualité, au prix d’un temps de calcul bien supérieur.
-
-Un solveur libre, codé en C++, est mis à disposition de la communauté scientifique.
 
 ```cpp
 MimosaUnmix_1inst_meth $(pwd) 2 bb_homotopy_fcls eq
