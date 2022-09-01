@@ -47,7 +47,7 @@ subtitle = ""
   #   2 = Compact
   #   3 = Card
   #   5 = Showcase
-  view = 5
+  view = 2
   # Pour dire si je veux afficher les images ou pas (0 ou 1) - valide pour les geq 2
   show_img = 0
   show_bttn_link = 0
