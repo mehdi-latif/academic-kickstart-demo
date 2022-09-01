@@ -1,5 +1,5 @@
 ---
-title: MIMOSA Unmix - Code
+title: MIMOSA Unmix
 summary: Implémentation de l'algorithme branch-and-bound pour le démélange spectral parcimonieux.
 tags:
   - Project
