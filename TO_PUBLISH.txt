@@ -1,0 +1,9 @@
+rm -rf public
+
+git clone git@github.com:mehdi-latif/mehdi-latif.github.io.git public
+hugo
+cd public
+git add .
+git commit -m update content 30/12/22
+git push
+cd ..
