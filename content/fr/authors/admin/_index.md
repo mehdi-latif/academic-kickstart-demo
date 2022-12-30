@@ -53,9 +53,6 @@ social:
 - icon: linkedin-in
   icon_pack: fab
   link: https://www.linkedin.com/in/mehdilatif/
-- icon: twitter
-  icon_pack: fab
-  link: https://twitter.com/mehdilatif
 - icon: envelope
   icon_pack: fas
   link: "mailto:mehdi.latif@ls2n.fr?cc=latifm.pro@gmail.com"
