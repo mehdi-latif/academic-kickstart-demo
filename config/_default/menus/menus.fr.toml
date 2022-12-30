@@ -4,24 +4,47 @@
 #   The weight parameter defines the order that the links will appear in.
 
 [[main]]
+  identifier = "education"
   name = "Formation"
   url = "#education"
   weight = 10
 
 [[main]]
+  identifier = "experience"
   name = "Experience"
   url = "#experience"
   weight = 20
 
 [[main]]
-  name = "Projets et Présentations"
+  identifier = "project"
+  name = "Projets & Présentations"
   url = "#projects"
   weight = 30
 
 [[main]]
-  name = "CV"
-  url = "files/CV_LM.pdf"
+  identifier = "CV_DOCS"
+  name = "CV & Portfolio"
+  # url = "files/CV_LM.pdf"
   weight = 40
+
+[[main]]
+  identifier = "CV_FR"
+  parent = "CV_DOCS"
+  name = "CV - Français"
+  url = "files/CV_LM.pdf"
+  weight = 45
+[[main]]
+  identifier = "CV_EN"
+  parent = "CV_DOCS"
+  name = "CV - Anglais"
+  url = "/project/default_soon/"
+  weight = 55
+[[main]]
+  identifier = "PF_PHD"
+  parent = "CV_DOCS"
+  name = "Portfolio"
+  url = "/project/default_soon/"
+  weight = 65
 
   #[[main]]
   #  name = "Home"
