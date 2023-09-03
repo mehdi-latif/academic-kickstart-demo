@@ -27,8 +27,12 @@ subtitle = ""
     tag = "*"
 
   [[content.filter_button]]
-    name = "Présentations"
+    name = "Présentations et Posters"
     tag = "Slides"
+
+  [[content.filter_button]]
+    name = "Publications"
+    tag = "Article"
 
   [[content.filter_button]]
     name = "Projets"
