@@ -5,7 +5,7 @@ headless = false  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 65  # Order that this section will appear.
 
-title = "Projets et présentations"
+title = "Projets et publications"
 subtitle = ""
 
 # https://github.com/wowchemy/starter-hugo-academic/tree/main/content/project
