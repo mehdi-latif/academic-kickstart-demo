@@ -50,9 +50,10 @@ date_format = "Jan 2006"
   **Planches:** [Séminaire SIMS 06/22](files/LATIFM_PHD_ETEZ22.pdf)  
 
   **Activités d'enseignement à l'ECN:**
-  - 2021/2022 - Semestre 2: Algorithmique et programmation (TP);
-  - 2022/2023 - Semestre 1: Algorithmique et programmation (TP), Mathématiques pour l'ingénieur (TP).
-  - 2022/2023 - Semestre 2: Mathématiques pour l'ingénieur (TP), C$^{3}$ : Signaux et systèmes (TP).
+  - **2021/2022 - Semestre 2:** Algorithmique et programmation (TP,EI1);
+  - **2022/2023 - Semestre 1:** Algorithmique et programmation (TP,EI1), Mathématiques pour l'ingénieur (TP,EI1).
+  - **2022/2023 - Semestre 2:** Mathématiques pour l'ingénieur (TP,EI1), C$^{3}$ : Signaux et systèmes (TP,EI1).
+  - **2023/2024 - Semestre 1:** Mathématiques pour l'ingénieur (TP,EI1), Calcul scientifique et optimisation (TP,EI2).
 """
 
 [[experience]]
