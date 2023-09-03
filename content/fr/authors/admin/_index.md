@@ -24,7 +24,7 @@ bio: $\lambda$
 
 interests:
   - Musique, Photographie, Littérature
-  - Aviron
+  - Aviron, Badminton 
   - Voyages
 
 education:
@@ -56,7 +56,9 @@ social:
 - icon: envelope
   icon_pack: fas
   link: "mailto:mehdi.latif@ls2n.fr?cc=latifm.pro@gmail.com"
-
+- icon: hal-square
+  icon_pack: ai
+  link: https://hal.science/search/index/q/*/authFullName_s/Mehdi+Latif
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
