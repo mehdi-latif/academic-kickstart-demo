@@ -18,6 +18,44 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
+  title = "Vacataire - Encadrement de travaux pratiques"
+  company = "École Centrale de Nantes"
+  company_url = "https://www.ec-nantes.fr/"
+  location = "Nantes"
+  date_start = "2022-01-01"
+  date_end = ""
+  description = """
+  Encadrement de travaux pratiques en cycle ingénieur ECN dans les domaines des mathématiques appliquées, de l'algorithmique et du traitement du signal.
+  """
+  info_sup_tag = 1
+  info_sup = """
+  **Matières enseignées :**
+  - *2021/2022 - Semestre 2:*  
+     
+    - TP Algorithmique et programmation (EI1) - 18h. 
+  - *2022/2023 - Semestre 1:* 
+
+    - TP Algorithmique et programmation (EI1) - 18h;
+    - TP Mathématiques pour l'ingénieur (EI1) - 12h.
+  - *2022/2023 - Semestre 2:* 
+    
+    - TP Mathématiques pour l'ingénieur (EI1) - 12h; 
+    - TP C$^{3}$ : Signaux et systèmes (EI1) - 4h.
+  - *2023/2024 - Semestre 1:* 
+    
+    - TP Mathématiques pour l'ingénieur (EI1) - 12h;
+    - TP C$^{3}$ : Signaux et systèmes (EI1) - 6h;  
+    - TP Calcul scientifique et optimisation (EI23, Master CORO-SIP) - 16h.
+  
+
+  **Rattachement :** 
+  [Département Mathématiques, Informatique et Biologie (MIB](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-mathematiques-informatique-et-biologie-mib), [Département Automatique et Robotique](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-automatique-et-robotique)
+
+  **Eléments de correction :** [envoyer une demande motivée](mailto:latifm.pro@gmail.com?subject=[mlatif.fr]%20Demande%20d'accès%20aux%20éléments%20de%20correction%20matière%20...)
+"""
+
+
+[[experience]]
   title = " Ingénieur de recherche - Equipe Signal IMage et Son (SIMS)"
   company = "Laboratoire des Sciences du Numérique de Nantes (LS2N)"
   company_url = "https://www.ls2n.fr/equipe/sims/"

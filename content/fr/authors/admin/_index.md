@@ -16,7 +16,7 @@ job: Doctorant.
 organizations:
   - name: SiMS - LS2N
     url: "https://www.ls2n.fr/equipe/sims/"
-  - name: Nuclear Oncology - CRCI2NA
+  - name: Nuclear Oncology - CRCI$^{2}$NA
     url: "https://crci2na.univ-nantes.fr/en/research/team-2"
 
 # Short bio (displayed in user profile at end of posts)

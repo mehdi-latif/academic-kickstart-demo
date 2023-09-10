@@ -26,9 +26,9 @@ date_format = "Jan 2006"
   date_start = "2021-12-01"
   date_end = ""
   description = """
-  Préparation d'une thèse de doctorat sous la direction de Messieurs [J.Idier](https://pagesperso.ls2n.fr/~idier-j/IndexFR.html) ([LS2N](https://www.ls2n.fr/)), [S.Stute](https://medecine.univ-nantes.fr/simon-stute) et [T.Carlier](https://medecine.univ-nantes.fr/thomas-carlier) ([CRCI2NA](https://crci2na.univ-nantes.fr/)).
+  Préparation d'une thèse de doctorat sous la direction de Messieurs [J.Idier](https://pagesperso.ls2n.fr/~idier-j/IndexFR.html) ([LS2N](https://www.ls2n.fr/)), [S.Stute](https://medecine.univ-nantes.fr/simon-stute) et [T.Carlier](https://medecine.univ-nantes.fr/thomas-carlier) ([CRCI$^{2}$NA](https://CRCI$^{2}$NA.univ-nantes.fr/)).
 
-  **Problématique:** étude et la mise en oeuvre d'algorithmes de reconstruction tomographique pour l'imagerie TEP 3 photons appliqués à la caméra [XEMIS2](https://www-subatech.in2p3.fr/fr/recherche/22-recherche/xenon-recherche/557-projet-xemis-2).  
+  **Problématique:** étude et la mise en oeuvre d'algorithmes de reconstruction tomographique pour l'imagerie TEP 3-photons appliqués à la caméra [XEMIS2](https://www-subatech.in2p3.fr/fr/recherche/22-recherche/xenon-recherche/557-projet-xemis-2).  
 
 
   """
@@ -37,7 +37,7 @@ date_format = "Jan 2006"
   **Contexte:**
 
   Le groupe [Xénon](https://www-subatech.in2p3.fr/fr/recherche/equipes/xenon/presentation) du laboratoire [Subatech](https://www-subatech.in2p3.fr/fr/) développe depuis 2004 une nouvelle technique d'imagerie médicale à 3 photons basée sur l'utilisation simultanée d'un émetteur $(\\beta^{+},\\gamma)$ et d'un détecteur utilisant du xénon liquide.  
-  La caméra [Xenon Medical Imaging System 2](https://www-subatech.in2p3.fr/fr/recherche/22-recherche/xenon-recherche) a été récemment installée au CHU de Nantes et est dans sa phase finale de développement. Le système sera dédié aux expérimentations précliniques utilisant de nouveaux produits radiopharmaceutiques basés sur le $^{44}$Sc, en collaboration avec l'équipe [Nuclear Oncology](https://crci2na.univ-nantes.fr/en/research/team-2) du CRCI2NA.  
+  La caméra [Xenon Medical Imaging System 2](https://www-subatech.in2p3.fr/fr/recherche/22-recherche/xenon-recherche) a été récemment installée au CHU de Nantes et est dans sa phase finale de développement. Le système sera dédié aux expérimentations précliniques utilisant de nouveaux produits radiopharmaceutiques basés sur le $^{44}$Sc, en collaboration avec l'équipe [Nuclear Oncology](https://CRCI$^{2}$NA.univ-nantes.fr/en/research/team-2) du CRCI$^{2}$NA.  
   Ce nouveau système d'imagerie offre de nouvelles possibilités qui entraînent également de nouvelles difficultés pour la reconstruction des images:
   1. Le système est conçu pour détecter 3 photons simultanément mais des événements avec seulement 2 photons détectés peuvent se produire. Ces événements apportent toujours des informations utiles et la possibilité de les inclure dans le problème doit être étudiée.
   2. Le système est conçu pour fonctionner avec des concentrations d'activité très faibles. Très peu d'événements sont disponibles pour construire l'image par rapport à l'imagerie standard par tomographie par émission de positrons (TEP). Cette caractéristique intrinsèque doit être prise en compte avec des méthodes de régularisation ou des modèles préalables appropriés.
@@ -49,11 +49,20 @@ date_format = "Jan 2006"
 
   **Planches:** [Séminaire SIMS 06/22](files/LATIFM_PHD_ETEZ22.pdf)  
 
-  **Activités d'enseignement à l'ECN:**
-  - **2021/2022 - Semestre 2:** Algorithmique et programmation (TP,EI1);
-  - **2022/2023 - Semestre 1:** Algorithmique et programmation (TP,EI1), Mathématiques pour l'ingénieur (TP,EI1).
-  - **2022/2023 - Semestre 2:** Mathématiques pour l'ingénieur (TP,EI1), C$^{3}$ : Signaux et systèmes (TP,EI1).
-  - **2023/2024 - Semestre 1:** Mathématiques pour l'ingénieur (TP,EI1), Calcul scientifique et optimisation (TP,EI2).
+  **Activités connexes**
+  - **Année 2023/2023 :** 
+    Encadrement du stage de E.Gecimli  (M1 Physique fondamentale et applications - Université de Nantes)
+    \\
+    *Problématique :* Étude et mise en œuvre d’algorithmes de reconstruction d’événements pour l’imagerie TEP 3-photons appliqués à la caméra XEMIS2.
+    \\
+    *Durée :* 4 mois
+
+
+  **Particpations aux workshops/congrès scientifiques :**
+  EmiLy 2022 (orateur), MIC 2022 (auditeur), Fully3D 2023 (orateur), Gretsi 2023 (orateur). 
+
+  **Diffusion scientifique :**
+  demie-heure des doctorant LS2N 2022 (orateur) , science-dating - Nuit Blanche des Chercheurs 2023 (orateur). 
 """
 
 [[experience]]
