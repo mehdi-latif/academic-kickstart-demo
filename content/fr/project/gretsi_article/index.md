@@ -1,6 +1,6 @@
 ---
 title: Article - Reconstruction multiclasse pour la TEP $3\gamma$
-summary:  29ème Colloque Francophone de Traitement du Signal et des Images (GRETSI).
+summary:  29ème Colloque Francophone de Traitement du Signal et des Images ([GRETSI'23](https://gretsi.fr/colloque2023/)) - Grenoble (France).
 tags:
   - TEP
   - 3photons
