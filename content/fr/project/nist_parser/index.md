@@ -4,7 +4,7 @@ summary: Un script bash permettant d'extraire et de formater une liste de donné
 tags:
   - Bash
   - Tools
-date: '2021-01-01T00:00:00Z'
+date: '2022-09-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
 external_link: 'https://gitlab.com/mlatif/nist_parser'
