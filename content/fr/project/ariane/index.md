@@ -6,7 +6,7 @@ tags:
   - 3 Photons
   - Xemis2
   - Project
-date: '2022-07-01T00:00:00Z'
+date: '2023-09-15T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
 external_link: 'https://gitlab.com/mlatif/tep3g-ariane'
