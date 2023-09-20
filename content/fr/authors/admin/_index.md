@@ -47,6 +47,9 @@ social:
 - icon: gitlab
   icon_pack: fab
   link: https://gitlab.com/mlatif
+- icon: researchgate
+  icon_pack: ai
+  link: https://www.researchgate.net/profile/Mehdi-Latif
 - icon: google-scholar
   icon_pack: ai
   link: https://scholar.google.com/citations?user=GqB6M5MAAAAJ
