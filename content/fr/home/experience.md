@@ -33,23 +33,34 @@ date_format = "Jan 2006"
   - *2021/2022 - Semestre 2:*  
      
     - TP Algorithmique et programmation (EI1) - 18h. 
+      
+      - Introduction à l'implémentation d'algorithme, opérations sur grands entiers, tris et analyse de complexité, algorithmique des listes et des arbres, POO (application des concepts de Swarm intelligence).     
   - *2022/2023 - Semestre 1:* 
 
     - TP Algorithmique et programmation (EI1) - 18h;
     - TP Mathématiques pour l'ingénieur (EI1) - 12h.
+      
+      - Analyse numérique (Méthode des éléments-finis, résolution de systèmes linéaires mal posés), optimisation (libre, sous contrainte, programmation linéaire), probabilités et inférence statistique.
   - *2022/2023 - Semestre 2:* 
     
     - TP Mathématiques pour l'ingénieur (EI1) - 12h; 
     - TP C$^{3}$ : Signaux et systèmes (EI1) - 4h.
+      
+      - Analyse spectrale et temps-fréquence : transcription automatique de partition musicale. 
   - *2023/2024 - Semestre 1:* 
     
     - TP Mathématiques pour l'ingénieur (EI1) - 12h;
     - TP C$^{3}$ : Signaux et systèmes (EI1) - 6h;  
-    - TP Calcul scientifique et optimisation (EI23, Master CORO-SIP) - 16h.
+    - TP Calcul scientifique et optimisation (EI23 (Fr), CORO-SIP (En)) - 16h.
+
+      - Optimisation convexe différentiable: Recherches linéaires, régions de confiance, algorithmes de pénalisation quadratique et barrière logarithmique, régularisation ...; 
+      - Optimisation convexe non différentiable [Supports de B.Pascal](https://bpascal-fr.github.io/teaching/): sous-différentielle/gradient, opérateurs proximaux, algorithme primal-dual régularisé.
   
 
   **Rattachement :** 
-  [Département Mathématiques, Informatique et Biologie (MIB](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-mathematiques-informatique-et-biologie-mib), [Département Automatique et Robotique](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-automatique-et-robotique)
+  [Département Mathématiques, Informatique et Biologie](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-mathematiques-informatique-et-biologie-mib), [Département Automatique et Robotique](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-automatique-et-robotique)
+
+  **Note:** dans le langage ECN, *EI (Elèves ingénieurs)*: cursus généraliste (en 3 ans); *Master*: cursus spécialisé (en 2 ans).
 
   **Eléments de correction :** [envoyer une demande motivée](mailto:latifm.pro@gmail.com?subject=[mlatif.fr]%20Demande%20d'accès%20aux%20éléments%20de%20correction%20matière%20...)
 """

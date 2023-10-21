@@ -49,11 +49,11 @@ date_format = "Jan 2006"
 
   **Planches:** [Séminaire SIMS 06/22](files/LATIFM_PHD_ETEZ22.pdf)  
 
-  **Activités connexes**
-  - **Année 2023/2023 :** 
+  **Encadrement d'étudiants (Stages, Projets)**
+  - **Année 2023 :** 
     Encadrement du stage de E.Gecimli  (M1 Physique fondamentale et applications - Université de Nantes)
     \\
-    *Problématique :* Étude et mise en œuvre d’algorithmes de reconstruction d’événements pour l’imagerie TEP 3-photons appliqués à la caméra XEMIS2.
+    *Problématique :* Étude et mise en œuvre d’algorithmes de reconstruction d’événements pour l’imagerie TEP 3-photons appliqués à la caméra XEMIS2. Extraction et analyse des données obtenues à partir d'une simulation GEANT4 de la caméra XEMIS2 proposée par N.Beaupère (Laboratoire Subatech - IMTA).
     \\
     *Durée :* 4 mois
 
