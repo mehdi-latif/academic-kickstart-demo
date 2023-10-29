@@ -56,10 +56,16 @@ date_format = "Jan 2006"
     *Problématique :* Étude et mise en œuvre d’algorithmes de reconstruction d’événements pour l’imagerie TEP 3-photons appliqués à la caméra XEMIS2. Extraction et analyse des données obtenues à partir d'une simulation GEANT4 de la caméra XEMIS2 proposée par N.Beaupère (Laboratoire Subatech - IMTA).
     \\
     *Durée :* 4 mois
+  - **Année 2023 :** 
+    Encadrement du projet bibliographique de Y.Oumarou (M2 CORO-SIP - Ecole Centrale de Nantes)
+    \\
+    *Problématique :* Étude bibliographique de l'état de l'art des projecteurs en imagerie Compton - [Projet ComProj](/files/LM_corosip_merec23.pdf) .
+    \\
+    *Durée :* 3 mois  
 
 
   **Particpations aux workshops/congrès scientifiques :**
-  EmiLy 2022 (orateur), MIC 2022 (auditeur), Fully3D 2023 (orateur), Gretsi 2023 (orateur). 
+  EmiLy 2022 (orateur), MIC 2022 (auditeur), Fully3D 2023 (orateur), Gretsi 2023 (orateur), Journée du GDR ISIS : *Etat des lieux de la reconstruction tomographique* (auditeur). 
 
   **Diffusion scientifique :**
   demie-heure des doctorant LS2N 2022 (orateur) , science-dating - Nuit Blanche des Chercheurs 2023 (orateur). 
