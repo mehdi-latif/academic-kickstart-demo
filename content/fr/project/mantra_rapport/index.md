@@ -58,6 +58,37 @@ p2 = plot(…,‘Displayname’, "blo") ;
 legend([p1,p2],…) ;  
 ```
 
+![Exemple d'une *jolie figure* : Prox de la norme $\ell_{1}$](ex_norm_l1.png)
+Le code Matlab correspondant: 
+
+```
+x = linspace(-10,10,1000);
+figure; 
+  sgtitle("$\ell_{1}$ norm",'Interpreter','latex','FontSize',20)
+  subplot(1,2,1)
+    hold on; box on; grid minor;
+    plot(x,abs(x),'b','LineWidth',2);
+    yline(0,'k--'); xline(0,'k--');
+    ylim([-1,max(x)]);
+    xlabel('$x$','Interpreter','latex','FontSize',12); 
+    ylabel('$y$','Interpreter','latex','Rotation',0,'FontSize',12);    
+    title("$f:x \mapsto |x|$",'Interpreter','latex','FontSize',16);
+  subplot(1,2,2)
+    hold on; box on; grid minor; 
+    gamma = 1;  p = prox_l1(x,gamma);
+    p1 = plot(x,p,'-','LineWidth',2,'Displayname',"$\gamma="+num2str(gamma)+"$",'Color','#7E2F8E');
+    gamma = 2;  p = prox_l1(x,gamma);
+    p2 = plot(x,p,'--','LineWidth',2,'Displayname',"$\gamma="+num2str(gamma)+"$",'Color','#EDB120');
+    gamma = 3.5;  p = prox_l1(x,gamma);
+    p3 = plot(x,p,':','LineWidth',2,'Displayname',"$\gamma="+num2str(gamma)+"$",'Color','#A2142F');
+    yline(0,'k--'); xline(0,'k--');
+    xlabel('$x$','Interpreter','latex','FontSize',12);
+    ylabel('$y$','Interpreter','latex','Rotation',0,'FontSize',12);
+    title("prox$_{\gamma \|\cdot\|_{1}}(x)$",'Interpreter','latex','FontSize',16)
+    legend([p1,p2,p3],'Location','best','FontSize',16,'Interpreter','latex'); legend boxoff
+```
+
+
 ### Dessert, la conclusion : 
 bon bah là, discutez la figure obtenue ou donnez le résultat mathématique obtenu, bref discutez et soyez critiques vis-à-vis de ce que vous présentez.
 
