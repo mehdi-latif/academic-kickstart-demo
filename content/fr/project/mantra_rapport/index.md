@@ -26,18 +26,63 @@ url_video: ''
 slides: ""
 ---
 
-Un petit message pour vous rappeler les attentes que nous avons mentionné lors du TP ; pour mémoire, ce n’est pas pour être embêtant mais pour vous préparer à l’écriture de vos rapports de stage, vos projets biblios, … que vous continuiez en thèse ou dans le monde de l’entreprise (dixit Gwen : « ... » sur l’importance du contexte dans les écrits que vous produirez pour vos supérieurs, clients, mamans et papas de thèses …).
+1. [Contexte](#contexte)
+2. [Mantra](#mantra): [l'entrée](#entree), [le plat](#plat), [le dessert](#dessert), [le digestif](#digestif)
+3. [Moralité](#moralite)
 
-## « Mantra » principal : On doit pouvoir lire un rapport sans avoir à se référer au sujet.
-Pour faire simple : pour chaque question, faire :
+# Contexte <a name="contexte"></a>
+Un petit message pour vous rappeler les attentes que nous avons mentionnées lors du dernier TP de CSOPT ; pour mémoire, ce n’est pas pour être embêtant mais pour vous préparer à l’écriture de vos rapports de stage, vos projets biblios, … que vous continuiez en thèse ou dans le monde de l’entreprise (dixit Gwen : *sur l’importance du contexte dans les écrits que vous produirez pour vos supérieurs, clients, mamans et papas de thèses …*).
 
-### Entrée, l’intro : 
-Une phrase de contexte où vous dites ce que vous allez faire, prouver, montrer, …
-### Plat, le développement :
-- **Si question mathématique :** de la rigueur ie. hypothèses (ou l’endroit d’où vous partez) , résultats de cours utilisés, étapes de calculs (pas besoin de tout mettre si les opérations sont triviales), …
+---
+
+# Mantra  <a name="mantra"></a>
+Le « Mantra » principal est
+<center> <i> On doit pouvoir lire un rapport sans avoir à se référer au sujet. </i></center>
+</br>
+
+Pour faire simple : **Pour chaque question, faire:**
+
+## Entrée, l’intro :  <a name="entree"></a>
+Une phrase de contexte où vous dites ce que vous allez faire, prouver, montrer, … On évite **au maximum** de faire appel au numéro des questions dans le sujet afin d'être cohérent avec le mantra *ie.* on évite:
+```
+1.a: la réponse est ...
+...
+2.f: on trouve x=9
+...
+42.z: ça converge.  
+```
+## Plat, le développement :  <a name="plat"></a>
+
+- **Si question mathématique :** de la rigueur ie. hypothèses (ou l’endroit d’où vous partez) , résultats de cours utilisés, étapes de calculs (pas besoin de tout mettre si les opérations sont triviales), … 
+
+Pensez au [LaTeX](https://en.wikipedia.org/wiki/LaTeX) pour la rédaction de vos documents avec un éditeur type [Overleaf](https://www.overleaf.com/) si vous rendez un CR à plusieurs.
+- **Si tableau synthèse :** Tout est dans le titre de cette section, c’est censé être une synthèse … ne pas hésiter à mettre en valeur (avec du gras ou de la couleur) les résultats que vous jugez utiles, pertinents. Par exemple, le code LaTeX: 
+```
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c|}
+\cline{2-4}
+\textbf{} & \textbf{Méthode 1} & \textbf{Methode 2} & \textbf{Méthode 3} \\ \hline
+\multicolumn{1}{|c|}{\textbf{$\hat{x}$}} & $(.,.)^{\intercal}$ & $(.,.)^{\intercal}$ & $(.,.)^{\intercal}$ \\ \hline
+\multicolumn{1}{|c|}{\textbf{$\hat{z} := f(\hat{x})$}} & 0 & \textcolor{blue}{$\infty$} & $\ln (3)$ \\ \hline
+\multicolumn{1}{|c|}{Nb d'itérations} & $666$ & $24$ & $\begingroup \color{red}{4} \endgroup 2$ \\ \hline
+\multicolumn{1}{|c|}{Nature de $\hat{x}$} & \textcolor{magenta}{$\min$ local} & $\max$ local & point col \\ \hline
+\end{tabular}
+\caption{Données obtenues avec $x_{0} = (\dots)^{\intercal} \in \mathbb{R}^{n}$ avec $\rho = \dots$ et un nombre d'itération maximal $\text{iter}_{\max} = \dots$ }
+\label{tab:dummy_tab}
+\end{table}
+```
+permet d'obtenir le tableau suivant: 
+
+![Exemple d'un joli tableau](ex_dummy_tab.png)
+
+Et on discute les résultats obtenus ;).
+
+*Tip pour se simplifier la vie avec les tableaux latex:* 
+Créez vos tableaux dans un tableur et mettez en forme avec [Table generator](https://www.tablesgenerator.com/)
+
 - **Si on vous demande de tracer un truc :**
-
-*Protocole de la jolie figure (en Matlab, mais généralisable):*
+#### Protocole de la jolie figure (en Matlab, mais généralisable à d'autres langages ):
 ```
 figure ; hold on ; 
 [box on ; grid on] ; // […] signifie optionnel.  
@@ -48,7 +93,7 @@ xlabel(‘’) ; ylabel(‘’) ; title(‘’) ;
 // et sgtitle(‘’) si vous avez décidé de faire des subplot() cf la doc.
 legend(‘’) ; // idem, regardez la doc.
 ```
-*Tips pour des figures propres :*
+#### Tips pour des figures propres :
 - allez voir dans les docs le ‘Interpreter’,’latex’
 - gagnez du temps dans la création de la légende avec matlab :
 ```
@@ -57,10 +102,11 @@ p2 = plot(…,‘Displayname’, "blo") ;
 // [...]
 legend([p1,p2],…) ;  
 ```
+#### Un exemple de jolie figure - Cours de B.Pascal Datasim/CSOPT
+Pour les curieux, le cours de B.Pascal [Nonsmooth convex optimization](https://bpascal-fr.github.io/teaching/).
 
 ![Exemple d'une *jolie figure* : Prox de la norme $\ell_{1}$](ex_norm_l1.png)
-Le code Matlab correspondant: 
-
+Le code Matlab correspondant (possible de faire la même chose avec Python ou Julia): 
 ```
 x = linspace(-10,10,1000);
 figure; 
@@ -88,8 +134,25 @@ figure;
     legend([p1,p2,p3],'Location','best','FontSize',16,'Interpreter','latex'); legend boxoff
 ```
 
+#### Un peu d'auto-promo: 
+On peut faire de chouettes figures avec Matlab, un exemple avec le code [Ariane](https://gitlab.com/mlatif/tep3g-ariane):
+Ariane dans le plan             |  Ariane dans l'espace
+:-------------------------:|:-------------------------:
+![](mantra_ex1.png)  |  ![](mantra_ex2.png)
 
-### Dessert, la conclusion : 
+## Dessert, la conclusion :  <a name="dessert"></a>
 bon bah là, discutez la figure obtenue ou donnez le résultat mathématique obtenu, bref discutez et soyez critiques vis-à-vis de ce que vous présentez.
 
-Moralité, maintenant que vous avez tout ça, nous serons intraitables sur les rapports que nous allons corriger.
+## Le digestif, les remarques générales:  <a name="digestif"></a>
+
+Si on file la métaphore du restaurant : 
+-	**Le menu:** c’est l’introduction générale du TP, ce que l’on va étudier dans ce rapport de TP. Même si cela suppose faire des paraphrases du sujet, c’est toujours bien de faire comprendre au lecteur/correcteur/rapporteur l’endroit d’où il part **et** à quelle sauce il va être mangé. 
+-	**L’addition:** c’est la conclusion générale du TP ; il faut donner les grandes lignes de l’étude qui a été réalisée durant le rapport, les idées et les conclusions. Pas besoin de trop de blabla si vous avez été efficaces dans les desserts de chaque question.  
+
+---
+
+# Moralité:  <a name="moralite"></a>
+Moralité, maintenant que vous avez tout ça, nous serons intraitables sur les rapports que nous allons corriger et si vous avez des questions, n'hésitez pas à envoyer un [mail](mailto:mehdi.latif@ls2n.fr?subject=[mlatif.fr]%20Question%20mantra%20TP...)
+
+
+
