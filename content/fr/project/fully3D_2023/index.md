@@ -1,6 +1,6 @@
 ---
 title: Article - Multi-class maximum likelihood expectation-maximization list-mode image reconstruction
-summary: International Meeting on Fully Three-Dimensional Image Reconstruction in Radiology and Nuclear Medicine ([Fully3D 2023](https://renaissance.stonybrookmedicine.edu/Fully3D2023)) - Stony Brook (NY - USA).
+summary: International Meeting on Fully Three-Dimensional Image Reconstruction in Radiology and Nuclear Medicine ([Fully3D 2023](https://renaissance.stonybrookmedicine.edu/Fully3D2023)) - Stony Brook (NY - USA).  </br> [Proceedings complets sur ArXiv](https://arxiv.org/abs/2310.16846).
 tags:
   - TEP
   - 3photons
