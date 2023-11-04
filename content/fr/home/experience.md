@@ -131,7 +131,7 @@ date_format = "Jan 2006"
   """
   info_sup_tag = 1
   info_sup = """
-  Résoltion du Pickup and Delivery Problem with Time Windows par une approche de type matheuristique, la méthode mise en place pour la résolution de ce problème reposait sur :
+  Résolution du Pickup and Delivery Problem with Time Windows par une approche de type matheuristique, la méthode mise en place pour la résolution de ce problème reposait sur :
     - Une heuristique de recherche à voisinage large (LNS)
     - Une résolution d'un problème de couverture d'ensemble (SCP)  
   Mon rôle dans la conception de cette matheuristique :
