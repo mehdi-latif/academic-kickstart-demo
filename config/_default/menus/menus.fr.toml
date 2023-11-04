@@ -15,36 +15,43 @@
   url = "#experience"
   weight = 20
 
+
+[[main]]
+  identifier = "Publications"
+  name = "Publications"
+  url = "#publications"
+  weight = 30
+
 [[main]]
   identifier = "project"
-  name = "Projets & Publications"
+  name = "Projets & planches"
   url = "#projects"
-  weight = 30
+  weight = 40
 
 [[main]]
   identifier = "CV_DOCS"
   name = "CV & Portfolio"
   # url = "files/CV_LM.pdf"
-  weight = 40
+  weight = 50
 
 [[main]]
   identifier = "CV_FR"
   parent = "CV_DOCS"
   name = "CV - Français"
   url = "files/CV_LM.pdf"
-  weight = 45
+  weight = 55
 [[main]]
   identifier = "CV_EN"
   parent = "CV_DOCS"
   name = "CV - Anglais"
   url = "/project/default_soon/"
-  weight = 55
+  weight = 65
 [[main]]
   identifier = "PF_PHD"
   parent = "CV_DOCS"
   name = "Portfolio"
   url = "/project/default_soon/"
-  weight = 65
+  weight = 75
 
   #[[main]]
   #  name = "Home"
