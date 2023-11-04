@@ -26,7 +26,9 @@ publishDate: '2023-08-15T00:00:00Z'
 # Publication type.
 # Accepts a single type but formatted as a YAML list (for Hugo requirements).
 # Enter a publication type from the CSL standard.
-# publication_types: ['paper-conference']
+# https://discourse.gohugo.io/t/academic-theme-changing-the-name-of-publication-types/38091
+# # Publication type. Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article; 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section; 7 = Thesis; 8 = Patent
+publication_types: [1]
 
 # Publication name and optional abbreviated publication name.
 publication: In *XXIXème Colloque Francophone de Traitement du Signal et des Images (GRETSI'23)*.
