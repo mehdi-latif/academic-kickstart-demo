@@ -24,22 +24,27 @@
 
 [[main]]
   identifier = "project"
-  name = "Projets & planches"
+  name = "Projets"
   url = "#projects"
   weight = 40
+
+[[main]]
+  name = "Contact"
+  url = "#contact"
+  weight = 50
 
 [[main]]
   identifier = "CV_DOCS"
   name = "CV & Portfolio"
   # url = "files/CV_LM.pdf"
-  weight = 50
+  weight = 60
 
 [[main]]
   identifier = "CV_FR"
   parent = "CV_DOCS"
   name = "CV - Français [pas à jour]"
   url = "files/CV_LM.pdf"
-  weight = 55
+  weight = 60
 [[main]]
   identifier = "CV_EN"
   parent = "CV_DOCS"
@@ -63,10 +68,6 @@
   #   url = "#featured"
   #   weight = 60
 
-  # [[main]]
-  #   name = "Contact"
-  #   url = "#contact"
-  #   weight = 40
 
 # [[main]]
 #   name = "Compétences"
