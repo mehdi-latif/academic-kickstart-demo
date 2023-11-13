@@ -37,19 +37,19 @@
 [[main]]
   identifier = "CV_FR"
   parent = "CV_DOCS"
-  name = "CV - Français"
+  name = "CV - Français [pas à jour]"
   url = "files/CV_LM.pdf"
   weight = 55
 [[main]]
   identifier = "CV_EN"
   parent = "CV_DOCS"
-  name = "CV - Anglais"
+  name = "CV - Anglais [pas à jour]"
   url = "/project/default_soon/"
   weight = 65
 [[main]]
   identifier = "PF_PHD"
   parent = "CV_DOCS"
-  name = "Portfolio"
+  name = "Portfolio [en construction]"
   url = "/project/default_soon/"
   weight = 75
 
