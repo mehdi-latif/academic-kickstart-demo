@@ -18,4 +18,7 @@ autolink = false
 #   2: formspree.io
 email_form = 0
 +++
-gkjdhsgkdsnkgdfk
+## Dans la vie réelle :  
+LS2N/Site ECN : [Bâtiment S, bureau 217](https://www.openstreetmap.org/?mlat=47.25018&mlon=-1.54715#map=19/47.25018/-1.54715);
+## Dans le monde numérique :   
+mehdi.latif @ ls2n.fr **ou** latifm.pro @ gmail.com. 
