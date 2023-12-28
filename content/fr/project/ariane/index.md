@@ -2,9 +2,13 @@
 title: ARIANE - Projecteur TEP $3\gamma$
 summary: Un projecteur de LOR/COR/SOR basé sur Pollux pour l'imagerie TEP $3\gamma$ et trouver son chemin dans ce sacré boxel.
 tags:
-  - TEP
-  - 3 Photons
-  - Xemis2
+  - Imagerie 
+  - Compton
+  - 3-photons ($3\gamma$)
+  - XEMIS2
+  - Matlab
+  - Physique 
+  - Ray-Tracing
   - Project
 date: '2023-09-15T00:00:00Z'
 

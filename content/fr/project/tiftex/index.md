@@ -3,6 +3,7 @@ title: TIFTEX
 summary: Un script bash *non révolutionnaire* pour compiler du tex depuis un terminal.
 tags:
   - Bash
+  - Script
   - Latex
   - Tools
 date: '2021-01-01T00:00:00Z'

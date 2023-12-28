@@ -39,7 +39,8 @@ abstract: Dans cette contribution, nous abordons le problème de reconstruction 
 # Summary. An optional shortened abstract.
 summary: Dans cette contribution, nous abordons le problème de reconstruction d’image de distribution radioactive pour lequel l’information disponible provient de plusieurs classes de données distinctes, chacune associée à une combinaison spécifique de détections. 
 
-tags: ['Medical Physics [physics.med-ph]','Informatique [cs]/Imagerie médicale','Statistiques [stat]/Applications [stat.AP]']
+# tags: ['Medical Physics [physics.med-ph]','Informatique [cs]/Imagerie médicale','Statistiques [stat]/Applications [stat.AP]']
+tags: ['Medical Physics ','Imagerie médicale','Statistiques']
 
 # Display this page in the Featured widget?
 featured: true

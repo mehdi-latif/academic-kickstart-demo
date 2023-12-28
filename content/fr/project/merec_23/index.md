@@ -2,10 +2,12 @@
 title: ComProj - System matrix evaluation for Compton imaging system
 summary: 10/2023 - Projet de recherche bibliographique Master CORO-SIP
 tags:
-  - Compton
-  - 3Photons ($3\gamma$)
-  - Xemis2
-  - Project
+ - Imagerie 
+ - Compton
+ - Physique
+ - Ray-Tracing
+ - Project
+ - Slides
 date: '2023-09-30T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

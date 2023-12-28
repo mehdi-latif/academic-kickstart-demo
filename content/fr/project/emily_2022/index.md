@@ -2,9 +2,13 @@
 title: Challenges and opportunities of $3\gamma$ tomographic reconstruction for the XEMIS camera
 summary: Workshop [Emily](https://emilyworkshop.github.io/) 11/2022 - Rencontre Lyonnaise en Imagerie d'Emission.
 tags:
+  - Imagerie 
   - TEP
-  - 3photons
-  - Xemis2
+  - Compton
+  - Physique
+  - 3-photons ($3\gamma$)
+  - XEMIS2
+  - Simulation Monte Carlo
   - Slides
 date: '2022-11-07T00:00:00Z'
 

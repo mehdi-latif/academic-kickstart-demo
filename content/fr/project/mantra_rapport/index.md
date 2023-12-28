@@ -3,7 +3,8 @@ title: Mantra pour l'écriture d'un rapport de TP
 summary: A l'attention des étudiants que j'encadre en TP.
 tags:
   - Matlab
-  - Rapports
+  - Latex
+  - Enseignement
   - Tools
 date: '2023-09-01T00:00:00Z'
 

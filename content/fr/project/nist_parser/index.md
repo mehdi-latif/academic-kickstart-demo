@@ -3,6 +3,8 @@ title: NIST parser
 summary: Un script bash permettant d'extraire et de formater une liste de données de la base NIST.
 tags:
   - Bash
+  - Script
+  - Physique
   - Tools
 date: '2022-09-01T00:00:00Z'
 

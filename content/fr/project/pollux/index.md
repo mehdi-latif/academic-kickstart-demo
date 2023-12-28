@@ -2,9 +2,15 @@
 title: POLLUX - Simulateur TEP $3\gamma$
 summary: Simulateur TEP 3 photons implémenté en Matlab.
 tags:
+  - Imagerie 
   - TEP
-  - 3 Photons
-  - Xemis2
+  - Compton
+  - 3-photons ($3\gamma$)
+  - XEMIS2
+  - Simulation Monte Carlo
+  - Matlab
+  - Physique 
+  - Ray-Tracing
   - Project
 date: '2022-07-01T00:00:00Z'
 

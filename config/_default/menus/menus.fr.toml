@@ -15,18 +15,45 @@
   url = "#experience"
   weight = 20
 
+[[main]]
+  identifier = "RESEARCH"
+  name = "Recherches"
+  # url = "#experience"
+  weight = 30
+
+[[main]]
+  identifier = "TagCloud"
+  parent = "RESEARCH"
+  name = "En bref"
+  url = "#tags"
+  weight = 30
 
 [[main]]
   identifier = "Publications"
+  parent = "RESEARCH"
   name = "Publications"
   url = "#publications"
   weight = 30
 
 [[main]]
   identifier = "project"
+  parent = "RESEARCH"
   name = "Projets"
   url = "#projects"
   weight = 40
+
+
+# [[main]]
+#  identifier = "Publications"
+#  name = "Publications"
+#  url = "#publications"
+#  weight = 30
+
+# [[main]]
+#  identifier = "project"
+#  name = "Projets"
+#  url = "#projects"
+#  weight = 40
 
 [[main]]
   name = "Contact"

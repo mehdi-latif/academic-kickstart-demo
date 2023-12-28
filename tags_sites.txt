@@ -1,0 +1,36 @@
+  NIST
+  - Bash
+  - Script
+  - Physique
+  - Tools
+TIFTEX
+  - Bash
+  - Script
+  - Latex
+  - Tools
+POLLUX
+  - Imagerie 
+  - TEP
+  - Compton
+  - 3-photons ($3\gamma$)
+  - XEMIS2
+  - Simulation Monte Carlo
+  - Matlab
+  - Physique 
+  - Ray-Tracing
+  - Project
+MEREC
+ - Imagerie 
+ - Compton
+ - Physique
+ - Ray-Tracing
+ - Project
+ - Slides
+
+MIMOSA
+  - Branch-and-bound
+  - Parcimonie $\ell_{0}$
+  - Optimisation exacte
+  - Démélange spectral
+  - Solveur libre
+  - Slides
