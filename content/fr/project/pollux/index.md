@@ -2,7 +2,7 @@
 title: POLLUX - Simulateur TEP $3\gamma$
 summary: Simulateur TEP 3 photons implémenté en Matlab.
 tags:
-  - Imagerie 
+  - Imagerie médicale 
   - TEP
   - Compton
   - 3-photons ($3\gamma$)

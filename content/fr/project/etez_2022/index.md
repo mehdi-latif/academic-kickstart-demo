@@ -2,7 +2,7 @@
 title: Reconstruction tomographique pour l’imagerie TEP à $3\gamma$
 summary: Ecole d’Etez 06/2022 - Séminaire des doctorants SiMS.
 tags:
-  - Imagerie 
+  - Imagerie médicale 
   - TEP
   - Compton
   - Physique

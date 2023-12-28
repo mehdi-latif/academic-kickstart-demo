@@ -3,6 +3,7 @@ title: Exact resolution of the sparse spectral unmixing problem
 summary: 09/2021 - Séminaire d'équipe SiMS.
 tags:
   - Branch-and-bound
+  - Imagerie hyperspectrale
   - Parcimonie $\ell_{0}$
   - Optimisation exacte
   - Démélange spectral

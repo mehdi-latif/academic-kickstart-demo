@@ -9,7 +9,7 @@ TIFTEX
   - Latex
   - Tools
 POLLUX
-  - Imagerie 
+  - Imagerie médicale 
   - TEP
   - Compton
   - 3-photons ($3\gamma$)
@@ -20,7 +20,7 @@ POLLUX
   - Ray-Tracing
   - Project
 MEREC
- - Imagerie 
+ - Imagerie médicale 
  - Compton
  - Physique
  - Ray-Tracing
@@ -29,6 +29,7 @@ MEREC
 
 MIMOSA
   - Branch-and-bound
+  - Imagerie hyperspectrale
   - Parcimonie $\ell_{0}$
   - Optimisation exacte
   - Démélange spectral

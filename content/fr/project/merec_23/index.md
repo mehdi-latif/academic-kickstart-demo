@@ -2,7 +2,7 @@
 title: ComProj - System matrix evaluation for Compton imaging system
 summary: 10/2023 - Projet de recherche bibliographique Master CORO-SIP
 tags:
- - Imagerie 
+ - Imagerie médicale 
  - Compton
  - Physique
  - Ray-Tracing
