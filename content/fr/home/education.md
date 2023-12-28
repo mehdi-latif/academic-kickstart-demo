@@ -65,10 +65,16 @@ date_format = "Jan 2006"
 
 
   **Particpations aux workshops/congrès scientifiques :**
-  EmiLy 2022 (orateur), MIC 2022 (auditeur), Fully3D 2023 (orateur), Gretsi 2023 (orateur), Journée du GDR ISIS : *Etat des lieux de la reconstruction tomographique* (auditeur). 
+  - EmiLy 2022 (orateur);
+  - MIC 2022 (auditeur);
+  - Fully3D 2023 (orateur);
+  - Gretsi 2023 (orateur);
+  - Journée du GDR ISIS: *Etat des lieux de la reconstruction tomographique* (auditeur). 
 
-  **Diffusion scientifique :**
-  demie-heure des doctorant LS2N 2022 (orateur) , science-dating - Nuit Blanche des Chercheurs 2023 (orateur). 
+  **Diffusion scientifique :**  
+  - Demie-heure des doctorant LS2N 2022 (orateur); 
+  - Nuit Blanche des Chercheurs 2023: science-dating; 
+  - Nuit Blanche des Chercheurs 2024: science-dating. 
 """
 
 [[experience]]
