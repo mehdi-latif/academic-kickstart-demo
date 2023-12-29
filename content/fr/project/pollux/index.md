@@ -7,11 +7,11 @@ tags:
   - Compton
   - 3-photons ($3\gamma$)
   - XEMIS2
-  - Simulation Monte Carlo
+  - Simulations Monte Carlo
   - Matlab
   - Physique 
   - Ray-Tracing
-  - Project
+  - Projet
 date: '2022-07-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

@@ -8,7 +8,7 @@ tags:
   - Optimisation exacte
   - Démélange spectral
   - Solveur libre
-  - Slides
+  - Planches
 date: '2021-09-23T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

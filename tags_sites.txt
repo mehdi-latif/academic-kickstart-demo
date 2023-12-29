@@ -14,7 +14,7 @@ POLLUX
   - Compton
   - 3-photons ($3\gamma$)
   - XEMIS2
-  - Simulation Monte Carlo
+  - Simulations Monte Carlo
   - Matlab
   - Physique 
   - Ray-Tracing
@@ -25,7 +25,7 @@ MEREC
  - Physique
  - Ray-Tracing
  - Project
- - Slides
+ - Planches
 
 MIMOSA
   - Branch-and-bound
@@ -34,4 +34,4 @@ MIMOSA
   - Optimisation exacte
   - Démélange spectral
   - Solveur libre
-  - Slides
+  - Planches

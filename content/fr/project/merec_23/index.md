@@ -6,8 +6,7 @@ tags:
  - Compton
  - Physique
  - Ray-Tracing
- - Project
- - Slides
+ - Planches
 date: '2023-09-30T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

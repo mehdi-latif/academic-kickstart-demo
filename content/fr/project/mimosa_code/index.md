@@ -9,7 +9,7 @@ tags:
   - Démélange spectral
   - Solveur libre
   - C++
-  - Slides
+  - Planches
 date: '2021-11-30T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

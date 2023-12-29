@@ -8,8 +8,8 @@ tags:
   - Physique
   - 3-photons ($3\gamma$)
   - XEMIS2
-  - Simulation Monte Carlo
-  - Slides
+  - Simulations Monte Carlo
+  - Planches
 date: '2022-06-23T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

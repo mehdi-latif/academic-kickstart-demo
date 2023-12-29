@@ -28,11 +28,11 @@ subtitle = ""
 
   [[content.filter_button]]
     name = "Planches de présentation"
-    tag = "Slides"
+    tag = "Planches"
 
   [[content.filter_button]]
     name = "Projets"
-    tag = "Project"
+    tag = "Projet"
 
   [[content.filter_button]]
     name = "Outils"

@@ -1,5 +1,5 @@
 ---
-title: Mantra pour l'écriture d'un rapport de TP
+title: Conseils pour l'écriture d'un rapport de TP (et pas que ...)
 summary: A l'attention des étudiants que j'encadre en TP.
 tags:
   - Matlab
@@ -27,12 +27,18 @@ url_video: ''
 slides: ""
 ---
 
-1. [Contexte](#contexte)
-2. [Mantra](#mantra): [l'entrée](#entree), [le plat](#plat), [le dessert](#dessert), [le digestif](#digestif)
-3. [Moralité](#moralite)
+> Écrit à l'origine pour m'éviter de répéter constamment les mêmes conseils à mes étudiants, ce manuel a connu une diffusion assez large.   
+> **Umberto Eco** - Comment écrire sa thèse (1977)
 
+1. Le [Contexte](#contexte)
+2. Le [Mantra](#mantra) puis le modèle [entrée](#entree)/[plat](#plat)/[dessert](#dessert)/[digestif](#digestif)
+3. La [Moralité](#moralite)
+
+---
 # Contexte <a name="contexte"></a>
-Un petit message pour vous rappeler les attentes que nous avons mentionnées lors du dernier TP de CSOPT ; pour mémoire, ce n’est pas pour être embêtant mais pour vous préparer à l’écriture de vos rapports de stage, vos projets biblios, … que vous continuiez en thèse ou dans le monde de l’entreprise (dixit Gwen : *sur l’importance du contexte dans les écrits que vous produirez pour vos supérieurs, clients, mamans et papas de thèses …*).
+Initialement écrit pour les TP de CSOPT (Datasim), on se rend compte que ça sert à tout le monde. 
+
+> Ce n’est pas pour être embêtant mais pour vous préparer à l’écriture de vos rapports de stage, vos projets biblios, … que vous continuiez en thèse ou dans le monde de l’entreprise et vous montrer *l’importance du contexte dans les écrits que vous produirez pour vos supérieurs, clients, mamans et papas de thèses …* (dixit Gwen).
 
 ---
 
@@ -40,7 +46,6 @@ Un petit message pour vous rappeler les attentes que nous avons mentionnées lor
 Le « Mantra » principal est
 <center> <i> On doit pouvoir lire un rapport sans avoir à se référer au sujet. </i></center>
 </br>
-
 Pour faire simple : **Pour chaque question, faire:**
 
 ## Entrée, l’intro :  <a name="entree"></a>
@@ -140,6 +145,10 @@ On peut faire de chouettes figures avec Matlab, un exemple avec le code [Ariane]
 Ariane dans le plan             |  Ariane dans l'espace
 :-------------------------:|:-------------------------:
 ![](mantra_ex1.png)  |  ![](mantra_ex2.png)
+
+Et on peut même faire des animations: 
+
+{{< video src="Pi_convergence" width="600px" >}}
 
 ## Dessert, la conclusion :  <a name="dessert"></a>
 bon bah là, discutez la figure obtenue ou donnez le résultat mathématique obtenu, bref discutez et soyez critiques vis-à-vis de ce que vous présentez.

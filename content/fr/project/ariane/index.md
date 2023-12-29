@@ -1,5 +1,5 @@
 ---
-title: ARIANE - Projecteur TEP $3\gamma$
+title: ARIANE - Projecteur Compton
 summary: Un projecteur de LOR/COR/SOR basé sur Pollux pour l'imagerie TEP $3\gamma$ et trouver son chemin dans ce sacré boxel.
 tags:
   - Imagerie médicale 
@@ -9,7 +9,7 @@ tags:
   - Matlab
   - Physique 
   - Ray-Tracing
-  - Project
+  - Projet
 date: '2023-09-15T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

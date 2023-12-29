@@ -39,8 +39,8 @@ abstract: Our contribution focuses at improving the image reconstruction process
 # Summary. An optional shortened abstract.
 summary: Our contribution focuses at improving the image reconstruction process for specific Compton imaging systems able to detect multiple classes of events, in the field of nuclear imaging. 
 
-# tags: ['Medical Physics [physics.med-ph]','Informatique [cs]/Imagerie médicale','Statistiques [stat]/Applications [stat.AP]']
-tags: ['Medical Physics ','Imagerie médicale','Statistiques']
+# tags: ['Physique Médicale [physics.med-ph]','Informatique [cs]/Imagerie médicale','Statistiques [stat]/Applications [stat.AP]']
+tags: ['Physique Médicale ','Imagerie médicale','Statistiques']
 
 # Display this page in the Featured widget?
 featured: true

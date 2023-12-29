@@ -38,7 +38,7 @@
 [[main]]
   identifier = "project"
   parent = "RESEARCH"
-  name = "Projets"
+  name = "Projets & planches"
   url = "#projects"
   weight = 40
 
