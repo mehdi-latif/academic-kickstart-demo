@@ -141,13 +141,13 @@ figure;
 ```
 
 #### Un peu d'auto-promo: 
-On peut faire de chouettes figures avec Matlab, un exemple avec le code [Ariane](https://gitlab.com/mlatif/tep3g-ariane):
+On peut faire de chouettes figures et animations avec Matlab: 
+- un exemple avec le code [Ariane](https://gitlab.com/mlatif/tep3g-ariane) pour le calcul de la matrice système en imagerie Compton:
 Ariane dans le plan             |  Ariane dans l'espace
 :-------------------------:|:-------------------------:
 ![](mantra_ex1.png)  |  ![](mantra_ex2.png)
 
-Et on peut même faire des animations: 
-
+- un exemple d'application d'une méthode Monte Carlo pour l'approximation de $\pi$ par *Pluie aléatoire* (*cf.* Maths EI1/TP5):
 {{< video src="Pi_convergence" width="600px" >}}
 
 ## Dessert, la conclusion :  <a name="dessert"></a>
