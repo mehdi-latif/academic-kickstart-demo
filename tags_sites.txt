@@ -6,7 +6,7 @@
 TIFTEX
   - Bash
   - Script
-  - Latex
+  - LaTeX
   - Outils
 POLLUX
   - Imagerie médicale 

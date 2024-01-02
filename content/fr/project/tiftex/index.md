@@ -4,7 +4,7 @@ summary: Un script bash *non révolutionnaire* pour compiler du tex depuis un te
 tags:
   - Bash
   - Script
-  - Latex
+  - LaTeX
   - Outils
 date: '2021-01-01T00:00:00Z'
 
