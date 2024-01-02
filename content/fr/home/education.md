@@ -94,7 +94,7 @@ date_format = "Jan 2006"
 
   - **Université de Nantes (Master 1)** Analyse de données, Graphes, Graphes et Réseaux, Langage de programmation de haut niveau, Métaheuristiques, Optimisation discrète et combinatoire, Optimisation non linéaire.  
 
-  - **Mémoire :** *Application de la théorie des graphes pour l'optimisation d'emplois du temps* encadré par I.RUSU. [Rapport](/files/RAP_TER_LM.pdf), [Planches](/files/PRES_TER_LM.pdf)  
+  - **Mémoire :** *Application de la théorie des graphes pour l'optimisation d'emplois du temps* encadré par I.RUSU. [Rapport](/files/RAP_TER_LM.pdf), [Planches](/files/PRES_TER_LM.pdf). 
 
   - **Université Libre de Bruxelles (Master 1)** Combinatorial optimization, Continuous optimization, Statistical foundations of machine learning, Swarm Intelligence, Techniques of artificial intelligence.  
 
