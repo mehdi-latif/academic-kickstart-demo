@@ -36,9 +36,11 @@ slides: ""
 
 ---
 # Contexte <a name="contexte"></a>
-Initialement écrit pour les TP de CSOPT (Datasim), on se rend compte que ça sert à tout le monde. 
+Initialement écrit pour les TP de CSOPT ([Datasim](https://www.ec-nantes.fr/formation/les-options-de-2e-et-3e-annee/option-donnees-analyse-traitement-et-applications-en-signal-et-image)), on se rend compte que ça sert à tout le monde. 
 
-> Ce n’est pas pour être embêtant mais pour vous préparer à l’écriture de vos rapports de stage, vos projets biblios, … que vous continuiez en thèse ou dans le monde de l’entreprise et vous montrer *l’importance du contexte dans les écrits que vous produirez pour vos supérieurs, clients, mamans et papas de thèses …* (dixit Gwen).
+Ce n’est pas pour être embêtant mais pour vous préparer à l’écriture de vos rapports de stage, vos projets biblios, votre thèse … 
+>  Que vous continuiez en thèse ou dans le monde de l’entreprise,  il est important de poser le contexte dans les écrits que vous produirez pour vos supérieurs, clients, directeurs de thèses …   
+> dixit **Gwen.S** (2023)
 
 ---
 
@@ -140,7 +142,7 @@ figure;
     legend([p1,p2,p3],'Location','best','FontSize',16,'Interpreter','latex'); legend boxoff
 ```
 
-#### Un peu d'auto-promo: 
+#### Pour aller plus loin: 
 On peut faire de chouettes figures et animations avec Matlab: 
 - un exemple avec le code [Ariane](https://gitlab.com/mlatif/tep3g-ariane) pour le calcul de la matrice système en imagerie Compton:
 Ariane dans le plan             |  Ariane dans l'espace
