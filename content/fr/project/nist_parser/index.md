@@ -5,7 +5,7 @@ tags:
   - Bash
   - Script
   - Physique
-  - Tools
+  - Outils
 date: '2022-09-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

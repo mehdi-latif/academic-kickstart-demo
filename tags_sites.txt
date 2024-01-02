@@ -2,12 +2,12 @@
   - Bash
   - Script
   - Physique médicale
-  - Tools
+  - Outils
 TIFTEX
   - Bash
   - Script
   - Latex
-  - Tools
+  - Outils
 POLLUX
   - Imagerie médicale 
   - TEP

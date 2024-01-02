@@ -5,7 +5,7 @@ tags:
   - Matlab
   - Latex
   - Enseignement
-  - Tools
+  - Outils
 date: '2023-09-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
@@ -48,7 +48,8 @@ Ce n’est pas pour être embêtant mais pour vous préparer à l’écriture de
 Le « Mantra » principal est
 <center> <i> On doit pouvoir lire un rapport sans avoir à se référer au sujet. </i></center>
 </br>
-Pour faire simple : **Pour chaque question, faire:**
+
+**Pour faire simple:** Pour chaque question, faire
 
 ## Entrée, l’intro :  <a name="entree"></a>
 Une phrase de contexte où vous dites ce que vous allez faire, prouver, montrer, … On évite **au maximum** de faire appel au numéro des questions dans le sujet afin d'être cohérent avec le mantra *ie.* on évite:
@@ -145,12 +146,14 @@ figure;
 #### Pour aller plus loin: 
 On peut faire de chouettes figures et animations avec Matlab: 
 - un exemple avec le code [Ariane](https://gitlab.com/mlatif/tep3g-ariane) pour le calcul de la matrice système en imagerie Compton:
-Ariane dans le plan             |  Ariane dans l'espace
-:-------------------------:|:-------------------------:
-![](mantra_ex1.png)  |  ![](mantra_ex2.png)
+  - Ariane dans le plan:
+![Ariane dans le plan](mantra_ex1.png)
+  - Ariane dans l'espace:
+![Ariane dans l'espace](mantra_ex2.png)
 
-- un exemple d'application d'une méthode Monte Carlo pour l'approximation de $\pi$ par *Pluie aléatoire* (*cf.* Maths EI1/TP5):
+- un exemple d'application d'une méthode Monte Carlo pour l'approximation de $\pi$ par *Pluie aléatoire*: 
 {{< video src="Pi_convergence" width="600px" >}}
+*cf.* Maths EI1/TP5, animation présentée aux étudiants.
 
 ## Dessert, la conclusion :  <a name="dessert"></a>
 bon bah là, discutez la figure obtenue ou donnez le résultat mathématique obtenu, bref discutez et soyez critiques vis-à-vis de ce que vous présentez.
@@ -164,7 +167,7 @@ Si on file la métaphore du restaurant :
 ---
 
 # Moralité:  <a name="moralite"></a>
-Moralité, maintenant que vous avez tout ça, nous serons intraitables sur les rapports que nous allons corriger et si vous avez des questions, n'hésitez pas à envoyer un [mail](mailto:mehdi.latif@ls2n.fr?subject=[mlatif.fr]%20Question%20mantra%20TP...)
+Moralité, maintenant que vous avez tout ça, nous serons intraitables sur les rapports que nous allons corriger et si vous avez des questions, n'hésitez pas à envoyer un [mail](mailto:mehdi.latif@ls2n.fr?subject=[mlatif.fr]%20Question%rédaction%20TP...)
 
 
 
