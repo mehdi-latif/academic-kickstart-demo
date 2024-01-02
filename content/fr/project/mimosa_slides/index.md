@@ -4,7 +4,7 @@ summary: 09/2021 - Séminaire d'équipe SiMS.
 tags:
   - Branch-and-bound
   - Imagerie hyperspectrale
-  - Parcimonie $\ell_{0}$
+  - Parcimonie
   - Optimisation exacte
   - Démélange spectral
   - Solveur libre

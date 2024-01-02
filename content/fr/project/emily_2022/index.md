@@ -5,8 +5,8 @@ tags:
   - Imagerie médicale 
   - TEP
   - Compton
-  - Physique
-  - 3-photons ($3\gamma$)
+  - Physique médicale
+  - $3\gamma$
   - XEMIS2
   - Simulations Monte Carlo
   - Planches

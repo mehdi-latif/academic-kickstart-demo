@@ -3,7 +3,7 @@ title: MIMOSA Unmix
 summary: Implémentation de l'algorithme branch-and-bound pour le démélange spectral parcimonieux.
 tags:
   - Branch-and-bound
-  - Parcimonie $\ell_{0}$
+  - Parcimonie
   - Imagerie hyperspectrale
   - Optimisation exacte
   - Démélange spectral

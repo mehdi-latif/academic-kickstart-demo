@@ -4,7 +4,7 @@ summary: 10/2023 - Projet de recherche bibliographique Master CORO-SIP
 tags:
  - Imagerie médicale 
  - Compton
- - Physique
+ - Physique médicale
  - Ray-Tracing
  - Planches
 date: '2023-09-30T00:00:00Z'

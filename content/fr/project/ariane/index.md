@@ -4,10 +4,10 @@ summary: Un projecteur de LOR/COR/SOR basé sur Pollux pour l'imagerie TEP $3\ga
 tags:
   - Imagerie médicale 
   - Compton
-  - 3-photons ($3\gamma$)
+  - $3\gamma$
   - XEMIS2
   - Matlab
-  - Physique 
+  - Physique médicale 
   - Ray-Tracing
   - Projet
 date: '2023-09-15T00:00:00Z'

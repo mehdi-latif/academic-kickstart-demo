@@ -1,7 +1,7 @@
   NIST
   - Bash
   - Script
-  - Physique
+  - Physique médicale
   - Tools
 TIFTEX
   - Bash
@@ -12,17 +12,17 @@ POLLUX
   - Imagerie médicale 
   - TEP
   - Compton
-  - 3-photons ($3\gamma$)
+  - $3\gamma$
   - XEMIS2
   - Simulations Monte Carlo
   - Matlab
-  - Physique 
+  - Physique médicale 
   - Ray-Tracing
   - Project
 MEREC
  - Imagerie médicale 
  - Compton
- - Physique
+ - Physique médicale médicale
  - Ray-Tracing
  - Project
  - Planches
@@ -30,7 +30,7 @@ MEREC
 MIMOSA
   - Branch-and-bound
   - Imagerie hyperspectrale
-  - Parcimonie $\ell_{0}$
+  - Parcimonie
   - Optimisation exacte
   - Démélange spectral
   - Solveur libre

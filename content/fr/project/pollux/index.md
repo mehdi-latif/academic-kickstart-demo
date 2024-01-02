@@ -5,11 +5,11 @@ tags:
   - Imagerie médicale 
   - TEP
   - Compton
-  - 3-photons ($3\gamma$)
+  - $3\gamma$
   - XEMIS2
   - Simulations Monte Carlo
   - Matlab
-  - Physique 
+  - Physique médicale 
   - Ray-Tracing
   - Projet
 date: '2022-07-01T00:00:00Z'
