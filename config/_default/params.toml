@@ -89,7 +89,7 @@ show_related = {docs = true, page = false, post = true, project = true, publicat
 ############################
 
 # Enter contact details (optional). To hide a field, clear it to "".
-email = "latifm.pro@gmail.com"
+email = "mehdi.latif@ls2n.fr"
 phone = ""
 
 
@@ -115,7 +115,7 @@ phone = ""
 #   Set to `[]` to disable, or comment out unwanted lines with a hash `#`.
 #   Voir la spécification de side dans : themes/academic/layouts/partials/widgets/contact.html
 contact_links = [
-  # {icon = "envelope", icon_pack = "fa", name = "", link = "mailto:latifm.pro@gmail.com", side = "L"},
+  # {icon = "envelope", icon_pack = "fa", name = "", link = "mailto:mehdi.latif@ls2n.fr", side = "L"},
   # {icon = "phone", icon_pack="fa",name="",link = "tel:+33617770729", side = "L"},
   # {icon = "linkedin", icon_pack = "fab", name = "", link = "https://www.linkedin.com/in/mehdilatif/", side = "R"},
   # {icon = "twitter", icon_pack = "fab", name = "", link = "https://twitter.com/mehdilatif", side = "R"},

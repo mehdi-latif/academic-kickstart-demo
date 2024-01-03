@@ -55,7 +55,7 @@ social:
   link: https://www.linkedin.com/in/mehdilatif/
 - icon: envelope
   icon_pack: fas
-  link: "mailto:mehdi.latif@ls2n.fr?cc=latifm.pro@gmail.com"
+  link: "mailto:mehdi.latif@ls2n.fr?cc=mehdi.latif@ls2n.fr"
 
 
 # Link to a PDF of your resume/CV from the About widget.

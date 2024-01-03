@@ -58,7 +58,7 @@ social:
   link: https://www.linkedin.com/in/mehdilatif/
 - icon: envelope
   icon_pack: fas
-  link: https://mlatif.fr/#contact #"mailto:mehdi.latif@ls2n.fr?cc=latifm.pro@gmail.com"
+  link: https://mlatif.fr/#contact #"mailto:mehdi.latif@ls2n.fr?cc=mehdi.latif@ls2n.fr"
 - icon: hal-square
   icon_pack: ai
   link: https://hal.science/search/index/q/*/authFullName_s/Mehdi+Latif
