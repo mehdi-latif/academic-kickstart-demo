@@ -6,7 +6,7 @@ tags:
   - Parcimonie
   - Imagerie hyperspectrale
   - Optimisation exacte
-  - Démélange spectral
+  - Démélange
   - Solveur libre
   - C++
   - Planches

@@ -5,7 +5,7 @@ tags:
   - Branch-and-bound
   - Parcimonie
   - Optimisation exacte
-  - Démélange spectral
+  - Démélange
   - Solveur libre
 date: '2021-11-30T00:00:00Z'
 

@@ -32,6 +32,6 @@ MIMOSA
   - Imagerie hyperspectrale
   - Parcimonie
   - Optimisation exacte
-  - Démélange spectral
+  - Démélange
   - Solveur libre
   - Planches

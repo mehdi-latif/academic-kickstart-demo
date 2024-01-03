@@ -6,7 +6,7 @@ tags:
   - Imagerie hyperspectrale
   - Parcimonie
   - Optimisation exacte
-  - Démélange spectral
+  - Démélange
   - Solveur libre
   - Planches
 date: '2021-09-23T00:00:00Z'
