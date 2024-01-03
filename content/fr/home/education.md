@@ -69,7 +69,7 @@ date_format = "Jan 2006"
   - **Auditeur :** IEEE MIC 2022, Journée du GDR ISIS 2023: *Etat des lieux de la reconstruction tomographique*.
   
   **Diffusion scientifique :**  
-  - Demie-heure des doctorant LS2N 2022; 
+  - Demie-heure des doctorants LS2N 2022; 
   - Nuit Blanche des Chercheurs 2023: science-dating; 
   - Nuit Blanche des Chercheurs 2024: science-dating. 
 
