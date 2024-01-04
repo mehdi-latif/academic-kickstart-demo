@@ -4,7 +4,7 @@ summary: A l'attention des étudiants que j'encadre en TP.
 tags:
   - Matlab
   - LaTeX
-  - Enseignement
+  - Enseignements
   - Outils
 date: '2023-09-01T00:00:00Z'
 

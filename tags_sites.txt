@@ -35,3 +35,14 @@ MIMOSA
   - Démélange
   - Solveur libre
   - Planches
+ANIMATHS
+  - Matlab
+  - LaTeX
+  - Enseignements
+  - Outils
+
+MANTRA
+  - Matlab
+  - LaTeX
+  - Enseignements
+  - Outils
