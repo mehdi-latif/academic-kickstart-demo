@@ -1,5 +1,5 @@
 ---
-title: Affectation à base de graphe. 
+title: Affectation à base de graphe
 summary: Nouvelle implémentation en C++ d'un algorithme d'affectation basé sur la recherche de couplage maximal dans un graphe biparti.  (cf. [TER Master ORO](/files/RAP_TER_LM.pdf))
 tags:
   - Script
