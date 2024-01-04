@@ -5,7 +5,7 @@ tags:
   - Branch-and-bound
   - Imagerie hyperspectrale
   - Parcimonie
-  - Optimisation exacte
+  - Optimisation
   - Démélange
   - Solveur libre
   - Planches

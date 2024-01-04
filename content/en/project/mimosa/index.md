@@ -4,7 +4,7 @@ summary: Algorithme branch-and-bound pour le démélange spectral parcimonieux s
 tags:
   - Branch-and-bound
   - Parcimonie
-  - Optimisation exacte
+  - Optimisation
   - Démélange
   - Solveur libre
 date: '2021-11-30T00:00:00Z'

@@ -65,7 +65,7 @@ date_format = "Jan 2006"
 
 
   **Particpations aux workshops/congrès scientifiques :**
-  - **Orateur :**  Demie-heure des doctorants LS2N 2022, EmiLy 2022, Séminaire de [l'ED SIS](https://ed-sis.doctorat-paysdelaloire.fr/pendant) 2023, Fully3D 2023,  Gretsi 2023; 
+  - **Orateur :**  Journée d'Etez 2022 (Eq SiMS), Demie-heure des doctorants 2022 (LS2N/Login), EmiLy 2022, Séminaire de [l'ED SIS](https://ed-sis.doctorat-paysdelaloire.fr/pendant) 2023, Fully3D 2023,  Gretsi 2023; 
   - **Auditeur :** IEEE MIC 2022, Journée du GDR ISIS 2023: *Etat des lieux de la reconstruction tomographique*.
   
   **Diffusion scientifique :**  
