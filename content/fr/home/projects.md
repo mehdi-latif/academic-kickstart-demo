@@ -35,6 +35,10 @@ subtitle = ""
     tag = "Projet"
 
   [[content.filter_button]]
+    name = "Enseignements"
+    tag = "Enseignements"
+
+  [[content.filter_button]]
     name = "Outils"
     tag = "Outils"
 

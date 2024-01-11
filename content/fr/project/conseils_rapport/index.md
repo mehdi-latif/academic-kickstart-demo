@@ -5,7 +5,6 @@ tags:
   - Matlab
   - LaTeX
   - Enseignements
-  - Outils
 date: '2023-09-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
