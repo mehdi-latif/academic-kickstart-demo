@@ -43,6 +43,11 @@ TOC
 # Optimisation linéaire sous contrainte: <a name="optim_lin"></a> 
 ---
 # Simulations de lois de probabilité et illustraction des propriétés de convergence de variables aléatoires: <a name="simu_proba"></a> 
+## Simulations de loi usuelles   
+
+
+mettre un truc sur la réduction de la variance.
+
 ---
 # Inférence statistiques: <a name="stat_inf"></a> 
 
