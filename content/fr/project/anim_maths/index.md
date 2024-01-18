@@ -25,10 +25,26 @@ url_video: ''
 #   Otherwise, set `slides = ""`.
 slides: ""
 ---
-**Remarques générales:** 
+
+## Remarques générales:
 - Les exemples et animations présents sur cette page sont publiés avec l'autorisation de Madame [Françoise Foucher](https://www.ec-nantes.fr/version-francaise/annuaire/francoise-foucher), responsable du cours de *Mathématiques pour l'ingénieur* à l'ECN;
 - Sur cette page, il n'y aura pas de théorie, juste des jolies figures associées à des exercices de travaux pratiques.
+- **Des remerciements à B.Pascal** pour m'avoir donné le code qui m'a permis de générer ces animations.
 
+## Exemples proposés: 
+TOC
+
+
+---
+# Optimisation par recherche linéaire:  <a name="optim_rl"></a> 
+## Optimisation libre:  <a name="optim_rl_wocstr"></a> 
+## Optimisation sous contrainte: <a name="optim_rl_wicstr"></a> 
+---
+# Optimisation linéaire sous contrainte: <a name="optim_lin"></a> 
+---
+# Simulations de lois de probabilité et illustraction des propriétés de convergence de variables aléatoires: <a name="simu_proba"></a> 
+---
+# Inférence statistiques: <a name="stat_inf"></a> 
 
 <!-- 
 > Écrit à l'origine pour m'éviter de répéter constamment les mêmes conseils à mes étudiants, ce manuel a connu une diffusion assez large.   
