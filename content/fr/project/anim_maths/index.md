@@ -42,7 +42,7 @@ TOC
 ---
 # Optimisation linéaire sous contrainte: <a name="optim_lin"></a> 
 ---
-# Simulations de lois de probabilité et illustraction des propriétés de convergence de variables aléatoires: <a name="simu_proba"></a> 
+# Simulations de lois de probabilité et illustraction des propriétés de convergence des variables aléatoires: <a name="simu_proba"></a> 
 ## Simulations de loi usuelles   
 
 
