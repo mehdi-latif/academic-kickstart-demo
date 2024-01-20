@@ -32,8 +32,11 @@ slides: ""
 - **Mes remerciements vont à [Barbara Pascal](https://bpascal-fr.github.io/)** pour m'avoir donné le code qui m'a permis de générer ces animations ;)
 
 ## Exemples proposés: 
-TOC
 
+1. [Optimisation par recherche linéaire](#optim_rl); 
+2. [Optimisation linéaire sous contraintes](#optim_lin);
+3. [Simulations de lois de probabilité et convergence des variables aléatoires](#simu_proba);
+4. [Inférence statistiques](#stat_inf). 
 
 ---
 # Optimisation par recherche linéaire:  <a name="optim_rl"></a> 
@@ -73,7 +76,7 @@ La solution optimale $\boldsymbol{x}^{*}$ au problème $(\mathcal{P})$ est donn�
 ### Approche Polyèdrale
 ### Approche par méthodes des flots dans un graphe. 
 ---
-# Simulations de lois de probabilité et illustraction des propriétés de convergence des variables aléatoires: <a name="simu_proba"></a> 
+# Simulations de lois de probabilité et illustration des propriétés de convergence des variables aléatoires: <a name="simu_proba"></a> 
 ## Simulations de loi usuelles   
 
 
