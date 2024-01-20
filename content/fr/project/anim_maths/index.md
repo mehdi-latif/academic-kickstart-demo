@@ -29,7 +29,7 @@ slides: ""
 ## Remarques générales:
 - Les exemples et animations présents sur cette page sont publiés avec l'autorisation de Madame [Françoise Foucher](https://www.ec-nantes.fr/version-francaise/annuaire/francoise-foucher), responsable du cours de *Mathématiques pour l'ingénieur* à l'ECN;
 - Sur cette page, il n'y aura pas de théorie, juste des jolies figures associées à des exercices de travaux pratiques.
-- **Des remerciements à B.Pascal** pour m'avoir donné le code qui m'a permis de générer ces animations.
+- **Mes remerciements vont à [Barbara Pascal](https://bpascal-fr.github.io/)** pour m'avoir donné le code qui m'a permis de générer ces animations ;)
 
 ## Exemples proposés: 
 TOC
@@ -37,10 +37,41 @@ TOC
 
 ---
 # Optimisation par recherche linéaire:  <a name="optim_rl"></a> 
+Faire une ref vers le Nocedal 
+
 ## Optimisation libre:  <a name="optim_rl_wocstr"></a> 
-## Optimisation sous contrainte: <a name="optim_rl_wicstr"></a> 
+## Optimisation sous contraintes: <a name="optim_rl_wicstr"></a> 
 ---
-# Optimisation linéaire sous contrainte: <a name="optim_lin"></a> 
+# Optimisation linéaire sous contraintes: <a name="optim_lin"></a> 
+Une série d'exemples issus de la [Recherche Opérationnelle](https://fr.wikipedia.org/wiki/Recherche_op%C3%A9rationnelle) et plus particulièrement de l'[optimisation combinatoire](https://fr.wikipedia.org/wiki/Optimisation_combinatoire).   
+Un bon bouquin de *référence* est le [Wolsey](https://www.google.fr/books/edition/Integer_Programming/w-P7DwAAQBAJ?hl=fr&gbpv=0). 
+
+## Problème de maximisation 
+Le problème à résoudre est: 
+$$
+  (\mathcal{P}): \quad \max_{\boldsymbol{x}\in \mathbb{R}^{3}  }\quad  f(\boldsymbol{x}) \quad \textrm{st. } \quad \boldsymbol{x} \in \mathbf{K}
+$$ 
+où 
+- $f(\boldsymbol{x})$ est la fonction objectif définie par: 
+$$
+  f(\boldsymbol{x}) := 155x_{1} +160x_{2}+150x_{3}
+$$
+- $\mathbf{K}$ est un ensemble de contraintes défini par: 
+$$
+  \mathbf{K} := \\left\\{  16x_{1} + 13x_{2}+17x_{3} \leq 180, 27x_{1} + 15x_{2}+ 11x_{3} \leq 160, \\sum_{i=1}^{3} x_{i}=12, \boldsymbol{x} \geq 0 \\right\\}
+$$
+
+Les solveurs peuvent le faire à votre place, mais un bon moyen de résoudre ce problème revient à appliquer une approche polyédrale; des exemples de cours sont donnés [ici](https://www.lamsade.dauphine.fr/~poc/jpoc9/Chapitre-Polyedres.pdf) ou [là](https://www.andrew.cmu.edu/user/gc0v/webpub/IPsurveyAussois-11-08.pdf).   
+
+Visuellement, la résolution du problème $(\mathcal{P})$ est proposé dans l'animation suivante: 
+
+{{< video src="OPTIM_LIN_ANIM" width="600px" >}}
+
+La solution optimale $\boldsymbol{x}^{*}$ au problème $(\mathcal{P})$ est donné par le point rouge.
+
+## Problèmes de minimisation 
+### Approche Polyèdrale
+### Approche par méthodes des flots dans un graphe. 
 ---
 # Simulations de lois de probabilité et illustraction des propriétés de convergence des variables aléatoires: <a name="simu_proba"></a> 
 ## Simulations de loi usuelles   
