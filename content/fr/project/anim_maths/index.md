@@ -77,6 +77,21 @@ La solution optimale $\boldsymbol{x}^{*}$ au problème $(\mathcal{P})$ est donn�
 ### Approche par méthodes des flots dans un graphe. 
 ---
 # Simulations de lois de probabilité et illustration des propriétés de convergence des variables aléatoires: <a name="simu_proba"></a> 
+Comme indiqué dans le titre, cette section s'intéresse à la simulation de lois de probabilité. Mais on part déjà avec un problème, l'ordinateur est [déterministe](https://fr.wikipedia.org/wiki/Algorithme_d%C3%A9terministe).   
+Cependant, l'ordinateur génère efficacement des $0$ et des $1$.   
+
+Pour le coup, on ne peut pas dire que l'on va simuler un *vrai* comportement aléatoire, on parlera plutôt de générateur [**pseudo-aléatoire**](https://fr.wikipedia.org/wiki/Pseudo-al%C3%A9atoire) à partir d'une loi **uniforme** sur $[0,1]$, notée $\mathcal{U}([0,1])$, en fixant une [graine (seed)](https://fr.wikipedia.org/wiki/Graine_al%C3%A9atoire) au préalable.  
+La solution pour simuler un comportement pseudo-aléatoire avec un ordinateur est de produire une suite de nombres, suffisamment imprévisible, pour permettre d'imiter une suite $(u_{n})_{n\in \mathbb{N}^{*}}$ de variables aléatoire indépendantes de loi mère $\mathcal{U}([0,1])$. 
+
+À partir de ça, il existe des formules de transformation qui permettent de générer des lois plus complexes à partir d'une loi $\mathcal{U}([0,1])$.
+
+
+![RELATION_LOI_PROBA](RELATION_LOI_PROBA.jpg )
+
+**Source:** [Relationships Among Univariate Statistical Distributions](https://link.springer.com/referenceworkentry/10.1007/978-3-642-04898-2_487)
+
+
+
 ## Simulations de loi usuelles   
 
 
