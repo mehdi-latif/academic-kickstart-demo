@@ -76,26 +76,66 @@ La solution optimale $\boldsymbol{x}^{*}$ au problème $(\mathcal{P})$ est donn�
 ### Approche Polyèdrale
 ### Approche par méthodes des flots dans un graphe. 
 ---
-# Simulations de lois de probabilité et illustration des propriétés de convergence des variables aléatoires: <a name="simu_proba"></a> 
+# Simulations de lois de probabilité et convergence des variables aléatoires: <a name="simu_proba"></a> 
 Comme indiqué dans le titre, cette section s'intéresse à la simulation de lois de probabilité. Mais on part déjà avec un problème, l'ordinateur est [déterministe](https://fr.wikipedia.org/wiki/Algorithme_d%C3%A9terministe).   
 Cependant, l'ordinateur génère efficacement des $0$ et des $1$.   
 
 Pour le coup, on ne peut pas dire que l'on va simuler un *vrai* comportement aléatoire, on parlera plutôt de générateur [**pseudo-aléatoire**](https://fr.wikipedia.org/wiki/Pseudo-al%C3%A9atoire) à partir d'une loi **uniforme** sur $[0,1]$, notée $\mathcal{U}([0,1])$, en fixant une [graine (seed)](https://fr.wikipedia.org/wiki/Graine_al%C3%A9atoire) au préalable.  
-La solution pour simuler un comportement pseudo-aléatoire avec un ordinateur est de produire une suite de nombres, suffisamment imprévisible, pour permettre d'imiter une suite $(u_{n})_{n\in \mathbb{N}^{*}}$ de variables aléatoire indépendantes de loi mère $\mathcal{U}([0,1])$. 
+
+La solution pour simuler un comportement pseudo-aléatoire avec un ordinateur est de produire une suite de nombres, suffisamment imprévisible, pour permettre d'imiter une suite $(u_{n})_{n\in \mathbb{N}^{*}}$ de variables aléatoires indépendantes de loi mère $\mathcal{U}([0,1])$. 
 
 À partir de ça, il existe des formules de transformation qui permettent de générer des lois plus complexes à partir d'une loi $\mathcal{U}([0,1])$.
 
 
 ![RELATION_LOI_PROBA](RELATION_LOI_PROBA.jpg )
 
-**Source:** [Relationships Among Univariate Statistical Distributions](https://link.springer.com/referenceworkentry/10.1007/978-3-642-04898-2_487)
-
-
+**Source:** [Univariate Distribution Relationships](https://www.tandfonline.com/doi/abs/10.1198/000313008X270448) - Leemis & McQueston (2008).
 
 ## Simulations de loi usuelles   
+### Loi uniforme $ X \sim \mathcal{U}([0,1])$
+Voici un premier de simulation de la loi uniforme, c'est joli non ? 
 
+{{< video src="SIMU_ANIM_UNIF" width="600px" >}}
 
-mettre un truc sur la réduction de la variance.
+Deux parties sur ce graphique:
+- En haut sont représentés les tirages en utilisant la fonction rand().
+- En bas, nous utilisons l'histogramme pour regrouper les observations dans des classes identiques et où la surface de chaque est une approximation de la densité de probabilité (pour des lois continues).
+
+Les calculs de l'espérance et de la variance sont réalisés à partir des moment d'ordre 1, 2 et de la formule de [König-Huygens](https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_de_K%C3%B6nig-Huygens)
+
+```
+%Get the total number of draws for X simulation.
+N = length(x);
+% Use matlab to automatically sort observations into 10 classes.
+[n_elem,cent] = hist(x);
+% Determine the width of a class from the difference between class centers.
+h = cent(2) - cent(1); 
+ci = cent;
+hauteurs = n_elem/(N*h);
+f_ci = hauteurs*h ;
+% Using definition of expected value: |E(X) = sum_i f_X(ci) * ci
+% => We use a discrete approximation of the continuous pdf ... so it's a sum and not an integral.
+E_hat = ci*(f_ci');
+% Second order moment
+ci2 = cent.^2;
+% König-Huygens Formula
+V_hat = ci2*(f_ci') - E_hat^2;
+```
+
+### Loi uniforme $ X \sim \mathcal{B}(n,p)$
+La même chose mais cette fois-ci avec la Binomiale :
+
+{{< video src="SIMU_ANIM_BINOMIALE" width="600px" >}}
+
+### Loi uniforme $ X \sim \mathcal{N}(\mu,\sigma^{2})$
+Enfin, un troisième exemple avec la loi incontournable en probabilité et statistique: 
+
+{{< video src="SIMU_ANIM_NORMALE" width="600px" >}}
+
+Si on voit que les valeurs de l'espérance et de la variance empiriques sont un peu éloignées des valeurs théoriques, deux possiblités: 
+- augmenter le nombre de tirage et attendre de voir ce que ça donne; 
+- appliquer des méthodes de [réduction de variance](https://fr.wikipedia.org/wiki/R%C3%A9duction_de_la_variance), mais c'est pas au programme.
+
 
 ---
 # Inférence statistiques: <a name="stat_inf"></a> 
