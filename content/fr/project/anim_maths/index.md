@@ -122,12 +122,12 @@ ci2 = cent.^2;
 V_hat = ci2*(f_ci') - E_hat^2;
 ```
 
-### Loi uniforme $ X \sim \mathcal{B}(n,p)$
-La même chose mais cette fois-ci avec la Binomiale :
+### Loi binomiale $ X \sim \mathcal{B}(n,p)$
+La même chose mais cette fois-ci avec la binomiale :
 
 {{< video src="SIMU_ANIM_BINOMIALE" width="600px" >}}
 
-### Loi uniforme $ X \sim \mathcal{N}(\mu,\sigma^{2})$
+### Loi normale $ X \sim \mathcal{N}(\mu,\sigma^{2})$
 Enfin, un troisième exemple avec la loi incontournable en probabilité et statistique: 
 
 {{< video src="SIMU_ANIM_NORMALE" width="600px" >}}
