@@ -60,20 +60,22 @@ $$
   f(\boldsymbol{x}) := 155x_{1} +160x_{2}+150x_{3}
 $$
 - $\mathbf{K}$ est un ensemble de contraintes défini par: 
-$$
-  \mathbf{K} := \\left\\{  16x_{1} + 13x_{2}+17x_{3} \leq 180, 27x_{1} + 15x_{2}+ 11x_{3} \leq 160, \\sum_{i=1}^{3} x_{i}=12, \boldsymbol{x} \geq 0 \\right\\}
-$$
+  - $16x_{1} + 13x_{2}+17x_{3} \leq 180$
+  - $27x_{1} + 15x_{2}+ 11x_{3} \leq 160$
+  - $\sum_{i=1}^{3} x_{i}=12$
+  - $\boldsymbol{x} \geq 0 \Longleftrightarrow x_{i} \geq 0 \quad  \forall i \in \\{1,2,3\\}$
 
 Les solveurs peuvent le faire à votre place, mais un bon moyen de résoudre ce problème revient à appliquer une approche polyédrale; des exemples de cours sont donnés [ici](https://www.lamsade.dauphine.fr/~poc/jpoc9/Chapitre-Polyedres.pdf) ou [là](https://www.andrew.cmu.edu/user/gc0v/webpub/IPsurveyAussois-11-08.pdf).   
 
 Visuellement, la résolution du problème $(\mathcal{P})$ est proposé dans l'animation suivante: 
 
-{{< video src="OPTIM_LIN_ANIM" width="600px" >}}
+{{< video src="VIDEO/OPTIM_LIN_ANIM" width="600px" >}}
 
 La solution optimale $\boldsymbol{x}^{*}$ au problème $(\mathcal{P})$ est donné par le point rouge.
 
 ## Problèmes de minimisation 
 ### Approche Polyèdrale
+*TODO: mettre un lien vers l'algorithme du simplexe* 
 ### Approche par méthodes des flots dans un graphe. 
 ---
 # Simulations de lois de probabilité et convergence des variables aléatoires: <a name="simu_proba"></a> 
@@ -87,7 +89,7 @@ La solution pour simuler un comportement pseudo-aléatoire avec un ordinateur es
 À partir de ça, il existe des formules de transformation qui permettent de générer des lois plus complexes à partir d'une loi $\mathcal{U}([0,1])$.
 
 
-![RELATION_LOI_PROBA](RELATION_LOI_PROBA.jpg )
+![RELATION_LOI_PROBA](IMG/RELATION_LOI_PROBA.jpg )
 
 **Source:** [Univariate Distribution Relationships](https://www.tandfonline.com/doi/abs/10.1198/000313008X270448) - Leemis & McQueston (2008).
 
@@ -95,7 +97,7 @@ La solution pour simuler un comportement pseudo-aléatoire avec un ordinateur es
 ### Loi uniforme $ X \sim \mathcal{U}([0,1])$
 Voici un premier de simulation de la loi uniforme, c'est joli non ? 
 
-{{< video src="SIMU_ANIM_UNIF" width="600px" >}}
+{{< video src="VIDEO/SIMU_ANIM_UNIF" width="600px" >}}
 
 Deux parties sur ce graphique:
 - En haut sont représentés les tirages en utilisant la fonction rand().
@@ -125,20 +127,68 @@ V_hat = ci2*(f_ci') - E_hat^2;
 ### Loi binomiale $ X \sim \mathcal{B}(n,p)$
 La même chose mais cette fois-ci avec la binomiale :
 
-{{< video src="SIMU_ANIM_BINOMIALE" width="600px" >}}
+{{< video src="VIDEO/SIMU_ANIM_BINOMIALE" width="600px" >}}
 
 ### Loi normale $ X \sim \mathcal{N}(\mu,\sigma^{2})$
 Enfin, un troisième exemple avec la loi incontournable en probabilité et statistique: 
 
-{{< video src="SIMU_ANIM_NORMALE" width="600px" >}}
+{{< video src="VIDEO/SIMU_ANIM_NORMALE" width="600px" >}}
 
 Si on voit que les valeurs de l'espérance et de la variance empiriques sont un peu éloignées des valeurs théoriques, deux possiblités: 
 - augmenter le nombre de tirage et attendre de voir ce que ça donne; 
 - appliquer des méthodes de [réduction de variance](https://fr.wikipedia.org/wiki/R%C3%A9duction_de_la_variance), mais c'est pas au programme.
 
-
 ---
 # Inférence statistiques: <a name="stat_inf"></a> 
+Il s'agit dans cette partie de déterminer un estimateur du paramètre d'une loi de probabilité donnée.  
+
+On prend par exemple le cas d'une élection entre deux candidats $C_{1}$ et $C_{0}$ et on se fixe une variable aléatoire $X_{i} \in \left\\{0,1\right\\}$ qui représente la préférence d'un citoyen telle que $X_{i}=1$ si il préfère le candidat $C_{1}$ (vous devinerez ce que signifie $X_{i}=0$).   
+De manière générale, les probabilités et statistiques sont précises quand on prend un grand nombre d'observation, il va donc falloir sonder un nombre $N$ d'électeurs. 
+
+A partir des préférences recueillies, on va chercher à estimer la proportion $p$ de suffrages qui préfèrent le candidat $C_{1}$ et en déduire un intervalle de confiance $I_{n}$  pour un risque $\alpha \in \mathbb{R}_+$ (parce qu'on peut se tromper).  
+
+La modélisation de ce problème peut se faire en remarquant que les intentions de vote collectées peuvent être exprimés exprimés comme un $N$-échantillon de loi mère $X_i\sim \mathcal{B}(p)$ avec $X_{i}(\Omega) \in \\{0,1\\}$ $\forall i \in \\{1,...,N\\}$ .  
+On sait que la proportion $\bar{p}$ admet un estimateur des moments d'ordre 1 noté $\bar{X}_{n}$ qui possède des chouettes propriétés $\forall n \in \\{1,...,N\\}$:
+- il est sans biais *ie.*  $\mathbb{E}(\bar{X}_{n}) = p$;
+- il converge presque sûrement vers $p$;
+- puisque $X_{i} \in \mathcal{L}^{2}(\Omega)$, il admet un moment d'ordre 2 et une variance $V(\bar{X}_{n})$ qui converge vers 0 quand $n\rightarrow+\infty$.
+
+L'expression de cet estimateur est donnée par:
+$$
+\bar{X}_{n}:=\frac{1}{n} \sum_i^n X_i \quad \forall n \in \\{1,...,N\\}
+$$
+
+Comme on chercher un estimateur d'une quantité inconnue, on construit un intervalle de confiance $I_{n}$ au risque $\alpha\in \mathbb{R}_+$ de se tromper. 
+En appliquant le TCL et la propriété de convergence ps. de $\bar{X}_n$, on peut calculer l'erreur d'estimation:   
+
+$$
+\epsilon_{n}:= z_{\frac{\alpha}{2}} \sqrt{ \frac{\bar{X}_{n} (1- \bar{X}_n )}{n}} \quad \forall n \in \\{1,...,N\\}
+$$
+où $z$ est le quantile d'ordre $\alpha$ pour la loi $\mathcal{N}(0,1)$. 
+
+L'intervalle de confiance pour l'estimateur $\bar{X}_{n}$ s'exprime tel que: 
+
+$$
+  I_{n} := [ \bar{X}\_{n} -\epsilon_{n},\bar{X}\_{n}+\epsilon_{n}] \quad \forall n \in \\{1,...,N\\}
+$$
+
+Maintenant qu'on a tout ça, on peut construire l'estimateur et l'intervalle de confiance associé dans le cas où la population préfère le candidat $C_{1}$ à 51% et ceci:
+- au risque $\alpha = 5$%
+{{< video src="VIDEO/SIMU_IC_1.96" width="600px" >}}
+- au risque $\alpha = 1$%
+{{< video src="VIDEO/SIMU_IC_2.576" width="600px" >}}
+
+Je vous laisse étudier les comportements obtenus.
+
+
+**Note :** Il s'agit d'un exemple pour un estimateur paramétrique par la méthode des moments, mais il existe d'autres méthodes pour calculer des estimateurs *eg.* le maximum de vraisemblance.
+
+---
+
+## Extra:
+Deux fiches synthèses sur les principales commandes Matlab à garder en tête:
+- [MATLAB Fundamentals - Res Jöhr](PDF/MATLAB_Fundamentals_ETH_Zürich.pdf)
+- [Matlab Cheat Sheet - Thor Nielsen](PDF/Nielsen2015_MatlabCheatSheet.pdf)
 
 <!-- 
 > Écrit à l'origine pour m'éviter de répéter constamment les mêmes conseils à mes étudiants, ce manuel a connu une diffusion assez large.   
