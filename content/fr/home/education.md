@@ -51,17 +51,18 @@ date_format = "Jan 2006"
 
   **Encadrement d'étudiants (Stages, Projets)**
   - **Année 2023 :** 
-    Encadrement du stage de E.Gecimli  (M1 Physique fondamentale et applications - Université de Nantes)
+    Encadrement du stage de E.Gecimli, Master 1 Physique fondamentale et applications - Université de Nantes,  pendant 4 mois;
     \\
-    *Problématique :* Étude et mise en œuvre d’algorithmes de reconstruction d’événements pour l’imagerie TEP 3-photons appliqués à la caméra XEMIS2. Extraction et analyse des données obtenues à partir d'une simulation GEANT4 de la caméra XEMIS2 proposée par N.Beaupère (Laboratoire Subatech - IMTA).
-    \\
-    *Durée :* 4 mois
+    *Problématique :* Étude et mise en œuvre d’algorithmes de reconstruction d’événements pour l’imagerie TEP 3-photons appliqués à la caméra XEMIS2. Extraction et analyse des données obtenues à partir d'une simulation GEANT4 de la caméra XEMIS2 proposée par N.Beaupère (Laboratoire Subatech - IMTA);
   - **Année 2023 :** 
-    Encadrement du projet bibliographique de Y.Oumarou (M2 CORO-SIP - Ecole Centrale de Nantes)
+    Encadrement du projet bibliographique de Y.Oumarou, Master 2 international [CORO-SIP](https://www.ec-nantes.fr/study/masters/signal-and-image-processing) - Ecole Centrale de Nantes, pendant 3 mois;
     \\
-    *Problématique :* Étude bibliographique de l'état de l'art des projecteurs en imagerie Compton - [Projet ComProj](/files/LM_corosip_merec23.pdf) .
+    *Problématique :* Étude bibliographique de l'état de l'art des projecteurs en imagerie Compton - [Projet ComProj](/files/LM_corosip_merec23.pdf) pendant 3 mois;
     \\
-    *Durée :* 3 mois  
+    ![ComProj Short Meeting](/img/COMPROJ_Art.jpg "ComProj Short Meeting")
+    \\
+    *Note obtenue par l'étudiant :* A+, [Attestation](/files/LM_Attestation_COROSIP_COMPROJ.pdf).  
+        
 
 
   **Particpations aux workshops/congrès scientifiques :**
