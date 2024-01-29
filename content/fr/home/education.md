@@ -57,14 +57,12 @@ date_format = "Jan 2006"
   - **Année 2023 :** 
     Encadrement du projet bibliographique de Y.Oumarou, Master 2 international [CORO-SIP](https://www.ec-nantes.fr/study/masters/signal-and-image-processing) - Ecole Centrale de Nantes, pendant 3 mois;
     \\
-    *Problématique :* Étude bibliographique de l'état de l'art des projecteurs en imagerie Compton - [Projet ComProj](/files/LM_corosip_merec23.pdf) pendant 3 mois;
-    \\
-    ![ComProj Short Meeting](/img/COMPROJ_Art.jpg "ComProj Short Meeting")
+    *Problématique :* Étude bibliographique de l'état de l'art des projecteurs en imagerie Compton - [Projet ComProj](/files/LM_corosip_merec23.pdf);
     \\
     *Note obtenue par l'étudiant :* A+, [Attestation](/files/LM_Attestation_COROSIP_COMPROJ.pdf).  
+     \\
+    ![ComProj Short Meeting](/img/COMPROJ_Art.jpg "ComProj Short Meeting")
         
-
-
   **Particpations aux workshops/congrès scientifiques :**
   - **Orateur :**  Journée d'Etez 2022 (Eq SiMS), Demie-heure des doctorants 2022 (LS2N/Login), EmiLy 2022, Séminaire de [l'ED SIS](https://ed-sis.doctorat-paysdelaloire.fr/pendant) 2023, Fully3D 2023,  Gretsi 2023; 
   - **Auditeur :** IEEE MIC 2022, Journée du GDR ISIS 2023: *Etat des lieux de la reconstruction tomographique*.
