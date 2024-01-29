@@ -138,6 +138,27 @@ Si on voit que les valeurs de l'espérance et de la variance empiriques sont un 
 - augmenter le nombre de tirage et attendre de voir ce que ça donne; 
 - appliquer des méthodes de [réduction de variance](https://fr.wikipedia.org/wiki/R%C3%A9duction_de_la_variance), mais c'est pas au programme.
 
+## Le Théorème Central Limite  
+*Bon en gros, tout est normal*
+
+
+## Loi forte des grands nombres 
+
+C'est un résultat de convergence assez puissant qui s'énonce comme suit:   
+> Si $(X_{n})_{n\in\mathbb{N}}$ est une suite de variables aléatoires iid telle que $X_i \in \mathcal{L}^{1}(\Omega)$ avec $\mathbb{E}(X_i) = m$ $\forall i \in \\{1,...,n\\}$, alors 
+> $$\bar{X}_n = \frac{1}{n} \sum_1^n X_i  \overset{ps.}{\to} \mathbb{E}(X_i) = m \text{ quand } n \to +\infty.$$
+> Dans le cas où $X_i \in \mathcal{L}^{2}(\Omega)$ avec $\mathbb{E}(X_i) = m$, on obtient un résultat similaire en étudiant la somme des $X_i - m$ et on prouve sa convergence vers $0$. 
+
+Donc pour faire simple, cette loi nous dit qu'à partir d'une suite de variables aléatoires, on va converger [presque sûrement](https://www.bibmath.net/dico/index.php?action=affiche&quoi=./p/presquesur.html) vers une quantité déterministe $m\in \mathbb{R}$.  
+
+On peut illustrer graphiquement ce résultat pour: 
+- la loi uniforme $\mathcal{U}([0,1])$:
+{{< video src="VIDEO/LFGN_ANIM_UNIFORME" width="600px" >}}
+- la loi de Poisson $\mathcal{P}(\lambda)$ avec $\lambda \in \mathbb{R}_+^*$:
+{{< video src="VIDEO/LFGN_ANIM_POISSON" width="600px" >}}
+
+## Application d'une méthode Monte Carlo pour approcher $\pi$
+
 ---
 # Inférence statistiques: <a name="stat_inf"></a> 
 Il s'agit dans cette partie de déterminer un estimateur du paramètre d'une loi de probabilité donnée.  
