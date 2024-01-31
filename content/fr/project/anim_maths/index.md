@@ -158,18 +158,43 @@ On peut illustrer graphiquement ce résultat pour:
 {{< video src="VIDEO/LFGN_ANIM_POISSON" width="600px" >}}
 
 ## Application d'une méthode Monte Carlo pour approcher $\pi$
+Une application directe des résultats qui sont présentés dans cette partie est la méthode de [Monte-Carlo (Metropolis & Ulam, 1949)](https://www.tandfonline.com/doi/abs/10.1080/01621459.1949.10483310) qui permet de *calculer une valeur numérique approchée en utilisant des procédés aléatoires [...]* (Source: [Wikipédia](https://en.wikipedia.org/wiki/Monte_Carlo_method)) et est assez utile pour calculer, par exemples, des intégrales compliquées.  
+L'idée générale pour le calcul d'intégrales avec une méthode Monte-Carlo (MC) est: 
+1. Interpréter l'intégrale comme un espérance; 
+2. Calculer cette espérance comme une moyenne; 
+3. Appliquer la loi forte des grands nombres. 
+
+Un exemple assez standard est l'approximation de $\pi$ par une pluie aléatoire (adapté du cours [Aléatoire : une introduction aux probabilités - Partie 2](https://www.coursera.org/learn/probabilites-2)).  
+L'idée générale derrière cette approximation est de calculer $\pi$ comme le rapport entre les surfaces d'un disque unitaire $D:=\left(C=(0,0),r=1\right)$ et celle du carré $C$ dans lequel $D$ est inscrit. En tirant une séquence de couple $(X,Y)$ avec $X,Y\sim \mathcal{U}([-1,1])$, on peut exprimer la probabilité $(X,Y)\in D$ comme le rapport de surface: 
+$$
+\mathbb{P}\left((X,Y)\in D\right):=\frac{\textrm{surface}(D)}{\textrm{surface}(C)} = \frac{\pi}{4}
+$$
+En exprimant le rapport des surfaces sous forme d'intgrale (on vit dans un domaine continu...), on obtient: 
+$$
+\mathbb{P}\left((X,Y)\in D\right) = \int\int_{\\{x^{2}+y^{2}\leq 1\\}} \textrm{d}x\textrm{d}y 
+\times 
+\left( \int\int_{\\{-1\leq x, y \leq 1\\}}  \textrm{d}x\textrm{d}y   \right)^{-1}
+$$
+On va pas se mentir, c'est assez moche, mais simple à approcher avec une méthode MC. 
+
+Pour aller plus vite, on peut se restreindre au calcul d'un quadrant unique et tirer les couples $(X,Y)$ tels que $X,Y\sim \mathcal{U}([0,1])$ ; le résultat d'une simulation MC pour approcher la valeur est $\pi$ est présenté ci-dessous: 
+{{< video src="Pi_convergence" width="600px" >}}
+On peut voir que l'augmentation du nombre de tirage permet de converger vers une valeur approchée de $\pi$
 
 ---
 # Inférence statistiques: <a name="stat_inf"></a> 
 Il s'agit dans cette partie de déterminer un estimateur du paramètre d'une loi de probabilité donnée.  
 
-On prend par exemple le cas d'une élection entre deux candidats $C_{1}$ et $C_{0}$ et on se fixe une variable aléatoire $X_{i} \in \left\\{0,1\right\\}$ qui représente la préférence d'un citoyen telle que $X_{i}=1$ si il préfère le candidat $C_{1}$ (vous devinerez ce que signifie $X_{i}=0$).   
-De manière générale, les probabilités et statistiques sont précises quand on prend un grand nombre d'observation, il va donc falloir sonder un nombre $N$ d'électeurs. 
+On prend, par exemple, le cas d'une élection entre deux candidats $C_{1}$ et $C_{0}$ et on définit une variable aléatoire $X_{i} \in \left\\{0,1\right\\}$ qui représente la préférence d'un citoyen telle que 
+- $X_{i}=1$ si il préfère le candidat $C_{1}$;
+- $X_{i}=0$ si il préfère le candidat $C_{0}$.   
 
-A partir des préférences recueillies, on va chercher à estimer la proportion $p$ de suffrages qui préfèrent le candidat $C_{1}$ et en déduire un intervalle de confiance $I_{n}$  pour un risque $\alpha \in \mathbb{R}_+$ (parce qu'on peut se tromper).  
+De manière générale en probabilité et statistique, la précision augmente avec le nombre d'observations; dans notre cas, il va donc falloir sonder un **grand** nombre d'électeurs noté $N$. 
 
-La modélisation de ce problème peut se faire en remarquant que les intentions de vote collectées peuvent être exprimés exprimés comme un $N$-échantillon de loi mère $X_i\sim \mathcal{B}(p)$ avec $X_{i}(\Omega) \in \\{0,1\\}$ $\forall i \in \\{1,...,N\\}$ .  
-On sait que la proportion $\bar{p}$ admet un estimateur des moments d'ordre 1 noté $\bar{X}_{n}$ qui possède des chouettes propriétés $\forall n \in \\{1,...,N\\}$:
+A partir des préférences recueillies, on va chercher à estimer la proportion $p$ de suffrages qui préfèrent le candidat $C_{1}$ et déduire un intervalle de confiance $I_{n}$  pour un risque $\alpha \in \mathbb{R}_+$ (parce qu'on peut se tromper).  
+
+La modélisation de ce problème peut se faire en remarquant que les intentions de vote collectées sont un $N$-échantillon de loi mère $X_i\sim \mathcal{B}(p)$ avec $X_{i}(\Omega) \in \\{0,1\\}$ $\forall i \in \\{1,...,N\\}$ .  
+On sait de plus que la proportion $\bar{p}$ admet un estimateur des moments d'ordre 1 noté $\bar{X}_{n}$ qui possède des chouettes propriétés $\forall n \in \\{1,...,N\\}$:
 - il est sans biais *ie.*  $\mathbb{E}(\bar{X}_{n}) = p$;
 - il converge presque sûrement vers $p$;
 - puisque $X_{i} \in \mathcal{L}^{2}(\Omega)$, il admet un moment d'ordre 2 et une variance $V(\bar{X}_{n})$ qui converge vers 0 quand $n\rightarrow+\infty$.
@@ -193,13 +218,13 @@ $$
   I_{n} := [ \bar{X}\_{n} -\epsilon_{n},\bar{X}\_{n}+\epsilon_{n}] \quad \forall n \in \\{1,...,N\\}
 $$
 
-Maintenant qu'on a tout ça, on peut construire l'estimateur et l'intervalle de confiance associé dans le cas où la population préfère le candidat $C_{1}$ à 51% et ceci:
-- au risque $\alpha = 5$%
+Maintenant qu'on a tout ça, on peut construire l'estimateur et l'intervalle de confiance associé à la victoire de $C_{1}$ dans le cas où la population préfère le candidat $C_{1}$ à 51% et ceci:
+- au risque $\alpha = 5$% par pas de 100
 {{< video src="VIDEO/SIMU_IC_1.96" width="600px" >}}
-- au risque $\alpha = 1$%
+- au risque $\alpha = 1$% par pas de 500
 {{< video src="VIDEO/SIMU_IC_2.576" width="600px" >}}
 
-Je vous laisse étudier les comportements obtenus.
+Je vous laisse étudier les comportements obtenus. A partir des graphiques présentés, on peut voir les tailles d'échantillons $n\leq N$ pour lesquelles on s'est trompé et, en modifiant un peu la simulation, vérifier le niveau asymptotique $1-\alpha$ de $I_{n}$ $\forall n \in \\{1,...,N\\}$.
 
 
 **Note :** Il s'agit d'un exemple pour un estimateur paramétrique par la méthode des moments, mais il existe d'autres méthodes pour calculer des estimateurs *eg.* le maximum de vraisemblance.
