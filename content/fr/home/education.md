@@ -64,7 +64,7 @@ date_format = "Jan 2006"
     ![ComProj Short Meeting](/img/COMPROJ_Art.jpg "ComProj Short Meeting")
         
   **Particpations aux workshops/congrès scientifiques :**
-  - **Orateur :**  Journée d'Etez 2022 (Eq SiMS), Demie-heure des doctorants 2022 (LS2N/Login), EmiLy 2022, Séminaire de [l'ED SIS](https://ed-sis.doctorat-paysdelaloire.fr/pendant) 2023, Fully3D 2023,  Gretsi 2023; 
+  - **Orateur :**  Journée d'Etez 2022 (Eq SiMS), Demie-heure des doctorants 2022 (LS2N/Login), EmiLy 2022, Séminaire de [l'ED SIS](https://ed-sis.doctorat-paysdelaloire.fr/pendant) 2023, Fully3D 2023,  Gretsi 2023, [IMPACT - Art et Science](https://www.ec-nantes.fr/les-programmes/les-options-de-2e-et-3e-annees/ingenierie-et-numerique-pour-le-patrimoine-lart-et-la-culture) ; 
   - **Auditeur :** IEEE MIC 2022, Journée du GDR ISIS 2023: *Etat des lieux de la reconstruction tomographique*.
   
   **Diffusion scientifique :**  
