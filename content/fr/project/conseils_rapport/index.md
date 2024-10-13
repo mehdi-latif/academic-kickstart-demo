@@ -142,7 +142,7 @@ figure;
     legend([p1,p2,p3],'Location','best','FontSize',16,'Interpreter','latex'); legend boxoff
 ```
 
-#### Pour aller plus loin: 
+<!-- #### Pour aller plus loin: 
 On peut faire de chouettes figures et animations avec Matlab: 
 - un exemple avec le code [Ariane](https://gitlab.com/mlatif/tep3g-ariane) pour le calcul de la matrice système en imagerie Compton:
   - Ariane dans le plan:
@@ -152,7 +152,7 @@ On peut faire de chouettes figures et animations avec Matlab:
 
 - un exemple d'application d'une méthode Monte Carlo pour l'approximation de $\pi$ par *Pluie aléatoire*: 
 {{< video src="Pi_convergence" width="600px" >}}
-*cf.* Maths EI1/TP5, animation présentée aux étudiants.
+*cf.* Maths EI1/TP5, animation présentée aux étudiants. -->
 
 ## Dessert, la conclusion :  <a name="dessert"></a>
 bon bah là, discutez la figure obtenue ou donnez le résultat mathématique obtenu, bref discutez et soyez critiques vis-à-vis de ce que vous présentez.

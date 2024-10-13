@@ -60,6 +60,10 @@ date_format = "Jan 2006"
     - TP Mathématiques pour l'ingénieur (EI1) - 12h;
     - TP C$^{3}$ : Signaux et systèmes (EI1) - 4h;  
 
+  - *2024/2025 - Semestre 1:*
+
+    - TP Calcul scientifique et optimisation (EI23 (Fr), CORO-SIP (En)) - 12h.
+
 
   **Rattachement :** 
   [Département Mathématiques, Informatique et Biologie](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-mathematiques-informatique-et-biologie-mib), [Département Automatique et Robotique](https://www.ec-nantes.fr/organisation/organisation-de-lecole/departement-automatique-et-robotique)
