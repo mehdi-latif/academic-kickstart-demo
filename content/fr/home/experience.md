@@ -23,9 +23,9 @@ date_format = "Jan 2006"
   company_url = "https://www.ec-nantes.fr/"
   location = "Nantes"
   date_start = "2022-01-01"
-  date_end = ""
+  date_end = "2024-11-01"
   description = """
-  Encadrement de travaux pratiques en cycle ingénieur ECN dans les domaines des mathématiques appliquées, de l'algorithmique et du traitement du signal.
+  Encadrement de travaux pratiques en cycle ingénieur ECN et master international dans les domaines des mathématiques appliquées, de l'algorithmique et du traitement du signal.
   """
   info_sup_tag = 1
   info_sup = """
