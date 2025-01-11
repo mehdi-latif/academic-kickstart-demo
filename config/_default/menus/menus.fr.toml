@@ -69,7 +69,7 @@
 [[main]]
   identifier = "CV_FR"
   parent = "CV_DOCS"
-  name = "CV - Français [pas à jour]"
+  name = "CV - Français"
   url = "files/CV_LM.pdf"
   weight = 60
 [[main]]
