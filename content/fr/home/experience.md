@@ -70,7 +70,7 @@ date_format = "Jan 2006"
 
   **Note:** dans le langage ECN, *EI (Elèves ingénieurs)*: cursus généraliste (en 3 ans); *Master*: cursus spécialisé (en 2 ans).
 
-  **Eléments de correction :** [envoyer une demande motivée](mailto:mehdi.latif@ls2n.fr?subject=[mlatif.fr]%20Demande%20d'accès%20aux%20éléments%20de%20correction%20matière%20...)
+  **Eléments de correction :** [envoyer une demande motivée](mailto:prenom.nom@ls2n.fr?subject=[mlatif.fr]%20Demande%20d'accès%20aux%20éléments%20de%20correction%20matière%20...)
 """
 
 
