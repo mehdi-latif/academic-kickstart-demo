@@ -47,15 +47,22 @@ social:
 - icon: gitlab
   icon_pack: fab
   link: https://gitlab.com/mlatif
+- icon: orcid
+  icon_pack: ai
+  link: https://orcid.org/0009-0001-1480-9770
+- icon: researchgate
+  icon_pack: ai
+  link: https://www.researchgate.net/profile/Mehdi-Latif
 - icon: google-scholar
   icon_pack: ai
   link: https://scholar.google.com/citations?user=GqB6M5MAAAAJ
 - icon: linkedin-in
   icon_pack: fab
   link: https://www.linkedin.com/in/mehdilatif/
-- icon: envelope
-  icon_pack: fas
-  link: "mailto:mehdi.latif@ls2n.fr?cc=mehdi.latif@ls2n.fr"
+
+# - icon: envelope
+#   icon_pack: fas
+#   link: "mailto:mehdi.latif@ls2n.fr?cc=mehdi.latif@ls2n.fr"
 
 
 # Link to a PDF of your resume/CV from the About widget.

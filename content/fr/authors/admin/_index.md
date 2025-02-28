@@ -47,6 +47,9 @@ social:
 - icon: gitlab
   icon_pack: fab
   link: https://gitlab.com/mlatif
+- icon: orcid
+  icon_pack: ai
+  link: https://orcid.org/0009-0001-1480-9770
 - icon: researchgate
   icon_pack: ai
   link: https://www.researchgate.net/profile/Mehdi-Latif
@@ -56,12 +59,15 @@ social:
 - icon: linkedin-in
   icon_pack: fab
   link: https://www.linkedin.com/in/mehdilatif/
-- icon: envelope
-  icon_pack: fas
-  link: https://mlatif.fr/#contact #"mailto:mehdi.latif@ls2n.fr?cc=mehdi.latif@ls2n.fr"
-- icon: hal-square
-  icon_pack: ai
-  link: https://hal.science/search/index/q/*/authFullName_s/Mehdi+Latif
+
+
+
+# - icon: envelope
+#   icon_pack: fas
+#   link: https://mlatif.fr/#contact #"mailto:mehdi.latif@ls2n.fr?cc=mehdi.latif@ls2n.fr"
+# - icon: hal-square
+#   icon_pack: ai
+#   link: https://hal.science/search/index/q/*/authFullName_s/Mehdi+Latif
 
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
