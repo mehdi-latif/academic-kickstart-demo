@@ -1,6 +1,6 @@
 ---
-title: MIMOSA Unmix
-summary: Implémentation de l'algorithme branch-and-bound pour le démélange spectral parcimonieux.
+title: MIMOSA UNMIX - EUSIPCO 2025
+summary: Implémentation de l'algorithme branch-and-bound pour le démélange spectral parcimonieux. [Matériel supplémentaire](https://gitlab.univ-nantes.fr/ls2n-sims/l0-sparse-unmix-eusipco-supplementary-materials)
 tags:
   - Branch-and-bound
   - Parcimonie
@@ -9,10 +9,12 @@ tags:
   - Démélange
   - Solveur libre
   - C++
-date: '2021-11-30T00:00:00Z'
+  - Projet
+date: '2025-04-15T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: 'https://gitlab.com/mlatif/bbhs_ext_cpp'
+# external_link: 'https://gitlab.com/mlatif/bbhs_ext_cpp'
+external_link: 'https://gitlab.univ-nantes.fr/ls2n-sims/mimosa-solver'
 
 image:
   caption:
