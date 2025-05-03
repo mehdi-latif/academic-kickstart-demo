@@ -148,6 +148,6 @@ date_format = "Jan 2006"
 
   **Encadrement:**  F.Lehuédé, Q.Tonneau.
 
-  **Documents :** [Rapport](/files/LATIFM_L3_PDPTW_RAP.pdf), [Planches](/files/LATIFM_L3_PDPTW_PRES.pdf)
+  **Documents :** [Rapport](/files/LATIFM_L3_PDPTW_RAP.pdf), [Planches](/files/LATIFM_L3_PDPTW_PRES.pdf), [Code Julia](https://gitlab.com/mlatif/JPDP)
   """
 +++
