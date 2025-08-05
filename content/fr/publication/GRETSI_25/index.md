@@ -49,7 +49,7 @@ featured: true
 # - name: Custom Link
 #   url: http://example.org
 
-url_pdf: 'https://hal.science/hal-05145133v1'
+url_pdf: 'https://hal.science/hal-05145133'
 url_code: 'https://gitlab.com/nils_fc/bnb-gretsi-2025'
 # url_dataset: ''
 # url_poster: ''
