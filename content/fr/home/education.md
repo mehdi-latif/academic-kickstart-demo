@@ -65,7 +65,7 @@ date_format = "Jan 2006"
         
   **Particpations aux workshops/congrès scientifiques :**
   - **Orateur :**  Journée d'Etez 2022 (Eq SiMS), Demie-heure des doctorants 2022 (LS2N/Login), EmiLy 2022, Séminaire de [l'ED SIS](https://ed-sis.doctorat-paysdelaloire.fr/pendant) 2023, Fully3D 2023,  Gretsi 2023, [INPACT 2024](https://www.ec-nantes.fr/les-programmes/les-options-de-2e-et-3e-annees/ingenierie-et-numerique-pour-le-patrimoine-lart-et-la-culture) - Art et Science ; 
-  - **Auditeur :** IEEE MIC 2022, Journée du GDR ISIS 2023: *Etat des lieux de la reconstruction tomographique*.
+  - **Auditeur :** IEEE MIC 2022, Journée du GDR IASIS 2023: *Etat des lieux de la reconstruction tomographique*, Journée carrière des doctorant.e.s du GDR IASIS 2025.
   
   **Diffusion scientifique :**  
   - Demie-heure des doctorants LS2N 2022; 
