@@ -1,0 +1,152 @@
+# Configuration of Hugo
+# Guide: https://sourcethemes.com/academic/docs/get-started/
+# Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
+#
+# This file is formatted using TOML syntax - learn more at https://learnxinyminutes.com/docs/toml/
+# Each configuration section is defined by a name in square brackets (e.g. `[outputs]`).
+
+# Title of your site
+# title = "academic-kickstart-demo" # Supprimé en mode multilingual
+
+# The URL of your site.
+# End your URL with a `/` trailing slash, e.g. `https://example.com/`.
+# baseurl = "/"
+# #TODO
+baseurl = "https://mehdi-latif.github.io/"
+
+# Enter a copyright notice to display in the site footer.
+# To display a copyright symbol, type `&copy;`. For current year, type `{year}`.
+copyright = ""  # {year} &copy;
+
+############################
+## Advanced options below ##
+############################
+
+# Name of Academic theme folder in `themes/`.
+# theme = "academic"
+theme = ["hugo-video", "academic"]
+
+# Get last modified date for content from Git?
+enableGitInfo = true
+
+# Create your one Hugo Shortcode : https://gohugo.io/templates/shortcode-templates/
+enableInlineShortcodes = true
+
+# Default language to use (if you setup multilingual support)
+defaultContentLanguage = "fr"
+
+[params.navigation]
+  help  = "Help"
+
+[Languages]
+  [Languages.fr]
+    title = "Mehdi LATIF | CV Numérique"
+    contentDir = 'content/fr'
+    languageName = 'Fr'
+    weight = 1
+  [Languages.en]
+    title = "Mehdi LATIF | Digital Resume"
+    contentDir = 'content/en'
+    languageName = 'En'
+    weight = 2
+
+
+
+hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.
+defaultContentLanguageInSubdir = true
+removePathAccents = true  # Workaround for https://github.com/gohugoio/hugo/issues/5687
+
+summaryLength = 30  # Listing summary length in words. Also, see `abstract_length` in `params.toml`.
+paginate = 10  # Number of items per page in paginated lists.
+enableEmoji = true
+footnotereturnlinkcontents = "<sup>^</sup>"
+ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+# Workaround Hugo publishing taxonomy URLs as plurals - consistently use singular across Academic.
+[permalinks]
+  authors = "/author/:slug/"
+  tags = "/tag/:slug/"
+  categories = "/category/:slug/"
+  publication_types = "/publication-type/:slug/"
+
+[outputs]
+  home = [ "HTML", "RSS", "JSON", "WebAppManifest" ]
+  section = [ "HTML", "RSS" ]
+
+[mediaTypes."application/manifest+json"]
+  suffixes = ["webmanifest"]
+
+[outputFormats.WebAppManifest]
+  mediaType = "application/manifest+json"
+  rel = "manifest"
+
+# Configure the Markdown renderer.
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Enable user to embed HTML snippets in Markdown content.
+  [markup.highlight]
+    codeFences = false  # Disable Hugo's code highlighter as it conflicts with Academic's highligher.
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[imaging]
+  resampleFilter = "lanczos"
+  quality = 90
+  anchor = "smart"  # Anchor for cropping. Options include Smart and Center.
+
+# Taxonomies.
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  publication_type = "publication_types"
+  author = "authors"
+
+# Related content.
+[related]
+  threshold = 80.0
+  includeNewer = true
+  toLower = true
+
+  [[related.indices]]
+    name = "title"
+    weight = 60.0
+
+  [[related.indices]]
+    name = "summary"
+    weight = 50.0
+
+  [[related.indices]]
+    name = "tags"
+    weight = 80.0
+
+  [[related.indices]]
+    name = "categories"
+    weight = 70.0
+
+  [[related.indices]]
+    name = "authors"
+    weight = 20.0
+
+custom_head = """
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css" integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"></script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+      });
+  </script>
+"""

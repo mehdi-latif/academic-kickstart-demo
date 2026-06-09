@@ -1,0 +1,114 @@
+# Navigation Links
+#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
+#     desired widget in your `content/home/` folder.
+#   The weight parameter defines the order that the links will appear in.
+
+[[main]]
+  identifier = "education"
+  name = "Formation"
+  url = "#education"
+  weight = 10
+
+[[main]]
+  identifier = "experience"
+  name = "Experience"
+  url = "#experience"
+  weight = 20
+
+[[main]]
+  identifier = "RESEARCH"
+  name = "Recherches"
+  # url = "#experience"
+  weight = 30
+
+[[main]]
+  identifier = "TagCloud"
+  parent = "RESEARCH"
+  name = "En bref"
+  url = "#tags"
+  weight = 30
+
+[[main]]
+  identifier = "Publications"
+  parent = "RESEARCH"
+  name = "Publications"
+  url = "#publications"
+  weight = 30
+
+[[main]]
+  identifier = "project"
+  parent = "RESEARCH"
+  name = "Projets & planches"
+  url = "#projects"
+  weight = 40
+
+
+# [[main]]
+#  identifier = "Publications"
+#  name = "Publications"
+#  url = "#publications"
+#  weight = 30
+
+# [[main]]
+#  identifier = "project"
+#  name = "Projets"
+#  url = "#projects"
+#  weight = 40
+
+[[main]]
+  name = "Contact"
+  url = "#contact"
+  weight = 50
+
+[[main]]
+  identifier = "CV_DOCS"
+  name = "CV & Portfolio"
+  # url = "files/CV_LM.pdf"
+  weight = 60
+
+[[main]]
+  identifier = "CV_FR"
+  parent = "CV_DOCS"
+  name = "CV - Français"
+  url = "files/CV_LM.pdf"
+  weight = 60
+[[main]]
+  identifier = "CV_EN"
+  parent = "CV_DOCS"
+  name = "CV - Anglais [pas à jour]"
+  url = "/project/default_soon/"
+  weight = 65
+[[main]]
+  identifier = "PF_PHD"
+  parent = "CV_DOCS"
+  name = "Portfolio [en construction]"
+  url = "/project/default_soon/"
+  weight = 75
+
+  #[[main]]
+  #  name = "Home"
+  #  url = "#about"
+  #  weight = 10
+
+  # [[main]]
+  #   name = "Publications"
+  #   url = "#featured"
+  #   weight = 60
+
+
+# [[main]]
+#   name = "Compétences"
+#   url = "#skills"
+#   weight = 50
+
+  # [[main]]
+  #   name = "Posts"
+  #   url = "#posts"
+  #   weight = 20
+
+  # Link to a PDF of your resume/CV from the menu.
+  # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
+  # [[main]]
+  #    name = "CV"
+  #    url = "files/cv.pdf"
+  #    weight = 70
