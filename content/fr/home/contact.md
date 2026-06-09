@@ -3,7 +3,7 @@
 # ATTENTION: tu as fais une modif dans themes/academic/layouts/partials/widget/contact.html pour pouvoir ajouter ton texte et retirer l'enveloppe par défaut [à partir de la ligne 46 à 56]
 widget = "contact"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
-active = true  # Activate this widget? true/false
+active = false  # Activate this widget? true/false
 weight = 70  # Order that this section will appear.
 
 title = "Contact"
