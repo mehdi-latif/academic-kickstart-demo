@@ -1,0 +1,174 @@
+.home-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+}
+
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.5rem 0;
+}
+
+.tag-cloud-item {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    color: inherit;
+    background: #f8fafc;
+}
+
+.tag-cloud-item span {
+    opacity: 0.65;
+    font-size: 0.8em;
+}
+
+.auto-list {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.auto-list-item {
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.auto-list-item h3 {
+    margin-bottom: 0.3rem;
+}
+
+.authors {
+    margin: 0.2rem 0;
+    opacity: 0.85;
+}
+
+.venue {
+    margin: 0.2rem 0 0.6rem 0;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 0.15rem 0.45rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 999px;
+    background: #ffffff;
+}
+
+.tag-area {
+    font-weight: 600;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #f8fafc;
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.contact-block {
+    margin: 1.8rem auto;
+    text-align: center;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.contact-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.8rem;
+    text-decoration: none;
+    position: relative;
+    z-index: 2;
+}
+
+.contact-icons i {
+    line-height: 1;
+}
+
+.contact-location {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.contact-location i {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.contact-location a {
+    position: relative;
+    z-index: 2;
+}
+
+a:hover,
+a:focus {
+    color: #2962ff; 
+}
+
+/* Center native Academic/Wowchemy tag cloud widget on the home page. */
+/* Stronger centering for Academic native tag_cloud widget. */
+
+// .home-tag-cloud-centered {
+//     text-align: center;
+// }
+
+// .home-tag-cloud-centered a {
+//     display: inline-block;
+//     margin: 0.25rem 0.45rem;
+// }
+
+// .wg-tag-cloud {
+//     text-align: center;
+// }
+
+// .wg-tag-cloud .container {
+//     text-align: center;
+// }
+
+// .wg-tag-cloud .tag-cloud {
+//     text-align: center;
+//     margin-left: auto;
+//     margin-right: auto;
+// }
+
+// .wg-tag-cloud .tag-cloud a {
+//     display: inline-block;
+//     margin: 0.25rem 0.45rem;
+// }

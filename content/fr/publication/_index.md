@@ -1,5 +1,6 @@
 ---
 title: Publications
+summary: "Publications scientifiques et communications."
 cms_exclude: true
 
 # View.
@@ -14,3 +15,5 @@ banner:
   caption: ''
   image: ''
 ---
+
+Cette page regroupe mes principales publications et communications scientifiques autour de la reconstruction statistique, de l’imagerie TEP 3-photons, de l’imagerie Compton et de l’optimisation parcimonieuse exacte.

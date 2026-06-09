@@ -1,0 +1,52 @@
+{{ $limit := .Get "limit" | default 100 }}
+{{ $area := .Get "research_area" }}
+{{ $tag := .Get "tag" }}
+{{ $pubs := where site.RegularPages "Section" "publication" }}
+
+{{ if $area }}
+{{ $pubs = where $pubs "Params.research_areas" "intersect" (slice $area) }}
+{{ end }}
+
+{{ if $tag }}
+{{ $pubs = where $pubs "Params.tags" "intersect" (slice $tag) }}
+{{ end }}
+
+<div class="auto-list publication-auto-list">
+    {{ range first $limit ($pubs.ByDate.Reverse) }}
+    <article class="auto-list-item publication-item">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+
+        {{ with .Params.authors }}
+        <p class="authors">{{ delimit . ", " }}</p>
+        {{ end }}
+
+        {{ with .Params.publication }}
+        <p class="venue"><strong>{{ . }}</strong></p>
+        {{ end }}
+
+        {{ with .Params.research_areas }}
+        <p class="tag-list">
+            {{ range . }}
+            <span class="tag tag-area">{{ . }}</span>
+            {{ end }}
+        </p>
+        {{ end }}
+
+        {{ with .Params.tags }}
+        <p class="tag-list">
+            {{ range . }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+        </p>
+        {{ end }}
+
+        {{ with .Params.url_pdf }}
+        <p><a href="{{ . }}">PDF / HAL</a></p>
+        {{ end }}
+
+        {{ with .Summary }}
+        <p>{{ . }}</p>
+        {{ end }}
+    </article>
+    {{ end }}
+</div>

@@ -5,8 +5,8 @@ headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
 weight = 20  # Order that this section will appear.
 
-title = "En bref"
-subtitle = "Thématiques, méthodes et outils."
+title = "At a glance"
+subtitle = "Topics, methods and tools."
 
 [content]
   # Choose the taxonomy from `config.toml` to display (e.g. tags, categories)

@@ -1,0 +1,43 @@
+{{ $limit := .Get "limit" | default 100 }}
+{{ $tag := .Get "tag" }}
+{{ $area := .Get "research_area" }}
+{{ $category := .Get "category" }}
+{{ $projects := where site.RegularPages "Section" "project" }}
+
+{{ if $tag }}
+{{ $projects = where $projects "Params.tags" "intersect" (slice $tag) }}
+{{ end }}
+
+{{ if $area }}
+{{ $projects = where $projects "Params.research_areas" "intersect" (slice $area) }}
+{{ end }}
+
+{{ if $category }}
+{{ $projects = where $projects "Params.project_category" $category }}
+{{ end }}
+
+<div class="cards auto-project-list">
+    {{ range first $limit ($projects.ByTitle) }}
+    <article class="card">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+
+        {{ with .Params.summary }}
+        <p>{{ . }}</p>
+        {{ else }}
+        <p>{{ .Summary }}</p>
+        {{ end }}
+
+        {{ with .Params.project_category }}
+        <p><strong>{{ . }}</strong></p>
+        {{ end }}
+
+        {{ with .Params.software_stack }}
+        <p class="tag-list">
+            {{ range . }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+        </p>
+        {{ end }}
+    </article>
+    {{ end }}
+</div>

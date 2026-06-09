@@ -1,0 +1,48 @@
+{{ $limit := .Get "limit" | default 100 }}
+{{ $type := .Get "talk_type" }}
+{{ $audience := .Get "audience" }}
+{{ $talks := where site.RegularPages "Section" "talk" }}
+
+{{ if $type }}
+{{ $talks = where $talks "Params.talk_types" "intersect" (slice $type) }}
+{{ end }}
+
+{{ if $audience }}
+{{ $talks = where $talks "Params.audiences" "intersect" (slice $audience) }}
+{{ end }}
+
+<div class="auto-list talk-auto-list">
+    {{ range first $limit ($talks.ByDate.Reverse) }}
+    <article class="auto-list-item talk-item">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+
+        {{ with .Params.event }}
+        <p class="venue"><strong>{{ . }}</strong></p>
+        {{ end }}
+
+        {{ with .Params.location }}
+        <p>{{ . }}</p>
+        {{ end }}
+
+        {{ with .Params.talk_types }}
+        <p class="tag-list">
+            {{ range . }}
+            <span class="tag tag-area">{{ . }}</span>
+            {{ end }}
+        </p>
+        {{ end }}
+
+        {{ with .Params.url_slides }}
+        <p><a href="{{ . }}">Slides</a></p>
+        {{ end }}
+
+        {{ with .Params.url_pdf }}
+        <p><a href="{{ . }}">PDF</a></p>
+        {{ end }}
+
+        {{ with .Summary }}
+        <p>{{ . }}</p>
+        {{ end }}
+    </article>
+    {{ end }}
+</div>

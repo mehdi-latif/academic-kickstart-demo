@@ -1,0 +1,24 @@
+{{ $taxonomyName := .Get "taxonomy" | default "tags" }}
+{{ $taxonomies := index site.Taxonomies $taxonomyName }}
+
+{{ if $taxonomies }}
+{{ $max := 1 }}
+
+{{ range $name, $taxonomy := $taxonomies }}
+{{ if gt (len $taxonomy.Pages) $max }}
+{{ $max = len $taxonomy.Pages }}
+{{ end }}
+{{ end }}
+
+<div class="tag-cloud">
+    {{ range $name, $taxonomy := $taxonomies }}
+    {{ $count := len $taxonomy.Pages }}
+    {{ $size := add 0.9 (mul 1.1 (div (float $count) (float $max))) }}
+    {{ $termURL := printf "/%s/%s/" $taxonomyName ($name | urlize) | relLangURL }}
+
+    <a href="{{ $termURL }}" class="tag-cloud-item" style="font-size: {{ $size }}rem;">
+        {{ $name }} <span>{{ $count }}</span>
+    </a>
+    {{ end }}
+</div>
+{{ end }}
