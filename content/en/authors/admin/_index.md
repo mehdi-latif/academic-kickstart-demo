@@ -8,33 +8,38 @@ authors:
 # Is this the primary user of the site?
 superuser: true
 # Role/position
-role: PhD student - Algorithmics & Signal processing.
-
-job: PhD student.
+role: "PhD in Signal Processing - Inverse Problems, Statistical Reconstruction and Optimization"
+job: "PhD in Signal Processing"
 
 # Organizations/Affiliations
 organizations:
-  - name: SiMS - LS2N
-    url: "https://www.ls2n.fr/equipe/sims/"
-  - name: Nuclear Oncology - CRCI2NA
-    url: "https://crci2na.univ-nantes.fr/en/research/team-2"
+  # - name: SiMS - LS2N
+  #   url: "https://www.ls2n.fr/equipe/sims/"
+  # - name: Nuclear Oncology - CRCI2NA
+  #   url: "https://crci2na.univ-nantes.fr/en/research/team-2"
 
 # Short bio (displayed in user profile at end of posts)
-bio: $\lambda$
+bio: "" # PhD in Signal Processing working on inverse problems, tomographic reconstruction, optimization and statistical modelling.
 
 interests:
-  - Musique, Photographie, Littérature
-  - Aviron
-  - Voyages
+  - Inverse problems
+  - Statistical reconstruction
+  - Tomographic imaging
+  - Monte Carlo modelling
+  - Optimization
+  - Computational imaging
 
 education:
   courses:
-  - course: Master Informatique - Optimisation en Recherche Opérationnelle
-    institution: Université de Nantes, Université Libre de Bruxelles
-    year: 2020
-  - course: Licence Informatique parcours Mathématiques
-    institution: Université de Nantes.
-    year: 2018
+    - course: "PhD in Signal, Image and Vision"
+      institution: "École Centrale de Nantes"
+      year: 2026
+    - course: "MSc in Computer Science - Optimization and Operations Research"
+      institution: "Nantes Université / Université libre de Bruxelles"
+      year: 2020
+    - course: "BSc in Computer Science, Mathematics track"
+      institution: "Nantes Université"
+      year: 2018
 
 job:
 # Social/Academic Networking
@@ -59,12 +64,9 @@ social:
 - icon: linkedin-in
   icon_pack: fab
   link: https://www.linkedin.com/in/mehdilatif/
-
 # - icon: envelope
 #   icon_pack: fas
 #   link: "mailto:mehdi.latif@ls2n.fr?cc=mehdi.latif@ls2n.fr"
-
-
 # Link to a PDF of your resume/CV from the About widget.
 # To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
 # - icon: cv
@@ -76,15 +78,15 @@ social:
 
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
-email: ""
+email: "latifm[.]pro[@]gmail[.]com"
 # Organizational groups that you belong to (for People widget)
 #   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
 - Researchers
-- Visitors
+
 ---
-Actuellement étudiant en thèse de doctorat, mon sujet de recherche se situe à l'intersection des domaines de l'imagerie médicale, du traitement des signaux et de la physique.
+I am a PhD in Signal Processing with a research profile at the intersection of inverse problems, statistical reconstruction, optimization and computational imaging.
 
-Avant ça, j'ai obtenu un diplôme du Master en informatique spécialisé en [Optimisation et Recherche Opérationnelle](http://oro.univ-nantes.fr/) proposé par l'université de Nantes ainsi que du Master Optimisation et Algorithmique de l'Université Libre de Bruxelles.
+My PhD research focused on the development of models and algorithms for tomographic reconstruction in three-photon imaging, with applications to hybrid PET/Compton cameras and the XEMIS2 system.
 
-Curieux de nature, passionné et dynamique, je m'intéresse à de nombreux domaines des mathématiques et de l'informatique théorique.
+More broadly, I am interested in probabilistic modelling, optimization and statistical inference for complex imaging data. I have also worked on sparse spectral unmixing, developing exact branch-and-bound methods for source separation in hyperspectral imaging.
