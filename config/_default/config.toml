@@ -34,27 +34,31 @@ enableInlineShortcodes = true
 
 # Default language to use (if you setup multilingual support)
 defaultContentLanguage = "fr"
+hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.
+defaultContentLanguageInSubdir = true
+removePathAccents = true  # Workaround for https://github.com/gohugoio/hugo/issues/5687
+disablePathToLower = true
 
 [params.navigation]
   help  = "Help"
 
+#############################################################
+#############################################################
+
 [Languages]
   [Languages.fr]
-    title = "Mehdi LATIF | CV Numérique"
+    title = "Mehdi LATIF | Profil recherche"
     contentDir = 'content/fr'
     languageName = 'Fr'
     weight = 1
   [Languages.en]
-    title = "Mehdi LATIF | Digital Resume"
+    title = "Mehdi LATIF | Research Profile"
     contentDir = 'content/en'
     languageName = 'En'
     weight = 2
 
-
-
-hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.
-defaultContentLanguageInSubdir = true
-removePathAccents = true  # Workaround for https://github.com/gohugoio/hugo/issues/5687
+#############################################################
+#############################################################
 
 summaryLength = 30  # Listing summary length in words. Also, see `abstract_length` in `params.toml`.
 paginate = 10  # Number of items per page in paginated lists.
@@ -68,6 +72,11 @@ ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "
   tags = "/tag/:slug/"
   categories = "/category/:slug/"
   publication_types = "/publication-type/:slug/"
+  research_areas = "/research-area/:slug/"
+  software_stack = "/software-stack/:slug/"
+  talk_types = "/talk-type/:slug/"
+  audiences = "/audience/:slug/"
+
 
 [outputs]
   home = [ "HTML", "RSS", "JSON", "WebAppManifest" ]
@@ -97,12 +106,21 @@ ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "
   quality = 90
   anchor = "smart"  # Anchor for cropping. Options include Smart and Center.
 
+#############################################################
+#############################################################
 # Taxonomies.
 [taxonomies]
   tag = "tags"
   category = "categories"
   publication_type = "publication_types"
   author = "authors"
+  research_area = "research_areas"
+  software_stack = "software_stack"
+  talk_type = "talk_types"
+  audience = "audiences"
+
+#############################################################
+#############################################################
 
 # Related content.
 [related]

@@ -4,24 +4,71 @@
 #   The weight parameter defines the order that the links will appear in.
 
 [[main]]
-  name = "Education"
-  url = "#education"
+  identifier = "home"
+  name = "Home"
+  url = "/en/"
   weight = 10
 
 [[main]]
-  name = "Experiences"
-  url = "#experience"
+  identifier = "research"
+  name = "Research"
+  url = "/en/research/"
   weight = 20
 
 [[main]]
-  name = "Projects & Slides"
-  url = "#projects"
+  identifier = "publications"
+  name = "Publications"
+  url = "/en/publication/"
   weight = 30
 
 [[main]]
-  name = "Resume"
-  url = "../files/CV_LM.pdf"
+  identifier = "software"
+  name = "Software"
+  url = "/en/software/"
   weight = 40
+
+[[main]]
+  identifier = "talks"
+  name = "Talks"
+  url = "/en/talk/"
+  weight = 50
+
+[[main]]
+  identifier = "teaching"
+  name = "Teaching"
+  url = "/en/teaching/"
+  weight = 60
+
+[[main]]
+  identifier = "contact"
+  name = "Contact"
+  url = "/en/contact/"
+  weight = 70
+
+[[main]]
+  identifier = "cv"
+  name = "CV"
+  # url = "/files/CV_MLATIF_FR.pdf"
+  weight = 80
+
+[[main]]
+  identifier = "cv_fr"
+  parent = "cv"
+  name = "CV - English"
+  url =  "/project/default_soon/"         #"/files/CV_MLATIF_EN.pdf"
+  weight = 90
+
+[[main]]
+  identifier = "cv_en"
+  parent = "cv"
+  name = "CV - French"
+  url = "/files/cv_mlatif_fr.pdf"
+  weight = 100
+
+#############################################################
+#############################################################
+#############################################################
+#############################################################
 
   #[[main]]
   #  name = "Home"
@@ -33,10 +80,6 @@
   #   url = "#featured"
   #   weight = 60
 
-  # [[main]]
-  #   name = "Contact"
-  #   url = "#contact"
-  #   weight = 40
 
 # [[main]]
 #   name = "Compétences"

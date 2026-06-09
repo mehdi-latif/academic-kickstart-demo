@@ -2,15 +2,21 @@
 #   Create a `[X]` block for each language you want, where X is the language ID.
 #   Refer to https://sourcethemes.com/academic/docs/language/
 
+#############################################################
+#############################################################
+# WEBSITE NAME
 # Configure the English version of the site.
 [fr]
   languageCode = "fr"
   contentDir = "content/fr"  # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
-  title = "Mehdi LATIF | CV Numérique"
+  title = "Mehdi LATIF"
 [en]
   languageCode = "en"
   contentDir = "content/en"  # Uncomment for multi-lingual sites, and move English content into `en` sub-folder.
-  title = "Mehdi LATIF | Digital Resume"
+  title = "Mehdi LATIF"
+
+#############################################################
+#############################################################
 
 # Uncomment the lines below to configure your website in a second language.
 #[zh]

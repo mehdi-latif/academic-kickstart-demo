@@ -26,7 +26,7 @@ font = ""
 
 # Choose a font size.
 # Sizes: XS (extra small), S (small), M (medium), L (large - DEFAULT), XL (extra large)
-font_size = "L"
+font_size = "XL"
 
 ############################
 ## Basic Info
@@ -48,7 +48,7 @@ local_business_type = ""
 org_name = ""
 
 # Description for social sharing and search engines. If undefined, superuser role is used in place.
-description = "Mehdi LATIF | CV Numérique. Optimisation, Algorithmique, Imagerie médicale."
+description = "Mehdi LATIF | Docteur en Traitement du Signal. Profil recherche en problèmes inverses, reconstruction statistique, optimisation, simulation Monte Carlo et imagerie computationnelle."
 images = "main_site/static/img/icon-512.png"
 
 ############################
@@ -89,7 +89,7 @@ show_related = {docs = true, page = false, post = true, project = true, publicat
 ############################
 
 # Enter contact details (optional). To hide a field, clear it to "".
-email = "mehdi.latif@ls2n.fr"
+email = "latifm[.]pro[@]gmail[.]com"
 phone = ""
 
 
