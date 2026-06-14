@@ -142,6 +142,71 @@ a:focus {
     color: #2962ff; 
 }
 
+// CENTERING OF BUTTONS IN PROJECT TOOLBAR
+.project-toolbar .btn-toolbar {
+    justify-content: center;
+}
+
+// CENTERING THE TITLE OF THE PORTFOLIO SECTION ON THE HOME PAGE
+.wg-portfolio .center-text {
+    text-align: left;
+}
+
+// INFO SUPPLEMENTAIRE SHORTCODE
+/* Shortcode info_sup - affichage en ligne */
+.info-dropdown {
+    display: inline;
+}
+
+.info-dropdown-icon {
+    list-style: none;
+    cursor: pointer;
+    display: inline;
+    color: #999;
+    outline: none;
+}
+
+.info-dropdown-icon::-webkit-details-marker {
+    display: none;
+}
+
+.info-dropdown:hover .info-dropdown-icon,
+.info-dropdown[open] .info-dropdown-icon {
+    color: #007bff;
+}
+
+.info-dropdown-content {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.info-dropdown-content p:last-child {
+    margin-bottom: 0;
+}
+
+.info-dropdown-content {
+    margin: 0;
+    padding: 2px 0 4px 0;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.info-dropdown-content p {
+    margin: 0 0 0.5em 0;
+}
+// Eviter un espace vertical supplémentaire entre les paragraphes dans le contenu du dropdown
+li>p {
+    margin: 0;
+}
+
+
+
+
+
 /* Center native Academic/Wowchemy tag cloud widget on the home page. */
 /* Stronger centering for Academic native tag_cloud widget. */
 

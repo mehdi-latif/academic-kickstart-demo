@@ -22,15 +22,15 @@
   weight = 30
 
 [[main]]
-  identifier = "software"
-  name = "Software"
-  url = "/en/software/"
-  weight = 40
-
-[[main]]
   identifier = "talks"
   name = "Talks"
   url = "/en/talk/"
+  weight = 40
+
+[[main]]
+  identifier = "software"
+  name = "Software"
+  url = "/en/software/"
   weight = 50
 
 [[main]]

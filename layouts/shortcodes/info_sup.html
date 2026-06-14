@@ -1,0 +1,12 @@
+{{ $inner := replaceRE `(?m)^[ \t]+` "" .Inner }}
+
+<details class="info-dropdown">
+    <summary class="info-dropdown-icon" aria-label="Plus d'informations">
+        <i class="fas fa-info-circle"></i>
+    </summary>
+    <div class="info-dropdown-content">
+
+        {{ $inner | markdownify }}
+
+    </div>
+</details>

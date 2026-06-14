@@ -42,14 +42,3 @@ J’utilise la simulation Monte Carlo pour modéliser les processus de détectio
 
 Ma formation en optimisation combinatoire et continue influence fortement mes travaux. Je m’intéresse aux algorithmes exacts et approchés, à l’optimisation numérique, aux modèles parcimonieux et aux stratégies algorithmiques pour les problèmes inverses de grande dimension.
 
-<!-- ## Mots-clés de recherche
-
-{{< taxonomy-cloud taxonomy="research_areas" >}}
-
-## Publications associées
-
-{{< publication-list limit="5" >}}
-
-## Logiciels associés
-
-{{< project-list category="core" limit="5" >}} -->

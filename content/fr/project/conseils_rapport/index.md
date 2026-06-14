@@ -1,5 +1,5 @@
 ---
-title: Conseils pour l'écriture d'un rapport de TP (et pas que ...)
+title: Conseils pour l'écriture d'un rapport de TP 
 summary: A l'attention des étudiants que j'encadre en TP.
 tags:
   - Matlab
