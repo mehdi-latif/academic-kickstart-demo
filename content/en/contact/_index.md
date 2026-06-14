@@ -3,7 +3,9 @@ title: "Contact"
 summary: "Contact, liens académiques et CV."
 ---
 
-You can contact me for research discussions, collaborations or postdoctoral opportunities related to inverse problems, computational imaging, statistical reconstruction, Monte Carlo modelling and optimization.
+Feel free to contact me to discuss research, collaborations or postdoctoral opportunities related to inverse problems, computational imaging, statistical reconstruction, Monte Carlo modelling and optimization.
+
+More informal conversations are also welcome, whether over coffee, during a rowing session or over a badminton match.
 
 
 
