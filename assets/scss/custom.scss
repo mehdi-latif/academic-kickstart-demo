@@ -203,7 +203,112 @@ li>p {
     margin: 0;
 }
 
+/* BADGES POUR LES STACKS LOGICIELS */
 
+.software-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+.software-stack-badge {
+    display: inline-block;
+    padding: 0.12rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    opacity: 0.75;
+}
+
+/* ELIZA :) */
+.contact-terminal {
+    max-width: 760px;
+    margin: 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111827;
+    color: #e5e7eb;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.contact-terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    background: #1f2937;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-terminal-dots {
+    display: flex;
+    gap: 0.45rem;
+}
+
+.contact-terminal-dots span {
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 50%;
+    background: #6b7280;
+}
+
+.contact-terminal-title {
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+.contact-terminal-screen {
+    min-height: 15rem;
+    max-height: 24rem;
+    overflow-y: auto;
+    padding: 1rem 1.1rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.terminal-line {
+    white-space: pre-wrap;
+    margin: 0.1rem 0;
+}
+
+.terminal-command {
+    color: #93c5fd;
+}
+
+.contact-terminal-screen a {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+.contact-terminal-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.1rem;
+    background: #0f172a;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact-terminal-prompt {
+    color: #93c5fd;
+}
+
+.contact-terminal-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #e5e7eb;
+    font: inherit;
+}
+
+.contact-terminal-input::placeholder {
+    color: rgba(229, 231, 235, 0.45);
+}
 
 
 

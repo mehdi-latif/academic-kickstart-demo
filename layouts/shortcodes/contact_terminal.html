@@ -1,0 +1,300 @@
+{{ $id := printf "contact-terminal-%d" .Ordinal }}
+{{ $lang := .Site.Language.Lang }}
+
+<div id="{{ $id }}" class="contact-terminal" data-lang="{{ $lang }}">
+  <div class="contact-terminal-header">
+    <div class="contact-terminal-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="contact-terminal-title">contact@mlatif.fr:~</div>
+  </div>
+
+  <div class="contact-terminal-screen" aria-live="polite"></div>
+
+  <form class="contact-terminal-form">
+    <span class="contact-terminal-prompt">$</span>
+    <input class="contact-terminal-input"
+           type="text"
+           autocomplete="off"
+           spellcheck="false"
+           aria-label="Terminal input">
+  </form>
+</div>
+
+<script>
+(function() {
+  const root = document.getElementById("{{ $id }}");
+  if (!root) return;
+
+  const lang = root.dataset.lang || "fr";
+  const screen = root.querySelector(".contact-terminal-screen");
+  const form = root.querySelector(".contact-terminal-form");
+  const input = root.querySelector(".contact-terminal-input");
+
+  let elizaMode = false;
+
+  const isFr = lang === "fr";
+
+  const cvUrl = isFr ? "/files/cv_mlatif_fr.pdf" : "/files/cv_mlatif_en.pdf";
+  const contactUrl = isFr ? "/fr/contact/" : "/en/contact/";
+  const email = "latifm.pro@gmail.com";
+
+  function print(text, cls) {
+    const line = document.createElement("div");
+    line.className = "terminal-line" + (cls ? " " + cls : "");
+    line.textContent = text;
+    screen.appendChild(line);
+    screen.scrollTop = screen.scrollHeight;
+  }
+
+  function printHTML(html, cls) {
+    const line = document.createElement("div");
+    line.className = "terminal-line" + (cls ? " " + cls : "");
+    line.innerHTML = html;
+    screen.appendChild(line);
+    screen.scrollTop = screen.scrollHeight;
+  }
+
+  function promptLine(command) {
+    print("$ " + command, "terminal-command");
+  }
+
+  function mailto(subject) {
+    return "mailto:" + email + "?subject=" + encodeURIComponent(subject);
+  }
+
+  function help() {
+    if (isFr) {
+      print("Commandes disponibles :");
+      print("  whoami      — profil court");
+      print("  research    — thèmes de recherche");
+      print("  postdoc     — statut actuel");
+      print("  cv          — lien vers le CV");
+      print("  email       — ouvrir un mail");
+      print("  coffee      — contact informel");
+      print("  rowing      — sortie d'aviron");
+      print("  badminton   — match de badminton");
+      print("  eliza       — lancer le mode ELIZA");
+      print("  clear       — nettoyer le terminal");
+    } else {
+      print("Available commands:");
+      print("  whoami      — short profile");
+      print("  research    — research topics");
+      print("  postdoc     — current status");
+      print("  cv          — CV link");
+      print("  email       — open email");
+      print("  coffee      — informal contact");
+      print("  rowing      — rowing outing");
+      print("  badminton   — badminton match");
+      print("  eliza       — start ELIZA mode");
+      print("  clear       — clear terminal");
+    }
+  }
+
+  function runCommand(command) {
+    const c = command.trim().toLowerCase();
+
+    if (!c) return;
+
+    if (elizaMode && c !== "exit" && c !== "quit" && c !== "clear") {
+      promptLine(command);
+      elizaReply(command);
+      return;
+    }
+
+    promptLine(command);
+
+    if (c === "help" || c === "?") {
+      help();
+    }
+
+    else if (c === "whoami") {
+      if (isFr) {
+        print("Mehdi LATIF — docteur en Traitement du Signal.");
+        print("Profil : problèmes inverses, reconstruction statistique, optimisation, imagerie computationnelle.");
+      } else {
+        print("Mehdi LATIF — PhD in Signal Processing.");
+        print("Profile: inverse problems, statistical reconstruction, optimization, computational imaging.");
+      }
+    }
+
+    else if (c === "research") {
+      if (isFr) {
+        print("Axes : reconstruction tomographique, modélisation probabiliste, simulation Monte Carlo, optimisation.");
+        print("Applications : imagerie 3-photons et détecteurs hybrides TEP/Compton.");
+      } else {
+        print("Topics: tomographic reconstruction, probabilistic modelling, Monte Carlo simulation, optimization.");
+        print("Applications: three-photon imaging and hybrid PET/Compton detectors.");
+      }
+    }
+
+    else if (c === "postdoc" || c === "status") {
+      if (isFr) {
+        print("Statut : recherche d'opportunités postdoctorales.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Opportunité postdoctorale") + '">Envoyer un message</a>');
+      } else {
+        print("Status: looking for postdoctoral opportunities.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Postdoctoral opportunity") + '">Send a message</a>');
+      }
+    }
+
+    else if (c === "cv") {
+      if (isFr) {
+        printHTML('<a href="' + cvUrl + '">Télécharger le CV</a>');
+      } else {
+        printHTML('<a href="' + cvUrl + '">Download CV</a>');
+      }
+    }
+
+    else if (c === "email" || c === "contact") {
+      if (isFr) {
+        printHTML('<a href="' + mailto("[mlatif.fr] Contact") + '">Ouvrir un email</a>');
+      } else {
+        printHTML('<a href="' + mailto("[mlatif.fr] Contact") + '">Open email</a>');
+      }
+    }
+
+    else if (c === "coffee" || c === "café" || c === "cafe") {
+      if (isFr) {
+        print("Café accepté. Sujet suggéré : discussion informelle, recherche ou parcours.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Café") + '">Proposer un café</a>');
+      } else {
+        print("Coffee accepted. Suggested topic: informal discussion, research or career path.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Coffee") + '">Suggest coffee</a>');
+      }
+    }
+
+    else if (c === "rowing" || c === "aviron") {
+      if (isFr) {
+        print("Mode aviron activé : discussion possible avant ou après la sortie.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Aviron") + '">Proposer une sortie d’aviron</a>');
+      } else {
+        print("Rowing mode enabled: discussion possible before or after the outing.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Rowing") + '">Suggest a rowing outing</a>');
+      }
+    }
+
+    else if (c === "badminton" || c === "bad") {
+      if (isFr) {
+        print("Mode badminton activé : l'analyse de performance est optionnelle.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Badminton") + '">Proposer un match</a>');
+      } else {
+        print("Badminton mode enabled: performance analysis is optional.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Badminton") + '">Suggest a match</a>');
+      }
+    }
+
+    else if (c === "eliza") {
+      elizaMode = true;
+      if (isFr) {
+        print("ELIZA> Bonjour. Parlez-moi de vos problèmes inverses.");
+        print("ELIZA> Tapez exit pour quitter.");
+      } else {
+        print("ELIZA> Hello. Tell me about your inverse problems.");
+        print("ELIZA> Type exit to leave.");
+      }
+    }
+
+    else if (c === "exit" || c === "quit") {
+      elizaMode = false;
+      if (isFr) {
+        print("Sortie du mode ELIZA.");
+      } else {
+        print("Leaving ELIZA mode.");
+      }
+    }
+
+    else if (c === "clear") {
+      screen.innerHTML = "";
+      welcome();
+    }
+
+    else {
+      if (isFr) {
+        print("Commande inconnue. Tapez help.");
+      } else {
+        print("Unknown command. Type help.");
+      }
+    }
+  }
+
+  function elizaReply(message) {
+    const m = message.toLowerCase();
+
+    if (isFr) {
+      if (m.includes("bonjour") || m.includes("salut")) {
+        print("ELIZA> Bonjour. Voulez-vous parler de recherche, de café ou de badminton ?");
+      } else if (m.includes("postdoc") || m.includes("opportunité") || m.includes("poste")) {
+        print("ELIZA> Vous semblez vouloir discuter d'une opportunité postdoctorale. Peut-être devriez-vous taper email.");
+      } else if (m.includes("recherche") || m.includes("collaboration")) {
+        print("ELIZA> La collaboration est souvent une bonne régularisation du problème inverse.");
+      } else if (m.includes("optimisation")) {
+        print("ELIZA> Parlez-moi davantage de cette optimisation. Est-elle convexe ?");
+      } else if (m.includes("monte carlo")) {
+        print("ELIZA> La variance semble vous préoccuper. Avez-vous envisagé plus de photons ?");
+      } else if (m.includes("aviron")) {
+        print("ELIZA> L'aviron est une méthode itérative avec retour périodique au point de départ.");
+      } else if (m.includes("badminton")) {
+        print("ELIZA> Le badminton révèle parfois des problèmes de trajectoire plus complexes que la tomographie.");
+      } else if (m.includes("cv")) {
+        printHTML('ELIZA> Le CV est ici : <a href="' + cvUrl + '">CV</a>');
+      } else {
+        const replies = [
+          "ELIZA> Pourquoi cela vous semble-t-il important ?",
+          "ELIZA> Pouvez-vous reformuler cela comme un problème inverse ?",
+          "ELIZA> Intéressant. Quelle serait la fonction objectif ?",
+          "ELIZA> Je vois. Et quelle contrainte ajouteriez-vous ?",
+          "ELIZA> Cela ressemble à une question de régularisation."
+        ];
+        print(replies[Math.floor(Math.random() * replies.length)]);
+      }
+    } else {
+      if (m.includes("hello") || m.includes("hi")) {
+        print("ELIZA> Hello. Would you like to talk about research, coffee or badminton?");
+      } else if (m.includes("postdoc") || m.includes("opportunity") || m.includes("position")) {
+        print("ELIZA> You seem to want to discuss a postdoctoral opportunity. Perhaps you should type email.");
+      } else if (m.includes("research") || m.includes("collaboration")) {
+        print("ELIZA> Collaboration is often a good regularization strategy for inverse problems.");
+      } else if (m.includes("optimization")) {
+        print("ELIZA> Tell me more about this optimization problem. Is it convex?");
+      } else if (m.includes("monte carlo")) {
+        print("ELIZA> Variance seems to concern you. Have you considered more photons?");
+      } else if (m.includes("rowing")) {
+        print("ELIZA> Rowing is an iterative method with periodic return to the starting point.");
+      } else if (m.includes("badminton")) {
+        print("ELIZA> Badminton sometimes involves trajectories more complex than tomography.");
+      } else if (m.includes("cv")) {
+        printHTML('ELIZA> The CV is here: <a href="' + cvUrl + '">CV</a>');
+      } else {
+        const replies = [
+          "ELIZA> Why does that seem important to you?",
+          "ELIZA> Can you reformulate this as an inverse problem?",
+          "ELIZA> Interesting. What would the objective function be?",
+          "ELIZA> I see. Which constraint would you add?",
+          "ELIZA> This sounds like a regularization question."
+        ];
+        print(replies[Math.floor(Math.random() * replies.length)]);
+      }
+    }
+  }
+
+  function welcome() {
+    if (isFr) {
+      print("Mehdi Contact Shell v1.0");
+      print("Tapez help pour voir les commandes disponibles.");
+    } else {
+      print("Mehdi Contact Shell v1.0");
+      print("Type help to list available commands.");
+    }
+  }
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const value = input.value;
+    input.value = "";
+    runCommand(value);
+  });
+
+  welcome();
+})();
+</script>
