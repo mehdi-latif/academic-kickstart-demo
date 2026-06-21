@@ -25,7 +25,7 @@ interests:
   - Problèmes inverses
   - Reconstruction statistique
   - Imagerie tomographique
-  - Simulations Monte-Carlo
+  - Simulations Monte Carlo
   - Optimisation
   - Imagerie computationnelle
 
@@ -80,6 +80,7 @@ social:
 #  icon_pack: ai
 #  link: https://www.researchgate.net/profile/Mehdi_Latif
 
+avatar: "/img/avatar.jpg" 
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: "latifm[.]pro[@]gmail[.]com"
