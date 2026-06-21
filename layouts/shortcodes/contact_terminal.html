@@ -13,288 +13,645 @@
 
   <form class="contact-terminal-form">
     <span class="contact-terminal-prompt">$</span>
-    <input class="contact-terminal-input"
-           type="text"
-           autocomplete="off"
-           spellcheck="false"
-           aria-label="Terminal input">
+    <input class="contact-terminal-input" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal input">
   </form>
 </div>
 
 <script>
-(function() {
-  const root = document.getElementById("{{ $id }}");
-  if (!root) return;
+  (function () {
+    const root = document.getElementById("{{ $id }}");
+    if (!root) return;
 
-  const lang = root.dataset.lang || "fr";
-  const screen = root.querySelector(".contact-terminal-screen");
-  const form = root.querySelector(".contact-terminal-form");
-  const input = root.querySelector(".contact-terminal-input");
+    const lang = root.dataset.lang || "fr";
+    const isFr = lang === "fr";
 
-  let elizaMode = false;
+    const screen = root.querySelector(".contact-terminal-screen");
+    const form = root.querySelector(".contact-terminal-form");
+    const input = root.querySelector(".contact-terminal-input");
 
-  const isFr = lang === "fr";
+    const email = "latifm.pro@gmail.com";
+    const cvUrl = isFr ? "/files/cv_mlatif_fr.pdf" : "/files/cv_mlatif_en.pdf";
 
-  const cvUrl = isFr ? "/files/cv_mlatif_fr.pdf" : "/files/cv_mlatif_en.pdf";
-  const contactUrl = isFr ? "/fr/contact/" : "/en/contact/";
-  const email = "latifm.pro@gmail.com";
+    let elizaMode = false;
+    let lastTopic = null;
+    let sameTopicStreak = 0;
 
-  function print(text, cls) {
-    const line = document.createElement("div");
-    line.className = "terminal-line" + (cls ? " " + cls : "");
-    line.textContent = text;
-    screen.appendChild(line);
-    screen.scrollTop = screen.scrollHeight;
-  }
+    let recentElizaReplies = [];
+    const maxRecentElizaReplies = 6;
 
-  function printHTML(html, cls) {
-    const line = document.createElement("div");
-    line.className = "terminal-line" + (cls ? " " + cls : "");
-    line.innerHTML = html;
-    screen.appendChild(line);
-    screen.scrollTop = screen.scrollHeight;
-  }
+    let history = [];
+    let historyIndex = -1;
 
-  function promptLine(command) {
-    print("$ " + command, "terminal-command");
-  }
-
-  function mailto(subject) {
-    return "mailto:" + email + "?subject=" + encodeURIComponent(subject);
-  }
-
-  function help() {
-    if (isFr) {
-      print("Commandes disponibles :");
-      print("  whoami      — profil court");
-      print("  research    — thèmes de recherche");
-      print("  postdoc     — statut actuel");
-      print("  cv          — lien vers le CV");
-      print("  email       — ouvrir un mail");
-      print("  coffee      — contact informel");
-      print("  rowing      — sortie d'aviron");
-      print("  badminton   — match de badminton");
-      print("  eliza       — lancer le mode ELIZA");
-      print("  clear       — nettoyer le terminal");
-    } else {
-      print("Available commands:");
-      print("  whoami      — short profile");
-      print("  research    — research topics");
-      print("  postdoc     — current status");
-      print("  cv          — CV link");
-      print("  email       — open email");
-      print("  coffee      — informal contact");
-      print("  rowing      — rowing outing");
-      print("  badminton   — badminton match");
-      print("  eliza       — start ELIZA mode");
-      print("  clear       — clear terminal");
+    function print(text, cls) {
+      const line = document.createElement("div");
+      line.className = "terminal-line" + (cls ? " " + cls : "");
+      line.textContent = text;
+      screen.appendChild(line);
+      screen.scrollTop = screen.scrollHeight;
     }
-  }
 
-  function runCommand(command) {
-    const c = command.trim().toLowerCase();
+    function printHTML(html, cls) {
+      const line = document.createElement("div");
+      line.className = "terminal-line" + (cls ? " " + cls : "");
+      line.innerHTML = html;
+      screen.appendChild(line);
+      screen.scrollTop = screen.scrollHeight;
+    }
 
-    if (!c) return;
+    function promptLine(command) {
+      print("$ " + command, "terminal-command");
+    }
 
-    if (elizaMode && c !== "exit" && c !== "quit" && c !== "clear") {
+    function mailto(subject) {
+      return "mailto:" + email + "?subject=" + encodeURIComponent(subject);
+    }
+
+    function randomChoice(array) {
+      if (!array || array.length === 0) return "";
+
+      const available = array.filter(reply => !recentElizaReplies.includes(reply));
+      const pool = available.length > 0 ? available : array;
+
+      const reply = pool[Math.floor(Math.random() * pool.length)];
+
+      recentElizaReplies.push(reply);
+      if (recentElizaReplies.length > maxRecentElizaReplies) {
+        recentElizaReplies.shift();
+      }
+
+      return reply;
+    }
+
+    function welcome() {
+      if (isFr) {
+        print("Mehdi Contact Shell v1.2");
+        print("Tapez help pour voir les commandes disponibles.");
+        print("Tapez eliza pour lancer le mode conversation rétro.");
+      } else {
+        print("Mehdi Contact Shell v1.2");
+        print("Type help to list available commands.");
+        print("Type eliza to start retro conversation mode.");
+      }
+    }
+
+    function help() {
+      if (isFr) {
+        print("Commandes disponibles :");
+        print("");
+        print("  whoami      — profil court");
+        print("  research    — thèmes de recherche");
+        print("  postdoc     — statut actuel");
+        print("  cv          — lien vers le CV");
+        print("  email       — ouvrir un email");
+        print("  topic       — proposer des sujets");
+        print("");
+        print("  coffee      — contact informel");
+        print("  rowing      — sortie d'aviron");
+        print("  badminton   — match de badminton");
+        print("");
+        print("  eliza       — mode conversation rétro");
+        print("  exit        — quitter le mode ELIZA");
+        print("  clear       — nettoyer le terminal");
+        print("");
+        print("Commandes cachées : lambda, pollux, cassandre, castor, latex, photon.");
+      } else {
+        print("Available commands:");
+        print("");
+        print("  whoami      — short profile");
+        print("  research    — research topics");
+        print("  postdoc     — current status");
+        print("  cv          — CV link");
+        print("  email       — open email");
+        print("  topic       — suggest topics");
+        print("");
+        print("  coffee      — informal contact");
+        print("  rowing      — rowing outing");
+        print("  badminton   — badminton match");
+        print("");
+        print("  eliza       — retro conversation mode");
+        print("  exit        — leave ELIZA mode");
+        print("  clear       — clear terminal");
+        print("");
+        print("Hidden commands: lambda, pollux, cassandre, castor, latex, photon.");
+      }
+    }
+
+    function printTopics() {
+      if (isFr) {
+        print("Sujets possibles :");
+        print("  imagerie, statistiques, Monte Carlo, optimisation, code, enseignement, postdoc, café, aviron, badminton.");
+      } else {
+        print("Possible topics:");
+        print("  imaging, statistics, Monte Carlo, optimization, code, teaching, postdoc, coffee, rowing, badminton.");
+      }
+    }
+
+    const elizaRulesFr = [
+      {
+        topic: "postdoc",
+        pattern: /(postdoc|postdoctoral|opportunité|poste|recrutement|candidature)/i,
+        replies: [
+          "ELIZA> Vous semblez vouloir parler d'une opportunité postdoctorale. Peut-être devriez-vous taper email.",
+          "ELIZA> Une opportunité postdoctorale est une bonne occasion de changer de cadre scientifique.",
+          "ELIZA> Souhaitez-vous discuter d'un projet, d'une équipe ou d'un sujet de recherche ?",
+          "ELIZA> Un postdoc commence souvent par une question simple : que voulez-vous explorer ensuite ?"
+        ]
+      },
+      {
+        topic: "imagerie",
+        pattern: /(imagerie|tomographie|tep|compton|photon|détecteur|reconstruction|scanner|image)/i,
+        replies: [
+          "ELIZA> L'imagerie révèle parfois plus de choses sur le modèle que sur l'objet observé.",
+          "ELIZA> La tomographie est une manière élégante de poser une question indirecte à la matière.",
+          "ELIZA> Voulez-vous parler du modèle physique, de la reconstruction ou des données ?",
+          "ELIZA> Les photons ont souvent une trajectoire plus compliquée que prévu.",
+          "ELIZA> Une bonne reconstruction commence souvent par un modèle direct honnête."
+        ]
+      },
+      {
+        topic: "statistiques",
+        pattern: /(statistique|probabilité|probabiliste|vraisemblance|bayésien|bayesien|inférence|fim|fisher|incertitude|estimateur)/i,
+        replies: [
+          "ELIZA> La vraisemblance semble vouloir vous dire quelque chose.",
+          "ELIZA> Vous semblez hésiter entre estimation, incertitude et information.",
+          "ELIZA> La question est-elle de modéliser, d'estimer ou de décider ?",
+          "ELIZA> Une bonne statistique sait parfois rester silencieuse devant peu de données.",
+          "ELIZA> L'information de Fisher est souvent plus bavarde qu'elle n'en a l'air."
+        ]
+      },
+      {
+        topic: "montecarlo",
+        pattern: /(monte carlo|simulation|geant4|variance|échantillonnage|tirage|bruit|aléatoire|aleatoire)/i,
+        replies: [
+          "ELIZA> La variance semble vous préoccuper. C'est fréquent chez les simulations Monte Carlo.",
+          "ELIZA> Avez-vous distingué le bruit statistique du bruit conceptuel ?",
+          "ELIZA> Une simulation peut être longue, mais elle finit parfois par avouer.",
+          "ELIZA> Plus de photons n'est pas toujours une stratégie, mais c'est souvent une tentation.",
+          "ELIZA> Le hasard est parfois très organisé quand on regarde les logs."
+        ]
+      },
+      {
+        topic: "optimisation",
+        pattern: /(optimisation|gradient|proximal|convexe|parcimonieux|sparse|branch|bound|contrainte|minimum|maximum)/i,
+        replies: [
+          "ELIZA> Cette optimisation semble intéressante. Est-elle surtout numérique ou combinatoire ?",
+          "ELIZA> La parcimonie est parfois une forme de pudeur mathématique.",
+          "ELIZA> Avez-vous besoin d'une solution exacte ou d'une solution raisonnable ?",
+          "ELIZA> Le branch-and-bound aime beaucoup les problèmes qui refusent de choisir.",
+          "ELIZA> Les contraintes disent souvent plus de choses que la fonction objectif."
+        ]
+      },
+      {
+        topic: "code",
+        pattern: /(code|bug|debug|c\+\+|python|matlab|bash|castor|script|compile|git|hugo|terminal|linux|mac)/i,
+        replies: [
+          "ELIZA> Le bug est-il reproductible ou simplement vexant ?",
+          "ELIZA> Avez-vous essayé de l'isoler dans un exemple minimal ?",
+          "ELIZA> Le code semble vouloir participer à la discussion scientifique.",
+          "ELIZA> Parfois, un bon log vaut mieux qu'une longue introspection.",
+          "ELIZA> La compilation est une forme de dialogue avec la machine, souvent asymétrique."
+        ]
+      },
+      {
+        topic: "latex",
+        pattern: /(latex|tex|article|papier|publication|manuscrit|bibliographie|bibtex|overleaf)/i,
+        replies: [
+          "ELIZA> Le manuscrit est-il en cours de rédaction ou en cours de résistance ?",
+          "ELIZA> La bibliographie compile-t-elle du premier coup ? C'est rare et suspect.",
+          "ELIZA> Une bonne notation peut sauver une démonstration fatiguée.",
+          "ELIZA> Souhaitez-vous parler du fond, de la forme ou des deux ?",
+          "ELIZA> Un article est parfois un problème d'optimisation sous contraintes éditoriales."
+        ]
+      },
+      {
+        topic: "enseignement",
+        pattern: /(enseignement|cours|tp|étudiant|rapport|correction|pédagogie|exercice|master|ingénieur)/i,
+        replies: [
+          "ELIZA> Enseigner, c'est parfois débugger une idée chez plusieurs personnes à la fois.",
+          "ELIZA> Le problème vient-il du concept, de l'énoncé ou du rapport ?",
+          "ELIZA> Les étudiants ont-ils demandé si le compte rendu devait vraiment être rédigé ?",
+          "ELIZA> Une bonne explication est souvent une reconstruction inverse réussie.",
+          "ELIZA> Un bon TP doit être assez guidé pour commencer, assez ouvert pour apprendre."
+        ]
+      },
+      {
+        topic: "coffee",
+        pattern: /(café|coffee|discussion|rencontre|échanger|echange|parler)/i,
+        replies: [
+          "ELIZA> Un café est parfois le meilleur préconditionneur.",
+          "ELIZA> Souhaitez-vous un échange scientifique, informel, ou les deux ?",
+          "ELIZA> Le café améliore-t-il la convergence ? Les résultats sont empiriques.",
+          "ELIZA> Une discussion autour d'un café peut réduire beaucoup de bruit de communication."
+        ]
+      },
+      {
+        topic: "aviron",
+        pattern: /(aviron|rame|bateau|rowing|sortie)/i,
+        replies: [
+          "ELIZA> L'aviron est une méthode itérative avec contrainte de synchronisation.",
+          "ELIZA> Le bateau converge mieux quand tout le monde suit la même direction.",
+          "ELIZA> Avez-vous vérifié l'alignement, la cadence et la régularité du geste ?",
+          "ELIZA> Une sortie d'aviron est une bonne expérience de dynamique collective."
+        ]
+      },
+      {
+        topic: "badminton",
+        pattern: /(badminton|volant|raquette|match|sport)/i,
+        replies: [
+          "ELIZA> Le badminton est une étude expérimentale des trajectoires non linéaires.",
+          "ELIZA> Voulez-vous optimiser le placement, l'endurance ou la mauvaise foi compétitive ?",
+          "ELIZA> Le volant possède une dynamique qui mériterait presque un modèle direct.",
+          "ELIZA> Un match de badminton est parfois plus imprévisible qu'une simulation Monte Carlo."
+        ]
+      }
+    ];
+
+    const fallbackFr = [
+      "ELIZA> Pourquoi cela vous semble-t-il important ?",
+      "ELIZA> Voulez-vous en parler du point de vue scientifique ou humain ?",
+      "ELIZA> Je vois. Pouvez-vous préciser le contexte ?",
+      "ELIZA> Cela ressemble à une question intéressante, mais pas encore bien posée.",
+      "ELIZA> Souhaitez-vous transformer cela en projet, en discussion ou en email ?",
+      "ELIZA> Le problème semble avoir plusieurs variables cachées.",
+      "ELIZA> Parfois, le plus dur est de choisir le bon espace d'observation.",
+      "ELIZA> On peut aussi changer de sujet : recherche, code, café, aviron ou badminton ?"
+    ];
+
+    const elizaRulesEn = [
+      {
+        topic: "postdoc",
+        pattern: /(postdoc|postdoctoral|opportunity|position|recruitment|application)/i,
+        replies: [
+          "ELIZA> You seem to want to discuss a postdoctoral opportunity. Perhaps you should type email.",
+          "ELIZA> A postdoctoral opportunity is often a good change of scientific setting.",
+          "ELIZA> Would you like to discuss a project, a team or a research topic?",
+          "ELIZA> A postdoc often starts with a simple question: what do you want to explore next?"
+        ]
+      },
+      {
+        topic: "imaging",
+        pattern: /(imaging|tomography|pet|compton|photon|detector|reconstruction|scanner|image)/i,
+        replies: [
+          "ELIZA> Imaging sometimes reveals more about the model than about the object.",
+          "ELIZA> Tomography is an elegant way to ask matter an indirect question.",
+          "ELIZA> Would you like to discuss the physical model, the reconstruction or the data?",
+          "ELIZA> Photons often follow more complicated paths than expected.",
+          "ELIZA> A good reconstruction often starts with an honest forward model."
+        ]
+      },
+      {
+        topic: "statistics",
+        pattern: /(statistics|probability|probabilistic|likelihood|bayesian|inference|fim|fisher|uncertainty|estimator)/i,
+        replies: [
+          "ELIZA> The likelihood seems to be trying to tell you something.",
+          "ELIZA> You seem to be hesitating between estimation, uncertainty and information.",
+          "ELIZA> Is the question to model, estimate or decide?",
+          "ELIZA> A good statistic sometimes remains quiet when data are scarce.",
+          "ELIZA> Fisher information is often more talkative than it appears."
+        ]
+      },
+      {
+        topic: "montecarlo",
+        pattern: /(monte carlo|simulation|geant4|variance|sampling|noise|random)/i,
+        replies: [
+          "ELIZA> Variance seems to concern you. This is common in Monte Carlo simulations.",
+          "ELIZA> Have you separated statistical noise from conceptual noise?",
+          "ELIZA> A simulation may be long, but sometimes it eventually confesses.",
+          "ELIZA> More photons is not always a strategy, but it is often a temptation.",
+          "ELIZA> Randomness is sometimes very organized when you inspect the logs."
+        ]
+      },
+      {
+        topic: "optimization",
+        pattern: /(optimization|gradient|proximal|convex|sparse|branch|bound|constraint|minimum|maximum)/i,
+        replies: [
+          "ELIZA> This optimization problem sounds interesting. Is it numerical or combinatorial?",
+          "ELIZA> Sparsity is sometimes a form of mathematical modesty.",
+          "ELIZA> Do you need an exact solution or a reasonable one?",
+          "ELIZA> Branch-and-bound enjoys problems that refuse to choose.",
+          "ELIZA> Constraints often say more than the objective function."
+        ]
+      },
+      {
+        topic: "code",
+        pattern: /(code|bug|debug|c\+\+|python|matlab|bash|castor|script|compile|git|hugo|terminal|linux|mac)/i,
+        replies: [
+          "ELIZA> Is the bug reproducible or merely offended?",
+          "ELIZA> Have you tried isolating it in a minimal example?",
+          "ELIZA> The code seems to want to join the scientific discussion.",
+          "ELIZA> Sometimes a good log is better than a long introspection.",
+          "ELIZA> Compilation is a form of dialogue with the machine, often asymmetric."
+        ]
+      },
+      {
+        topic: "latex",
+        pattern: /(latex|tex|paper|publication|manuscript|bibliography|bibtex|overleaf)/i,
+        replies: [
+          "ELIZA> Is the manuscript being written, or is it resisting?",
+          "ELIZA> Did the bibliography compile on the first try? Rare and suspicious.",
+          "ELIZA> Good notation can rescue a tired proof.",
+          "ELIZA> Would you like to discuss the content, the form, or both?",
+          "ELIZA> A paper is sometimes an optimization problem under editorial constraints."
+        ]
+      },
+      {
+        topic: "teaching",
+        pattern: /(teaching|course|lab|student|report|correction|pedagogy|exercise|master|engineer)/i,
+        replies: [
+          "ELIZA> Teaching is sometimes debugging an idea in several minds at once.",
+          "ELIZA> Is the issue the concept, the exercise statement or the report?",
+          "ELIZA> Did the students ask whether the report really had to be written?",
+          "ELIZA> A good explanation is often a successful inverse reconstruction.",
+          "ELIZA> A good lab session should be guided enough to start, open enough to learn."
+        ]
+      },
+      {
+        topic: "coffee",
+        pattern: /(coffee|discussion|meeting|chat|talk)/i,
+        replies: [
+          "ELIZA> Coffee is sometimes the best preconditioner.",
+          "ELIZA> Would you prefer a scientific or informal discussion?",
+          "ELIZA> Does coffee improve convergence? Evidence remains empirical.",
+          "ELIZA> A coffee discussion can reduce a lot of communication noise."
+        ]
+      },
+      {
+        topic: "rowing",
+        pattern: /(rowing|row|boat|outing)/i,
+        replies: [
+          "ELIZA> Rowing is an iterative method with synchronization constraints.",
+          "ELIZA> The boat converges better when everyone follows the same direction.",
+          "ELIZA> Have you checked alignment, cadence and regularity?",
+          "ELIZA> A rowing outing is a good experiment in collective dynamics."
+        ]
+      },
+      {
+        topic: "badminton",
+        pattern: /(badminton|shuttlecock|racket|match|sport)/i,
+        replies: [
+          "ELIZA> Badminton is an experimental study of nonlinear trajectories.",
+          "ELIZA> Do you want to optimize positioning, endurance or competitive denial?",
+          "ELIZA> The shuttlecock has dynamics that almost deserve a forward model.",
+          "ELIZA> A badminton match is sometimes less predictable than a Monte Carlo simulation."
+        ]
+      }
+    ];
+
+    const fallbackEn = [
+      "ELIZA> Why does that seem important to you?",
+      "ELIZA> Would you like to discuss this scientifically or personally?",
+      "ELIZA> I see. Can you specify the context?",
+      "ELIZA> This sounds interesting, but not yet well posed.",
+      "ELIZA> Would you like to turn this into a project, a discussion or an email?",
+      "ELIZA> The problem seems to have several hidden variables.",
+      "ELIZA> Sometimes the hardest part is choosing the right observation space.",
+      "ELIZA> We can also switch topics: research, code, coffee, rowing or badminton?"
+    ];
+
+    function elizaAnswer(message) {
+      const rules = isFr ? elizaRulesFr : elizaRulesEn;
+      const fallback = isFr ? fallbackFr : fallbackEn;
+
+      const msg = message.trim();
+
+      const matches = rules.filter(rule => rule.pattern.test(msg));
+
+      if (/^(oui|yes|non|no|peut-être|peut etre|maybe|perhaps|bof|ok|d'accord|daccord)$/i.test(msg)) {
+        if (lastTopic) {
+          return isFr
+            ? randomChoice([
+              "ELIZA> D'accord. On peut changer d'angle : recherche, code, postdoc ou sport ?",
+              "ELIZA> Je note. Souhaitez-vous rester sur ce sujet ou passer à autre chose ?",
+              "ELIZA> Cela semble encore lié à " + lastTopic + ". Mais on peut aussi bifurquer.",
+              "ELIZA> Très bien. Choisissez une nouvelle direction : imagerie, statistiques, code, café, aviron ou badminton."
+            ])
+            : randomChoice([
+              "ELIZA> Alright. We can change angle: research, code, postdoc or sport?",
+              "ELIZA> I see. Would you like to stay on this topic or move on?",
+              "ELIZA> This still seems related to " + lastTopic + ". But we can also switch topics.",
+              "ELIZA> Very well. Choose a new direction: imaging, statistics, code, coffee, rowing or badminton."
+            ]);
+        }
+      }
+
+      let chosenRule = null;
+
+      if (matches.length > 0) {
+        const nonCurrentMatches = matches.filter(rule => rule.topic !== lastTopic);
+
+        if (sameTopicStreak >= 2 && nonCurrentMatches.length > 0) {
+          chosenRule = nonCurrentMatches[Math.floor(Math.random() * nonCurrentMatches.length)];
+        } else {
+          chosenRule = matches[Math.floor(Math.random() * matches.length)];
+        }
+
+        if (chosenRule.topic === lastTopic) {
+          sameTopicStreak += 1;
+        } else {
+          lastTopic = chosenRule.topic;
+          sameTopicStreak = 1;
+        }
+
+        let reply = randomChoice(chosenRule.replies);
+
+        if (sameTopicStreak >= 3) {
+          reply += isFr
+            ? "\nELIZA> On peut aussi parler d'un autre sujet : imagerie, statistiques, code, postdoc, café, aviron ou badminton."
+            : "\nELIZA> We can also switch topic: imaging, statistics, code, postdoc, coffee, rowing or badminton.";
+          sameTopicStreak = 0;
+        }
+
+        return reply;
+      }
+
+      lastTopic = null;
+      sameTopicStreak = 0;
+      return randomChoice(fallback);
+    }
+
+    function runCommand(command) {
+      const c = command.trim().toLowerCase();
+      if (!c) return;
+
       promptLine(command);
-      elizaReply(command);
-      return;
-    }
 
-    promptLine(command);
+      if (
+        c === "exit" ||
+        c === "quit" ||
+        c === "q" ||
+        c === "stop" ||
+        c === "quitter" ||
+        c === "sortir"
+      ) {
+        elizaMode = false;
+        lastTopic = null;
+        sameTopicStreak = 0;
+        print(isFr ? "Sortie du mode ELIZA." : "Leaving ELIZA mode.");
+        return;
+      }
 
-    if (c === "help" || c === "?") {
-      help();
-    }
+      if (c === "clear" || c === "cls") {
+        elizaMode = false;
+        lastTopic = null;
+        sameTopicStreak = 0;
+        recentElizaReplies = [];
+        screen.innerHTML = "";
+        welcome();
+        return;
+      }
 
-    else if (c === "whoami") {
-      if (isFr) {
-        print("Mehdi LATIF — docteur en Traitement du Signal.");
-        print("Profil : problèmes inverses, reconstruction statistique, optimisation, imagerie computationnelle.");
-      } else {
-        print("Mehdi LATIF — PhD in Signal Processing.");
-        print("Profile: inverse problems, statistical reconstruction, optimization, computational imaging.");
+      if (c === "help" || c === "?") {
+        help();
+        return;
+      }
+
+      if (c === "topic" || c === "topics" || c === "sujet" || c === "sujets") {
+        printTopics();
+        return;
+      }
+
+      if (elizaMode) {
+        print(elizaAnswer(command));
+        return;
+      }
+
+      if (c === "whoami") {
+        if (isFr) {
+          print("Mehdi LATIF — docteur en Traitement du Signal.");
+          print("Méthodes de reconstruction, optimisation et modélisation probabiliste pour l'imagerie computationnelle.");
+        } else {
+          print("Mehdi LATIF — PhD in Signal Processing.");
+          print("Reconstruction, optimization and probabilistic modelling methods for computational imaging.");
+        }
+      }
+
+      else if (c === "research") {
+        if (isFr) {
+          print("Thèmes : problèmes inverses, reconstruction statistique, simulation Monte Carlo, optimisation, imagerie tomographique.");
+          print("Applications : imagerie 3-photons et détecteurs hybrides TEP/Compton.");
+        } else {
+          print("Topics: inverse problems, statistical reconstruction, Monte Carlo simulation, optimization, tomographic imaging.");
+          print("Applications: three-photon imaging and hybrid PET/Compton detectors.");
+        }
+      }
+
+      else if (c === "postdoc" || c === "status") {
+        if (isFr) {
+          print("Statut : recherche d'opportunités postdoctorales.");
+          printHTML('<a href="' + mailto("[mlatif.fr] Opportunité postdoctorale") + '">Envoyer un message</a>');
+        } else {
+          print("Status: looking for postdoctoral opportunities.");
+          printHTML('<a href="' + mailto("[mlatif.fr] Postdoctoral opportunity") + '">Send a message</a>');
+        }
+      }
+
+      else if (c === "cv") {
+        printHTML('<a href="' + cvUrl + '">' + (isFr ? "Télécharger le CV" : "Download CV") + '</a>');
+      }
+
+      else if (c === "email" || c === "contact") {
+        printHTML('<a href="' + mailto("[mlatif.fr] Contact") + '">' + (isFr ? "Ouvrir un email" : "Open email") + '</a>');
+      }
+
+      else if (c === "coffee" || c === "café" || c === "cafe") {
+        print(isFr ? "Café accepté. Discussion scientifique ou informelle bienvenue." : "Coffee accepted. Scientific or informal discussion welcome.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Coffee") + '">' + (isFr ? "Proposer un café" : "Suggest coffee") + '</a>');
+      }
+
+      else if (c === "rowing" || c === "aviron") {
+        print(isFr ? "Mode aviron activé : synchronisation, trajectoire et discussion." : "Rowing mode enabled: synchronization, trajectory and discussion.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Rowing") + '">' + (isFr ? "Proposer une sortie d’aviron" : "Suggest a rowing outing") + '</a>');
+      }
+
+      else if (c === "badminton" || c === "bad") {
+        print(isFr ? "Mode badminton activé : trajectoires rapides et analyse optionnelle." : "Badminton mode enabled: fast trajectories and optional analysis.");
+        printHTML('<a href="' + mailto("[mlatif.fr] Badminton") + '">' + (isFr ? "Proposer un match" : "Suggest a match") + '</a>');
+      }
+
+      else if (c === "eliza") {
+        elizaMode = true;
+        lastTopic = null;
+        sameTopicStreak = 0;
+        recentElizaReplies = [];
+
+        if (isFr) {
+          print("ELIZA> Bonjour. Parlez-moi d'un sujet : recherche, imagerie, code, café, aviron, badminton...");
+          print("ELIZA> Je suis assez limitée pour le moment, Mehdi va m'améliorer bientôt. Mais je peux déjà discuter un peu.");
+          print("ELIZA> Tapez exit pour quitter.");
+        } else {
+          print("ELIZA> Hello. Tell me about a topic: research, imaging, code, coffee, rowing, badminton...");
+          print("ELIZA> I'm quite limited for now, Mehdi will improve me soon. But I can already chat a bit.");
+          print("ELIZA> Type exit to leave.");
+        }
+      }
+
+      else if (c === "lambda") {
+        print(isFr ? "λ détecté. Élégance mathématique probablement non nulle." : "λ detected. Mathematical elegance probably nonzero.");
+      }
+
+      else if (c === "pollux") {
+        print(isFr ? "POLLUX> Simulation Monte Carlo initialisée. Merci de patienter quelques millions de photons." : "POLLUX> Monte Carlo simulation initialized. Please wait a few million photons.");
+      }
+
+      else if (c === "cassandre") {
+        print(isFr ? "CASSANDRE> J'avais prédit ce bug avant la fin de la simulation." : "CASSANDRE> I predicted this bug before the simulation ended.");
+      }
+
+      else if (c === "castor") {
+        print(isFr ? "CASToR> Reconstruction en cours. La convergence reste une notion philosophique." : "CASToR> Reconstruction running. Convergence remains a philosophical notion.");
+      }
+
+      else if (c === "latex" || c === "tex") {
+        print(isFr ? "TIFTEX> Compilation lancée. La bibliographie coopérera peut-être." : "TIFTEX> Compilation started. The bibliography may cooperate.");
+      }
+
+      else if (c === "photon") {
+        print(isFr ? "Photon détecté. Origine incertaine, trajectoire discutable." : "Photon detected. Origin uncertain, trajectory debatable.");
+      }
+
+      else {
+        print(isFr ? "Commande inconnue. Tapez help." : "Unknown command. Type help.");
       }
     }
 
-    else if (c === "research") {
-      if (isFr) {
-        print("Axes : reconstruction tomographique, modélisation probabiliste, simulation Monte Carlo, optimisation.");
-        print("Applications : imagerie 3-photons et détecteurs hybrides TEP/Compton.");
-      } else {
-        print("Topics: tomographic reconstruction, probabilistic modelling, Monte Carlo simulation, optimization.");
-        print("Applications: three-photon imaging and hybrid PET/Compton detectors.");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const value = input.value;
+      if (!value.trim()) return;
+
+      history.push(value);
+      historyIndex = history.length;
+
+      input.value = "";
+      runCommand(value);
+    });
+
+    input.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && elizaMode) {
+        event.preventDefault();
+        elizaMode = false;
+        lastTopic = null;
+        sameTopicStreak = 0;
+        print(isFr ? "Sortie du mode ELIZA." : "Leaving ELIZA mode.");
+        input.value = "";
+        return;
       }
-    }
 
-    else if (c === "postdoc" || c === "status") {
-      if (isFr) {
-        print("Statut : recherche d'opportunités postdoctorales.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Opportunité postdoctorale") + '">Envoyer un message</a>');
-      } else {
-        print("Status: looking for postdoctoral opportunities.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Postdoctoral opportunity") + '">Send a message</a>');
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        if (history.length === 0) return;
+        historyIndex = Math.max(0, historyIndex - 1);
+        input.value = history[historyIndex];
       }
-    }
 
-    else if (c === "cv") {
-      if (isFr) {
-        printHTML('<a href="' + cvUrl + '">Télécharger le CV</a>');
-      } else {
-        printHTML('<a href="' + cvUrl + '">Download CV</a>');
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        if (history.length === 0) return;
+        historyIndex = Math.min(history.length, historyIndex + 1);
+        input.value = historyIndex === history.length ? "" : history[historyIndex];
       }
-    }
+    });
 
-    else if (c === "email" || c === "contact") {
-      if (isFr) {
-        printHTML('<a href="' + mailto("[mlatif.fr] Contact") + '">Ouvrir un email</a>');
-      } else {
-        printHTML('<a href="' + mailto("[mlatif.fr] Contact") + '">Open email</a>');
-      }
-    }
-
-    else if (c === "coffee" || c === "café" || c === "cafe") {
-      if (isFr) {
-        print("Café accepté. Sujet suggéré : discussion informelle, recherche ou parcours.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Café") + '">Proposer un café</a>');
-      } else {
-        print("Coffee accepted. Suggested topic: informal discussion, research or career path.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Coffee") + '">Suggest coffee</a>');
-      }
-    }
-
-    else if (c === "rowing" || c === "aviron") {
-      if (isFr) {
-        print("Mode aviron activé : discussion possible avant ou après la sortie.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Aviron") + '">Proposer une sortie d’aviron</a>');
-      } else {
-        print("Rowing mode enabled: discussion possible before or after the outing.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Rowing") + '">Suggest a rowing outing</a>');
-      }
-    }
-
-    else if (c === "badminton" || c === "bad") {
-      if (isFr) {
-        print("Mode badminton activé : l'analyse de performance est optionnelle.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Badminton") + '">Proposer un match</a>');
-      } else {
-        print("Badminton mode enabled: performance analysis is optional.");
-        printHTML('<a href="' + mailto("[mlatif.fr] Badminton") + '">Suggest a match</a>');
-      }
-    }
-
-    else if (c === "eliza") {
-      elizaMode = true;
-      if (isFr) {
-        print("ELIZA> Bonjour. Parlez-moi de vos problèmes inverses.");
-        print("ELIZA> Tapez exit pour quitter.");
-      } else {
-        print("ELIZA> Hello. Tell me about your inverse problems.");
-        print("ELIZA> Type exit to leave.");
-      }
-    }
-
-    else if (c === "exit" || c === "quit") {
-      elizaMode = false;
-      if (isFr) {
-        print("Sortie du mode ELIZA.");
-      } else {
-        print("Leaving ELIZA mode.");
-      }
-    }
-
-    else if (c === "clear") {
-      screen.innerHTML = "";
-      welcome();
-    }
-
-    else {
-      if (isFr) {
-        print("Commande inconnue. Tapez help.");
-      } else {
-        print("Unknown command. Type help.");
-      }
-    }
-  }
-
-  function elizaReply(message) {
-    const m = message.toLowerCase();
-
-    if (isFr) {
-      if (m.includes("bonjour") || m.includes("salut")) {
-        print("ELIZA> Bonjour. Voulez-vous parler de recherche, de café ou de badminton ?");
-      } else if (m.includes("postdoc") || m.includes("opportunité") || m.includes("poste")) {
-        print("ELIZA> Vous semblez vouloir discuter d'une opportunité postdoctorale. Peut-être devriez-vous taper email.");
-      } else if (m.includes("recherche") || m.includes("collaboration")) {
-        print("ELIZA> La collaboration est souvent une bonne régularisation du problème inverse.");
-      } else if (m.includes("optimisation")) {
-        print("ELIZA> Parlez-moi davantage de cette optimisation. Est-elle convexe ?");
-      } else if (m.includes("monte carlo")) {
-        print("ELIZA> La variance semble vous préoccuper. Avez-vous envisagé plus de photons ?");
-      } else if (m.includes("aviron")) {
-        print("ELIZA> L'aviron est une méthode itérative avec retour périodique au point de départ.");
-      } else if (m.includes("badminton")) {
-        print("ELIZA> Le badminton révèle parfois des problèmes de trajectoire plus complexes que la tomographie.");
-      } else if (m.includes("cv")) {
-        printHTML('ELIZA> Le CV est ici : <a href="' + cvUrl + '">CV</a>');
-      } else {
-        const replies = [
-          "ELIZA> Pourquoi cela vous semble-t-il important ?",
-          "ELIZA> Pouvez-vous reformuler cela comme un problème inverse ?",
-          "ELIZA> Intéressant. Quelle serait la fonction objectif ?",
-          "ELIZA> Je vois. Et quelle contrainte ajouteriez-vous ?",
-          "ELIZA> Cela ressemble à une question de régularisation."
-        ];
-        print(replies[Math.floor(Math.random() * replies.length)]);
-      }
-    } else {
-      if (m.includes("hello") || m.includes("hi")) {
-        print("ELIZA> Hello. Would you like to talk about research, coffee or badminton?");
-      } else if (m.includes("postdoc") || m.includes("opportunity") || m.includes("position")) {
-        print("ELIZA> You seem to want to discuss a postdoctoral opportunity. Perhaps you should type email.");
-      } else if (m.includes("research") || m.includes("collaboration")) {
-        print("ELIZA> Collaboration is often a good regularization strategy for inverse problems.");
-      } else if (m.includes("optimization")) {
-        print("ELIZA> Tell me more about this optimization problem. Is it convex?");
-      } else if (m.includes("monte carlo")) {
-        print("ELIZA> Variance seems to concern you. Have you considered more photons?");
-      } else if (m.includes("rowing")) {
-        print("ELIZA> Rowing is an iterative method with periodic return to the starting point.");
-      } else if (m.includes("badminton")) {
-        print("ELIZA> Badminton sometimes involves trajectories more complex than tomography.");
-      } else if (m.includes("cv")) {
-        printHTML('ELIZA> The CV is here: <a href="' + cvUrl + '">CV</a>');
-      } else {
-        const replies = [
-          "ELIZA> Why does that seem important to you?",
-          "ELIZA> Can you reformulate this as an inverse problem?",
-          "ELIZA> Interesting. What would the objective function be?",
-          "ELIZA> I see. Which constraint would you add?",
-          "ELIZA> This sounds like a regularization question."
-        ];
-        print(replies[Math.floor(Math.random() * replies.length)]);
-      }
-    }
-  }
-
-  function welcome() {
-    if (isFr) {
-      print("Mehdi Contact Shell v1.0");
-      print("Tapez help pour voir les commandes disponibles.");
-    } else {
-      print("Mehdi Contact Shell v1.0");
-      print("Type help to list available commands.");
-    }
-  }
-
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const value = input.value;
-    input.value = "";
-    runCommand(value);
-  });
-
-  welcome();
-})();
+    welcome();
+  })();
 </script>
