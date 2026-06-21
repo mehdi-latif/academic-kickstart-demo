@@ -1,19 +1,23 @@
 ---
-title: NIST PARSER
-summary: Un script bash permettant d'extraire et de formater les sections efficaces de la base [NIST](https://physics.nist.gov/PhysRefData/Xcom/html/xcom1.html), intégrées dans les logiciels de simulation Monte-Carlo pour l'imagerie TEP $3\gamma$.  
+title: CASToR - XEMIS2
+summary: Extension of the CASToR framework dedicated to multi-class reconstruction of medical images and  Fisher information matrix estimation for $3\gamma$ PET/Compton imaging from continuous photon detections.
+
 tags:
-  - Tools
+  - Software
 research_areas:
-  - Simulations Monte-Carlo
-  - TEP
+  - Inverse problems
+  - Tomographic imaging 
+  - Statistical reconstruction
+  - PET
   - Compton
-  - $3\gamma$
-software_stack:
-  - Bash
-date: '2022-09-01T00:00:00Z'
+  - XEMIS2
+software_stack: 
+  - Cpp
+  - Bash 
+date: '2025-12-31T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: 'https://gitlab.com/mlatif/nist_parser'
+external_link: 'https://castor-project.org/'
 
 image:
   caption:

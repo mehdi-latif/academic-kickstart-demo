@@ -1,19 +1,20 @@
 ---
-title: NIST PARSER
-summary: Un script bash permettant d'extraire et de formater les sections efficaces de la base [NIST](https://physics.nist.gov/PhysRefData/Xcom/html/xcom1.html), intégrées dans les logiciels de simulation Monte-Carlo pour l'imagerie TEP $3\gamma$.  
+title: TIFTEX
+summary: A basic bash script with a few options for compiling TeX from a terminal, without using an IDE. You can even compile a bibliography without repeating the same commands three times 😄.
+
 tags:
   - Tools
+  - LaTeX
 research_areas:
-  - Simulations Monte-Carlo
-  - TEP
-  - Compton
-  - $3\gamma$
+
 software_stack:
   - Bash
-date: '2022-09-01T00:00:00Z'
+  - LaTeX
+
+date: '2021-01-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: 'https://gitlab.com/mlatif/nist_parser'
+external_link: 'https://gitlab.com/mlatif/tif-tex'
 
 image:
   caption:

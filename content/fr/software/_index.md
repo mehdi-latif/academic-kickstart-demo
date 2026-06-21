@@ -29,19 +29,16 @@ summary = "Codes de recherche, simulation Monte-Carlo, outils scientifiques et s
 
   [[content.filter_button]]
     name = "Logiciels"
-    tag = "Soft"
+    tag = "Software"
 
   [[content.filter_button]]
     name = "Simulation"
-    tag = "Simu"
-
-  [[content.filter_button]]
-    name = "Optimisation"
-    tag = "Optim"
+    tag = "Simulation"
 
   [[content.filter_button]]
     name = "Outils"
     tag = "Tools"
+
 
 [design]
   # Choose how many columns the section has. Valid values: 1 or 2.
@@ -58,6 +55,10 @@ summary = "Codes de recherche, simulation Monte-Carlo, outils scientifiques et s
 
   # For Showcase view, flip alternate rows?
   flip_alt_rows = false
+  
+  # Permet d'activer l'appel à la surcharge du template de portfolio de ACADEMIC et va chercher la version dédiée avec les badges de stack logiciels (layouts/partials/portfolio_li_showcase_with_badges.html) 
+  # Aller voir le code dans themes/academic/layouts/parials/widgets/portfolio.html pour comprendre les surcharges 
+  show_badges = 1
 
 [design.background]
   # Apply a background color, gradient, or image.

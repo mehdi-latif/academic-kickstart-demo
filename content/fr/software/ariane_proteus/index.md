@@ -1,21 +1,18 @@
 ---
-title: ARIANE - Projecteur Compton
-summary: Un projecteur de LOR/COR/SOR basé sur Pollux pour l'imagerie TEP $3\gamma$ et trouver son chemin dans ce sacré boxel.
+title: ARIANE & PROTEUS
+summary: Algorithme de screening analytique pour l’accélération du calcul de l’opérateur de projection pour reconstruction en imagerie Compton (ARIANE) et méthode d’évaluation analytique de l’opérateur par déformation de voxels en boîtes sphériques (PROTEUS).
 tags:
-  - Imagerie médicale 
+  - Software
+research_areas:
   - Compton
-  - $3\gamma$
-  - XEMIS2
-  - Matlab
-  - Physique médicale 
-  - Ray-Tracing
-  - Projet
-  - Simulation
-  - Simulation
-date: '2023-09-15T00:00:00Z'
+
+software_stack:
+  - MATLAB
+
+date: '2025-12-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: 'https://gitlab.com/mlatif/tep3g-ariane'
+external_link: 'https://gitlab.com/mlatif/ariane-proteus'
 
 image:
   caption:

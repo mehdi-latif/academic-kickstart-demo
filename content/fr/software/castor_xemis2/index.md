@@ -1,22 +1,23 @@
 ---
-title: ORION
-summary: Générateur Monte-Carlo de cartes de sensibilité multiclasse compatibles CASTOR, dédié à XEMIS2.
+title: CASToR - XEMIS2
+summary: Extension du framework CASToR dédiée à la reconstruction multiclasse d'images médicales et l'estimation de la matrice d'information de Fisher pour l'imagerie $3\gamma$ TEP/Compton à partir de détections photoniques continues.
+
 tags:
-  - Simulation
+  - Software
 research_areas:
+  - Problèmes inverses
+  - Imagerie tomographique
+  - Reconstruction statistique
   - TEP
   - Compton
-  - $3\gamma$
-  - Simulations Monte-Carlo
-software_stack:
+  - XEMIS2
+software_stack: 
   - Cpp
-  - Bash
-  - Matlab
-
-date: '2024-10-01T00:00:00Z'
+  - Bash 
+date: '2025-12-31T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: 'https://gitlab.com/mlatif/orion_sensib_3g'
+external_link: 'https://castor-project.org/'
 
 image:
   caption:

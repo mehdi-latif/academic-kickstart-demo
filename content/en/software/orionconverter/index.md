@@ -1,20 +1,22 @@
 ---
 title: ORION
-summary: Traitement et réaffectation de détections simulées avec le programme [Orion](https://gitlab.com/mlatif/tep3g-pollux/-/blob/master/run_reader/run_orion.m?ref_type=heads) pour générer les cartes de sensibilité propres à chaque classes dans le cadre de l'imagerie TEP $3\gamma$.
+summary: A Monte Carlo simulator for multi-class sensitivity maps estimations, compatible with CASTOR, designed for XEMIS2.
 tags:
-  - C++
-  # - Bash
-  # - $3\gamma$
-  # - XEMIS2
-  # - Simulations Monte Carlo
-  # - Matlab
-  # - Projet
-  - Tools
   - Simulation
+research_areas:
+  - PET
+  - Compton
+  - $3\gamma$
+  - Monte Carlo simulations
+software_stack:
+  - Cpp
+  - Bash
+  - Matlab
+
 date: '2024-10-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: 'https://gitlab.com/mlatif/parser-sensibilite'
+external_link: 'https://gitlab.com/mlatif/orion_sensib_3g'
 
 image:
   caption:

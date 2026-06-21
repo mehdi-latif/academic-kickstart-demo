@@ -1,13 +1,15 @@
 ---
 title: NIST PARSER
-summary: Un script bash permettant d'extraire et de formater une liste de données de la base NIST.
+summary: A Bash script for extracting and formatting the photon cross sections from the [NIST](https://physics.nist.gov/PhysRefData/Xcom/html/xcom1.html) database, which are used in Monte Carlo simulation softwares for $3\gamma$ PET imaging.  
 tags:
-  # - Bash
-  # - Script
-  # - Physique
-  # - Outils
   - Tools
-  - Logiciels
+research_areas:
+  - Monte Carlo simulations
+  - PET
+  - Compton
+  - $3\gamma$
+software_stack:
+  - Bash
 date: '2022-09-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
