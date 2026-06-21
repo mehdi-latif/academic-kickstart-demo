@@ -81,8 +81,8 @@ J’ai participé à plusieurs activités de médiation scientifique autour de l
 
 #### INPACT — Art et Sciences
 
-Présentation des travaux de recherche dans le cadre de l’option professionnelle Ingénierie et Numérique pour le Patrimoine, l’Art et la Culture à l’École Centrale de Nantes.
+Présentation des travaux de recherche dans le cadre de l’option professionnelle ["Ingénierie et Numérique pour le Patrimoine, l’Art et la Culture"](https://www.ec-nantes.fr/les-programmes/les-options-de-2e-et-3e-annees/ingenierie-et-numerique-pour-le-patrimoine-lart-et-la-culture?l=0) à l’École Centrale de Nantes.
 
 #### Nuit Blanche des Chercheurs
 
-Participation à des formats de science-dating visant à présenter un projet doctoral en quelques minutes à un public non spécialiste.
+Participation à des formats de science-dating, dans le cadre de la [Nuit Blanche des Chercheurs](https://nbc.univ-nantes.fr/), visant à présenter un projet doctoral en quelques minutes à un public non spécialiste.

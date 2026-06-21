@@ -83,8 +83,8 @@ I have taken part in several science outreach activities related to medical imag
 
 #### INPACT - Art and Science
 
-Presentation of research work as part of the "Engineering and Digital Technology for Heritage, Art and Culture" professional course at École Centrale de Nantes.
+Presentation of research work as part of the ["Engineering for art, culture and heritage"](https://www.ec-nantes.fr/engineering-programme-diplome-dingenieur/course-specialisations-yrs-23/engineering-and-digital-sciences-for-art-culture-and-heritage?l=1) course at École Centrale de Nantes.
 
 #### "Nuit Blanche des Chercheurs"
 
-Participation in "science speed-dating" sessions, presenting a PhD project in a few minutes to a non-specialist audience.
+Participation in "science speed-dating" sessions, presenting a PhD project in a few minutes to a non-specialist audience - [Nuit Blanche des Chercheurs](https://nbc.univ-nantes.fr/).
