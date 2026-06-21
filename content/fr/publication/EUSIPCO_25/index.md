@@ -10,6 +10,13 @@ authors:
   - Nils Foix-Colonier
   - Sébastien Bourguignon
 
+research_areas:
+  - Problèmes inverses
+  - Optimisation
+  - Imagerie hyperspectrale
+  - Parcimonie
+  - Branch-and-bound
+  - Démélange
 # Author notes (optional)
 ## author_notes:
 ##  - 'Equal contribution'

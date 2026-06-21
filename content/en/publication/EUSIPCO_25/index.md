@@ -17,6 +17,14 @@ authors:
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
 
+research_areas:
+  - Inverse problems
+  - Optimization
+  - Hyperspectral imaging
+  - Sparsity
+  - Branch-and-bound
+  - Unmixing
+
 date: '2025-06-15T00:00:00Z'
 doi: ''
 
@@ -40,7 +48,7 @@ abstract: We propose an algorithm that exactly solves the cardinality-constraine
 summary:  We propose an algorithm that exactly solves the cardinality-constrained sparse spectral unmixing problem. 
 
 # tags: Informatique [cs]/Traitement du signal et de l'image [eess.SP]Informatique [cs]/Recherche opérationnelle [math.OC] Mathématiques [math]/Combinatoire [math.CO]
-tags: ['Branch-and-bound','C++','Démélange','Imagerie hyperspectrale','Optimisation','Parcimonie','Solveur libre']
+tags: ['Branch-and-bound','C++','Unmixing','Hyperspectral imaging','Optimization','Sparsity','Open source solver']
 
 # Display this page in the Featured widget?
 featured: true

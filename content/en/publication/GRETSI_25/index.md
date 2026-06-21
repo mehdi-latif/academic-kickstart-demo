@@ -15,6 +15,13 @@ authors:
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
+research_areas:
+  - Inverse problems
+  - Optimization
+  - Hyperspectral imaging
+  - Sparsity
+  - Branch-and-bound
+  - Unmixing
 
 date: '2025-06-30T00:00:00Z'
 doi: ''
@@ -33,13 +40,13 @@ publication_types: [1]
 publication: In *GRETSI 2025*.
 publication_short: In *GRETSI 2025, Aug 2025, Strasbourg, France.*
 
-abstract: On s’intéresse à la résolution exacte de problèmes de démélange spectral linéaire parcimonieux, i.e. à la recherche de solutions à cardinalité limitée d’un problème de moindres carrés linéaires sous contraintes de positivité et de somme unité. L’originalité de la méthode proposée – dont le code Python est mis à disposition – repose sur son aspect multi-solutions; on renvoie l’ensemble des meilleurs supports de solution. Cette méthode est testée sur des données synthétiques et les performances obtenues sont prometteuses.
+abstract: We focus on the exact resolution of sparse spectral unmixing problems, that is, the search for cardinality-limited linear least squares solutions under non-negativity and sum-to-one constraints. The originality of the proposed method - for which the Python code is provided - lies in its multisolution nature; we return the set of supports that yield the best solutions. The method is tested on synthetic data, with promising results.
 
 # Summary. An optional shortened abstract.
-summary: We focus on the exact resolution of sparse spectral unmixing problems, that is, the search for cardinality-limited linear least squares solutions under non-negativity and sum-to-one constraints. The originality of the proposed method - for which the Python code is provided - lies in its multisolution nature; we return the set of supports that yield the best solutions. The method is tested on synthetic data, with promising results.
+summary: We focus on the exact resolution of sparse spectral unmixing problems, that is, the search for cardinality-limited linear least squares solutions under non-negativity and sum-to-one constraints. 
 
 # tags: Informatique [cs]/Traitement du signal et de l'image [eess.SP]Informatique [cs]/Recherche opérationnelle [math.OC] Mathématiques [math]/Combinatoire [math.CO]
-tags: ['Branch-and-bound','Python','Démélange','Imagerie hyperspectrale','Optimisation','Parcimonie','Solveur libre']
+tags: ['Branch-and-bound','Python','Unmixing','HHyperspectral imaging','Optimization','Sparsity','Open source solver']
 
 # Display this page in the Featured widget?
 featured: true

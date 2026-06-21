@@ -17,6 +17,15 @@ authors:
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
 
+research_areas:
+  - Inverse problems
+  - Tomographic imaging
+  - Statistical reconstruction
+  - PET
+  - Compton
+  - $3\gamma$
+  - XEMIS2
+
 date: '2023-07-15T00:00:00Z'
 doi: '10.48550/arXiv.2310.16846'
 
@@ -40,7 +49,7 @@ abstract: Our contribution focuses at improving the image reconstruction process
 summary: Our contribution focuses at improving the image reconstruction process for specific Compton imaging systems able to detect multiple classes of events, in the field of nuclear imaging. 
 
 # tags: ['Physique Médicale [physics.med-ph]','Informatique [cs]/Imagerie médicale','Statistiques [stat]/Applications [stat.AP]']
-tags: ['Physique Médicale ','Imagerie médicale','Statistiques']
+tags: ['Medical Physics','Computing/Medical Imaging','Statistics/Applications']
 
 # Display this page in the Featured widget?
 featured: true

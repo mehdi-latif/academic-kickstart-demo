@@ -17,6 +17,16 @@ authors:
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
 
+research_areas:
+  - Inverse problems
+  - Tomographic imaging
+  - Statistical reconstruction
+  - PET
+  - Compton
+  - $3\gamma$
+  - XEMIS2
+
+
 date: '2023-08-28T00:00:00Z'
 doi: ''
 
@@ -34,13 +44,13 @@ publication_types: [1]
 publication: In *XXIXème Colloque Francophone de Traitement du Signal et des Images (GRETSI'23)*.
 publication_short: In *Groupe de Recherche et d'Etudes de Traitement du Signal et des Images (GRETSI'23), Aug 2023, Grenoble, France.*
 
-abstract: Dans cette contribution, nous abordons le problème de reconstruction d’image de distribution radioactive pour lequel l’information disponible provient de plusieurs classes de données distinctes, chacune associée à une combinaison spécifique de détections . Nous présentons un cadre théorique permettant de mesurer l'apport informationnel de chaque classe et nous développons un algorithme itératif dédié à la reconstruction multiclasse basé sur le maximum de vraisemblance. Nous proposons d’appliquer notre approche à la caméra XEMIS2, un prototype préclinique de télescope Compton dédié à l’imagerie TEP 3-photons dans lequel quatre classes de détections partielles viennent s’ajouter aux détections complètes. Sur la base de simulations Monte-Carlo, nous présentons les premières composantes du modèle développé pour la reconstruction multiclasse.
+abstract: This contribution addresses the problem of image reconstruction of radioactivity distribution for which the available information arises from several classes of data, each associated with a specific combination of detections. We introduce a theoretical framework to measure the amount of information brought by each class and we develop an iterative algorithm dedicated to multi-class reconstruction based on maximum likelihood. We apply our approach to the XEMIS2 camera, a preclinical prototype of a Compton telescope dedicated to 3-photon PET imaging for which four distinct classes of partial detections coexist with the full detection class. Based on Monte Carlo simulations, we present the first elements of our model.
 
 # Summary. An optional shortened abstract.
-summary: Dans cette contribution, nous abordons le problème de reconstruction d’image de distribution radioactive pour lequel l’information disponible provient de plusieurs classes de données distinctes, chacune associée à une combinaison spécifique de détections. 
+summary: This contribution addresses the problem of image reconstruction of radioactivity distribution for which the available information arises from several classes of data, each associated with a specific combination of detections 
 
 # tags: ['Physique Médicale [physics.med-ph]','Informatique [cs]/Imagerie médicale','Statistiques [stat]/Applications [stat.AP]']
-tags: ['Physique Médicale ','Imagerie médicale','Statistiques']
+tags: ['Medical Physics','Computing/Medical Imaging','Statistics/Applications']
 
 # Display this page in the Featured widget?
 featured: true

@@ -17,6 +17,15 @@ authors:
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
 
+research_areas:
+  - Problèmes inverses
+  - Imagerie tomographique 
+  - Reconstruction statistique
+  - TEP
+  - Compton
+  - $3\gamma$
+  - XEMIS2
+
 date: '2023-07-15T00:00:00Z'
 doi: '10.48550/arXiv.2310.16846'
 

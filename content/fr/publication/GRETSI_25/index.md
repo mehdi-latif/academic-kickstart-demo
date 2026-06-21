@@ -15,6 +15,13 @@ authors:
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
+research_areas:
+  - Problèmes inverses
+  - Optimisation
+  - Imagerie hyperspectrale
+  - Parcimonie
+  - Démélange
+  - Branch-and-bound
 
 date: '2025-06-30T00:00:00Z'
 doi: ''

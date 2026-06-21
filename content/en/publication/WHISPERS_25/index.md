@@ -16,6 +16,14 @@ authors:
 ##  - 'Equal contribution'
 ##  - 'Equal contribution'
 
+research_areas:
+  - Inverse problems
+  - Optimization
+  - Hyperspectral imaging
+  - Sparsity
+  - Branch-and-bound
+  - Unmixing
+
 date: '2025-10-17T00:00:00Z'
 doi: ''
 
@@ -36,10 +44,10 @@ publication_short: In *WHISPERS 2025, Oct 2025, Barcelona, Spain.*
 abstract: Cardinality-constrained sparse spectral unmixing can be solved using Branch-and-Bound algorithms, provided that the number of reference endmembers and the cardinality constraint are reasonably small. However, focusing solely on the best solution may not always be the most relevant approach, especially in the presence of high correlation between endmembers, solutions close to the optimal one-in terms of objective function-but with different supports (activated endmembers) may offer better interpretability. We propose a Branch-and-Bound algorithm that returns a given number of supports which are guaranteed to provide the lowest least-squares errors among all possible ones. The interest of such an approach is illustrated on numerical simulations, where chances for retrieving the ground truth among the few best solutions are shown to increase compared to considering only the optimal one, especially in the noisiest settings. A Python implementation is made available.
 
 # Summary. An optional shortened abstract.
-summary: 
+summary: Cardinality-constrained sparse spectral unmixing can be solved using Branch-and-Bound algorithms, provided that the number of reference endmembers and the cardinality constraint are reasonably small. However, focusing solely on the best solution may not always be the most relevant approach, especially in the presence of high correlation between endmembers, solutions close to the optimal one-in terms of objective function-but with different supports (activated endmembers) may offer better interpretability.
 
 # tags: Informatique [cs]/Traitement du signal et de l'image [eess.SP]Informatique [cs]/Recherche opérationnelle [math.OC] Mathématiques [math]/Combinatoire [math.CO]
-tags: ['Branch-and-bound','Optimization','Spectral Unmixing','Optimization','Sparsity']
+tags: ['Branch-and-bound','Optimization','Spectral Unmixing','Sparsity']
 
 # Display this page in the Featured widget?
 featured: true

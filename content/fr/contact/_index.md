@@ -3,7 +3,7 @@ title: "Contact"
 summary: "Contact, liens académiques et CV."
 ---
 
-Vous pouvez me contacter pour discuter de recherche, de collaborations ou d’opportunités postdoctorales autour des problèmes inverses, de l’imagerie computationnelle, de la reconstruction statistique, de la simulation Monte Carlo et de l’optimisation.
+Vous pouvez me contacter pour discuter de recherche, de collaborations ou d’opportunités postdoctorales autour des problèmes inverses, de l’imagerie computationnelle, de la reconstruction statistique, de la simulation Monte-Carlo et de l’optimisation.
 
 Les échanges plus informels sont aussi les bienvenus, que ce soit autour d’un café, d’une sortie d’aviron ou d’un match de badminton.
 
@@ -34,3 +34,6 @@ Les échanges plus informels sont aussi les bienvenus, que ce soit autour d’un
   </div>
 
 </div>
+
+
+<!-- {{< contact_terminal >}} -->
