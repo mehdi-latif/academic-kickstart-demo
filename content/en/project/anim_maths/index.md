@@ -157,7 +157,7 @@ On peut illustrer graphiquement ce résultat pour:
 - la loi de Poisson $\mathcal{P}(\lambda)$ avec $\lambda \in \mathbb{R}_+^*$:
 {{< video src="VIDEO/LFGN_ANIM_POISSON" width="600px" >}}
 
-## Application d'une méthode Monte Carlo pour approcher $\pi$
+## Application d'une méthode Monte-Carlo pour approcher $\pi$
 Une application directe des résultats qui sont présentés dans cette partie est la méthode de [Monte-Carlo (Metropolis & Ulam, 1949)](https://www.tandfonline.com/doi/abs/10.1080/01621459.1949.10483310) qui permet de *calculer une valeur numérique approchée en utilisant des procédés aléatoires [...]* (Source: [Wikipédia](https://en.wikipedia.org/wiki/Monte_Carlo_method)) et est assez utile pour calculer, par exemples, des intégrales compliquées.  
 L'idée générale pour le calcul d'intégrales avec une méthode Monte-Carlo (MC) est: 
 1. Interpréter l'intégrale comme un espérance; 
@@ -361,7 +361,7 @@ On peut faire de chouettes figures et animations avec Matlab:
   - Ariane dans l'espace:
 ![Ariane dans l'espace](mantra_ex2.png)
 
-- un exemple d'application d'une méthode Monte Carlo pour l'approximation de $\pi$ par *Pluie aléatoire*: 
+- un exemple d'application d'une méthode Monte-Carlo pour l'approximation de $\pi$ par *Pluie aléatoire*: 
 {{< video src="Pi_convergence" width="600px" >}}
 *cf.* Maths EI1/TP5, animation présentée aux étudiants.
 

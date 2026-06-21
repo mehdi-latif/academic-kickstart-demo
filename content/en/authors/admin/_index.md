@@ -25,7 +25,7 @@ interests:
   - Inverse problems
   - Statistical reconstruction
   - Tomographic imaging
-  - Monte Carlo modelling
+  - Monte Carlo simulations
   - Optimization
   - Computational imaging
 
@@ -85,8 +85,7 @@ user_groups:
 - Researchers
 
 ---
-I am a PhD in Signal Processing with a research profile at the intersection of inverse problems, statistical reconstruction, optimization and computational imaging.
+I hold a PhD in Signal Processing. My research focuses on reconstruction, optimization and probabilistic modeling methods for inverse problems in computational imaging.
 
-My PhD research focused on the development of models and algorithms for tomographic reconstruction in three-photon imaging, with applications to hybrid PET/Compton cameras and the XEMIS2 system.
-
-More broadly, I am interested in probabilistic modelling, optimization and statistical inference for complex imaging data. I have also worked on sparse spectral unmixing, developing exact branch-and-bound methods for source separation in hyperspectral imaging.
+* **Before my PhD:** research engineer at [LS2N](https://www.ls2n.fr/equipe/sims/) with [Sébastien Bourguignon](https://pagespersowp.ls2n.fr/sebastienbourguignon/), working on sparse optimisation and spectral unmixing.
+* **PhD:** work conducted at [LS2N](https://www.ls2n.fr/equipe/sims/) and [CRCI$^{\text{2}}$NA](https://crci2na.univ-nantes.fr/en/research/team-2/) under the supervision of [Jérôme Idier](https://pagespersowp.ls2n.fr/jeromeidier/en/jerome-idier-3/), [Simon Stute](https://scholar.google.com/citations?user=-OXk9BcAAAAJ&hl) and [Thomas Carlier](https://scholar.google.fr/citations?user=XbbDY1cAAAAJ&hl), on statistical tomographic reconstruction in three-photon medical imaging for hybrid PET/Compton detectors.

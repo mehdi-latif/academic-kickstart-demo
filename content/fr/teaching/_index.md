@@ -9,6 +9,8 @@ tags:
   - Optimisation
   - Traitement du signal
   - Algorithmique
+research_areas:
+  - Enseignements
 audiences:
   - Étudiants
   - Grand public

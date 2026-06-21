@@ -150,7 +150,7 @@ On peut faire de chouettes figures et animations avec Matlab:
   - Ariane dans l'espace:
 ![Ariane dans l'espace](mantra_ex2.png)
 
-- un exemple d'application d'une méthode Monte Carlo pour l'approximation de $\pi$ par *Pluie aléatoire*: 
+- un exemple d'application d'une méthode Monte-Carlo pour l'approximation de $\pi$ par *Pluie aléatoire*: 
 {{< video src="Pi_convergence" width="600px" >}}
 *cf.* Maths EI1/TP5, animation présentée aux étudiants. -->
 

@@ -25,7 +25,7 @@ interests:
   - Problèmes inverses
   - Reconstruction statistique
   - Imagerie tomographique
-  - Simulation Monte Carlo
+  - Simulations Monte-Carlo
   - Optimisation
   - Imagerie computationnelle
 
@@ -88,8 +88,7 @@ email: "latifm[.]pro[@]gmail[.]com"
 user_groups:
 - Researchers
 ---
-Je suis docteur en Traitement du Signal, avec un profil de recherche à l’intersection des problèmes inverses, de la reconstruction statistique, de l’optimisation et de l’imagerie computationnelle.
+Docteur en Traitement du Signal, je m'intéresse aux méthodes de reconstruction, d’optimisation et de modélisation probabiliste pour des problèmes inverses en imagerie computationnelle.
 
-Mes travaux de doctorat ont porté sur le développement de modèles et d’algorithmes pour la reconstruction tomographique en imagerie 3-photons, avec des applications aux caméras hybrides TEP/Compton et au système XEMIS2.
-
-Je m’intéresse plus largement aux questions de modélisation probabiliste, d’optimisation et d’inférence statistique pour l’exploitation de données complexes en imagerie. J’ai également travaillé sur le démélange spectral parcimonieux, en développant des méthodes exactes de type branch-and-bound pour l’imagerie hyperspectrale.
+* **Avant mon doctorat :** ingénieur d’étude au [LS2N](https://www.ls2n.fr/equipe/sims/) avec [Sébastien Bourguignon](https://pagespersowp.ls2n.fr/sebastienbourguignon/), sur l’optimisation parcimonieuse et le démélange spectral.
+* **Doctorat :** travaux menés au [LS2N](https://www.ls2n.fr/equipe/sims/) et au [CRCI$^{\text{2}}$NA](https://crci2na.univ-nantes.fr/en/research/team-2/) sous la direction de [Jérôme Idier](https://pagespersowp.ls2n.fr/jeromeidier/en/jerome-idier-3/), [Simon Stute](https://scholar.google.com/citations?user=-OXk9BcAAAAJ&hl) et [Thomas Carlier](https://scholar.google.fr/citations?user=XbbDY1cAAAAJ&hl), sur la reconstruction tomographique statistique en imagerie médicale 3-photons pour des détecteurs hybrides TEP/Compton.

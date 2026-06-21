@@ -14,7 +14,7 @@ header:
   image: ""
 ---
 
-I am currently looking for a postdoctoral opportunity related to inverse problems, optimization, statistical reconstruction, Monte Carlo modelling and computational imaging.
+I am currently looking for a postdoctoral opportunity related to inverse problems, optimization, statistical reconstruction, Monte Carlo simulations and computational imaging.
 
 I am open to projects in imaging, inverse problems, numerical optimization, statistical methods or scientific machine learning, in France or internationally.
 

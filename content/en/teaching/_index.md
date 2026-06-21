@@ -9,6 +9,8 @@ tags:
   - Optimization
   - Signal processing
   - Algorithms
+research_areas:
+  - Teaching
 audiences:
   - Students
   - General public

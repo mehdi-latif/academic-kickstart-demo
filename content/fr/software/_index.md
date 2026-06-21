@@ -7,7 +7,7 @@ weight = 10  # Order that this section will appear.
 
 title = "Logiciels"
 subtitle = ""
-summary = "Codes de recherche, simulation Monte Carlo, outils scientifiques et scripts utilitaires."
+summary = "Codes de recherche, simulation Monte-Carlo, outils scientifiques et scripts utilitaires."
 
 # https://github.com/wowchemy/starter-hugo-academic/tree/main/content/project
 [content]
