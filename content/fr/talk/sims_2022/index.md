@@ -2,14 +2,16 @@
 title: Reconstruction tomographique pour l’imagerie TEP à $3\gamma$
 summary: Ecole d’Etez 06/2022 - Séminaire des doctorants SiMS.
 tags:
-  - Imagerie médicale 
+  - Seminar
+research_areas:
+  - Imagerie tomographique 
   - TEP
   - Compton
-  - Physique médicale
   - $3\gamma$
   - XEMIS2
-  - Simulations Monte Carlo
-  - Planches
+audiences:
+  - Students
+  - Researchers
 date: '2022-06-23T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

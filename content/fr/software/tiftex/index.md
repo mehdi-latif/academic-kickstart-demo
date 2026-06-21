@@ -1,25 +1,26 @@
 ---
-title: POLLUX
-summary: Simulateur TEP 3 photons.
+title: TIFTEX
+summary: Un simple script bash avec quelques options pour compiler du tex depuis un terminal et être indépendant d'IDE. On peut même compiler une bibliographie sans répéter les commandes 3 fois 😄.
+
 tags:
-  - Tomographie par émission de positon (TEP)
-  - Simulation
-date: '2022-07-01T00:00:00Z'
+  - Tools
+  - LaTeX
+research_areas:
+
+software_stack:
+  - Bash
+  - LaTeX
+
+date: '2021-01-01T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).
-external_link: ''
+external_link: 'https://gitlab.com/mlatif/tif-tex'
 
 image:
   caption:
   focal_point: Smart
 
-links:
-#  - icon: twitter
-#    icon_pack: fab
-#    name: Follow
-#    url: https://twitter.com/georgecushen
-url_code: 'https://gitlab.com/mlatif/tep3g-pollux/'
-url_pdf: ''
+url_code: ''
 url_slides: ''
 url_video: ''
 
@@ -30,5 +31,3 @@ url_video: ''
 #   Otherwise, set `slides = ""`.
 slides: ""
 ---
-
-*En cours*

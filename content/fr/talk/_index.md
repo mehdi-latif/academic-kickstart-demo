@@ -87,5 +87,5 @@ summary = "Conférences, séminaires, supports de présentation et slides."
  css_class = ""
 +++
 
-Cette page regroupe les logiciels et outils scientifiques développés dans le cadre de mes travaux de recherche.
+Cette page rassemble une sélection de présentations scientifiques, de séminaires, d'exposés présentés lors de congrès et de supports de médiation.
 
