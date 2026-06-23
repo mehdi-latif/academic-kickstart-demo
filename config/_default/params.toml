@@ -140,7 +140,7 @@ twitter = "mehdilatif"
 #   Examples: "Mon, Jan 2, 2006" or "2006-01-02"
 date_format = "Jan 2, 2006"
 #   Examples: "3:04 pm" or "15:04"
-time_format = "3:04 PM"
+time_format = "15:04"
 
 # Address format (choose from the [address_formats] list below or add you own to the list).
 address_format = "en-us"
@@ -153,7 +153,7 @@ address_format = "en-us"
 main_menu = {align = "l", show_logo = true}
 
 # Show estimated reading time for posts? (true/false)
-reading_time = true
+reading_time = false
 
 # Display next/previous section pager? (true/false)
 section_pager = false
