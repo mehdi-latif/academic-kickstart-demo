@@ -20,5 +20,4 @@ I am open to projects in imaging, inverse problems, numerical optimization, stat
 
 For more information, please see my [CV](/files/cv_mlatif_en.pdf) or [contact](/en/contact/) me directly.
 
----
 
