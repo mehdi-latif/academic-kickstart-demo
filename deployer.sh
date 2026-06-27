@@ -68,6 +68,7 @@ touch "$BUILD_DIR/.nojekyll"
 test -f "$BUILD_DIR/CNAME" || { echo "ERREUR : CNAME absent du build"; exit 1; }
 test -f "$BUILD_DIR/robots.txt" || { echo "ERREUR : robots.txt absent du build"; exit 1; }
 test -f "$BUILD_DIR/.nojekyll" || { echo "ERREUR : .nojekyll absent du build"; exit 1; }
+test -f "$BUILD_DIR/index.html" || { echo "ERREUR : index.html racine absent"; exit 1; }
 
 echo "Fichiers critiques présents."
 echo "$sep"
