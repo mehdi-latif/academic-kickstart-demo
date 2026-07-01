@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Page not found — Mehdi LATIF</title>
+    <meta name="robots" content="noindex">
+    <script>
+        (function () {
+            const path = window.location.pathname;
+
+            if (/\.(css|js|png|jpg|jpeg|gif|svg|webp|ico|pdf|txt|xml|json)$/i.test(path)) {
+                return;
+            }
+
+            let lang = "fr";
+
+            if (path.startsWith("/en/")) {
+                lang = "en";
+            } else if (path.startsWith("/fr/")) {
+                lang = "fr";
+            }
+
+            const parts = path.replace(/^\/+|\/+$/g, "").split("/").filter(Boolean);
+            let rest = parts;
+
+            if (parts[0] === "fr" || parts[0] === "en") {
+                rest = parts.slice(1);
+            }
+
+            const first = rest[0] || "";
+            const last = rest[rest.length - 1] || "";
+
+            function sectionTarget(section) {
+                if (rest.length <= 1) {
+                    return "/" + lang + "/" + section + "/";
+                }
+                return "/" + lang + "/" + section + "/" + last + "/";
+            }
+
+            let target = null;
+
+            if (first === "project" || first === "projects") {
+                target = sectionTarget("software");
+            } else if (first === "software") {
+                target = sectionTarget("software");
+            } else if (first === "talk" || first === "talks" || first === "slides") {
+                target = sectionTarget("talk");
+            } else if (first === "publication" || first === "publications") {
+                target = sectionTarget("publication");
+            } else if (first === "teaching" || first === "enseignement") {
+                target = "/" + lang + "/teaching/";
+            } else if (first === "contact") {
+                target = "/" + lang + "/contact/";
+            } else if (first === "research" || first === "recherche") {
+                target = "/" + lang + "/research/";
+            } else {
+                target = "/" + lang + "/404/";
+            }
+
+            window.location.replace(target);
+        })();
+    </script>
+</head>
+
+<body>
+    <p>Redirecting…</p>
+</body>
+
+</html>
