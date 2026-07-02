@@ -15,13 +15,22 @@ tags:
   - Inférence statistique
 ---
 
+## Sur cette page 
+* [Positionnement scientifique](#positionnement-scientifique)
+* [Axes de recherche](#axes-de-recherche)
+
+## Positionnement scientifique
+
 Mes recherches se situent à l’intersection des problèmes inverses, de la reconstruction statistique, de l’optimisation et de l’imagerie computationnelle.
 
 Je développe des modèles probabilistes et des méthodes algorithmiques pour la reconstruction tomographique, avec un intérêt particulier pour les régimes à faibles statistiques, la simulation Monte-Carlo et les modèles directs physiquement cohérents.
 
-Mes travaux de doctorat, réalisés sous la direction de Jérôme Idier ([LS2N - équipe SiMS](https://www.ls2n.fr/equipe/sims/)), Simon Stute et Thomas Carlier ([CRCI$^\text{2}$NA - équipe Nuclear oncology](https://crci2na.univ-nantes.fr/en/research/team-2)), ont porté sur la reconstruction tomographique statistique pour l’imagerie TEP 3-photons et les caméras hybrides TEP/Compton, dans le contexte du système XEMIS2.
+Mes travaux de doctorat, réalisés sous la direction de Jérôme Idier ([LS2N - équipe SiMS](https://www.ls2n.fr/equipe/sims/)), Simon Stute et Thomas Carlier ([CRCI$^\text{2}$NA - équipe Nuclear oncology](https://crci2na.univ-nantes.fr/en/research/team-2)), ont porté sur la reconstruction tomographique statistique pour l’imagerie TEP 3-photons et les caméras hybrides TEP/Compton, dans le contexte du système [XEMIS2](https://www.imt-atlantique.fr/fr/recherche-innovation/collaborer/projet/xemis-2).
 
 Plus largement, je m’intéresse aux méthodes statistiques et numériques pour les problèmes inverses mal posés, au-delà d’une modalité d’imagerie particulière.
+
+Cette perspective traduit une curiosité plus générale pour les problèmes à l’intersection de plusieurs disciplines, où se croisent modélisation, statistiques, optimisation, analyse numérique et calcul scientifique. 
+Ce goût pour l’interdisciplinarité guide ma démarche : articuler différents points de vue pour comprendre des systèmes complexes et en extraire une information fiable.
 
 ## Axes de recherche
 
@@ -40,4 +49,3 @@ J’utilise la simulation Monte-Carlo pour modéliser les processus de détectio
 ### Optimisation et algorithmique
 
 Ma formation en optimisation combinatoire et continue influence fortement mes travaux. Je m’intéresse aux algorithmes exacts et approchés, à l’optimisation numérique, aux modèles parcimonieux et aux stratégies algorithmiques pour les problèmes inverses de grande dimension.
-
