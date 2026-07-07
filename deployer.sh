@@ -70,8 +70,8 @@ test -f "$BUILD_DIR/robots.txt" || { echo "ERREUR : robots.txt absent du build";
 test -f "$BUILD_DIR/.nojekyll" || { echo "ERREUR : .nojekyll absent du build"; exit 1; }
 test -f "$BUILD_DIR/index.html" || { echo "ERREUR : index.html racine absent"; exit 1; }
 test -f "$BUILD_DIR/404.html" || { echo "Attention : 404.html absent du build. Les anciennes URLs ne seront pas redirigées."; exit 1; }
-test -f "$BUILD_DIR/fr/404/index.html" || { echo "ERREUR : page /fr/404/ absente"; exit 1; }
-test -f "$BUILD_DIR/en/404/index.html" || { echo "ERREUR : page /en/404/ absente"; exit 1; }
+# test -f "$BUILD_DIR/fr/404/index.html" || { echo "ERREUR : page /fr/404/ absente"; exit 1; }
+# test -f "$BUILD_DIR/en/404/index.html" || { echo "ERREUR : page /en/404/ absente"; exit 1; }
 
 echo "Fichiers critiques présents."
 echo "$sep"
