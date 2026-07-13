@@ -23,16 +23,13 @@ tags:
 
 ## Scientific positioning
 
-My research lies at the intersection of inverse problems, statistical reconstruction, optimization and computational imaging.
+My research lies at the intersection of inverse problems, statistical reconstruction, optimization and scientific computing.
 
-I develop probabilistic models and algorithmic methods for tomographic reconstruction, with a particular interest in low-count regimes, Monte Carlo simulations, sensitivity estimation and physically informed system models.
+I am interested in statistical and numerical methods for ill-posed inverse problems, beyond a specific imaging modality or application context. These questions involve tools at the interface between modelling, statistics, optimization, numerical analysis and scientific computing, especially when information has to be reconstructed from indirect, noisy or incomplete data.
 
-My PhD research was conducted under the supervision of Jérôme Idier ([LS2N — SiMS team](https://www.ls2n.fr/equipe/sims/)), Simon Stute and Thomas Carlier ([CRCI$^{\text{2}}$NA — Nuclear Oncology team](https://crci2na.univ-nantes.fr/en/research/team-2)). It focused on statistical tomographic reconstruction for three-photon PET imaging and hybrid PET/Compton cameras, in the context of the [XEMIS2](https://www.imt-atlantique.fr/fr/recherche-innovation/collaborer/projet/xemis-2) system.
+In this framework, I develop probabilistic models and algorithmic methods for tomographic reconstruction, with a particular interest in low-count regimes, Monte Carlo simulations, sensitivity estimation and physically informed system models.
 
-More broadly, I am interested in statistical and numerical methods for ill-posed inverse problems beyond a single imaging modality.
-
-This perspective reflects a broader curiosity for problems at the intersection of several disciplines, where modelling, statistics, optimization, numerical analysis and scientific computing meet. 
-My interest in interdisciplinary work guides my approach: bringing together different viewpoints to understand complex systems and extract reliable information from them.
+My PhD research was conducted under the supervision of Jérôme Idier (LS2N — SiMS team), Simon Stute and Thomas Carlier (CRCI$^{\text{2}}$NA — Nuclear Oncology team). It focused on statistical tomographic reconstruction for three-photon PET imaging and hybrid PET/Compton cameras, in the context of the XEMIS2 system.
 
 ## Research areas
 

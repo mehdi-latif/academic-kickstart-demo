@@ -21,16 +21,13 @@ tags:
 
 ## Positionnement scientifique
 
-Mes recherches se situent à l’intersection des problèmes inverses, de la reconstruction statistique, de l’optimisation et de l’imagerie computationnelle.
+Mes recherches se situent à l’intersection des problèmes inverses, de la reconstruction statistique, de l’optimisation et du calcul scientifique.
 
-Je développe des modèles probabilistes et des méthodes algorithmiques pour la reconstruction tomographique, avec un intérêt particulier pour les régimes à faibles statistiques, la simulation Monte-Carlo et les modèles directs physiquement cohérents.
+Je m’intéresse aux méthodes statistiques et numériques pour les problèmes inverses mal posés, au-delà d’une modalité d’imagerie ou d’un contexte applicatif particulier. Ces questions mobilisent des outils à l’interface entre modélisation, statistiques, optimisation, analyse numérique et calcul scientifique, notamment lorsque l’information doit être reconstruite à partir de données indirectes, bruitées ou incomplètes.
+
+Dans ce cadre, je développe des modèles probabilistes et des méthodes algorithmiques pour la reconstruction tomographique, avec un intérêt particulier pour les régimes à faibles statistiques, la simulation Monte-Carlo et les modèles directs physiquement cohérents.
 
 Mes travaux de doctorat, réalisés sous la direction de Jérôme Idier ([LS2N - équipe SiMS](https://www.ls2n.fr/equipe/sims/)), Simon Stute et Thomas Carlier ([CRCI$^\text{2}$NA - équipe Nuclear oncology](https://crci2na.univ-nantes.fr/en/research/team-2)), ont porté sur la reconstruction tomographique statistique pour l’imagerie TEP 3-photons et les caméras hybrides TEP/Compton, dans le contexte du système [XEMIS2](https://www.imt-atlantique.fr/fr/recherche-innovation/collaborer/projet/xemis-2).
-
-Plus largement, je m’intéresse aux méthodes statistiques et numériques pour les problèmes inverses mal posés, au-delà d’une modalité d’imagerie particulière.
-
-Cette perspective traduit une curiosité plus générale pour les problèmes à l’intersection de plusieurs disciplines, où se croisent modélisation, statistiques, optimisation, analyse numérique et calcul scientifique. 
-Ce goût pour l’interdisciplinarité guide ma démarche : articuler différents points de vue pour comprendre des systèmes complexes et en extraire une information fiable.
 
 ## Axes de recherche
 
