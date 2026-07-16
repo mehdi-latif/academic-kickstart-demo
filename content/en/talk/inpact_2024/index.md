@@ -16,6 +16,9 @@ audiences:
   - Researchers
   - General public
 date: '2024-02-13T00:00:00Z'
+all_day: true
+
+location: "Nantes, France"
 
 # Optional external URL for project (replaces project detail page).
 external_link: '/files/ML_INPACT24.pdf'

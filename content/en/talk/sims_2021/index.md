@@ -14,6 +14,9 @@ audiences:
   - Students
   - Researchers
 date: '2021-09-23T00:00:00Z'
+all_day: true
+
+location: "Nantes, France"
 
 # Optional external URL for project (replaces project detail page).
 external_link: '/files/LATIFM_MIMOSA_UNMIX_SLIDES.pdf'

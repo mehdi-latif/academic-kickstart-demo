@@ -13,6 +13,9 @@ audiences:
   - Students
   - Researchers
 date: '2022-06-23T00:00:00Z'
+all_day: true
+
+location: "Nantes, France"
 
 # Optional external URL for project (replaces project detail page).
 external_link: '/files/LATIFM_PHD_ETEZ22.pdf'
