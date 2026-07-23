@@ -1,6 +1,6 @@
 ---
 
-title: "Reconstruction tomographique pour l’imagerie 3-photons basée sur des caméras hybrides TEP/Compton."
+title: "Reconstruction tomographique pour l’imagerie 3-photons basée sur des caméras hybrides TEP/Compton"
 authors:
 - admin
 
