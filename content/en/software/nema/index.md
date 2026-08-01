@@ -1,7 +1,7 @@
 ---
 
-title: "NEMA quality phantom"
-summary: "Scripts for generating and preparing NEMA phantom compatible with CASToR and POLLUX reconstruction workflows."
+title: "NEMA Script"
+summary: "Bash scripts for generating NEMA NU 4 digital phantoms (sections 3 and 6) and associated masks, with outputs compatible with CASToR and POLLUX workflows."
 
 authors:
 - admin
@@ -45,3 +45,8 @@ preview_only: false
 
 **NEMA Script** gathers scripts for generating and preparing NEMA-type digital phantoms for tomographic reconstruction experiments.
 
+Two phantoms are currently available: 
+- the NEMA NU 4 phantom section 3 for spatial resolution analysis 
+- the NEMA NU 4 phantom for quality image assessment (section 6). 
+ 
+The outputs are compatible with the CASToR and POLLUX reconstruction workflows.
