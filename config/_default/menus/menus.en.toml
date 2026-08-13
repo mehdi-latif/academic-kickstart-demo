@@ -55,7 +55,7 @@
   identifier = "cv_fr"
   parent = "cv"
   name = "CV - English"
-  url =  "/project/default_soon/"         #"/files/CV_MLATIF_EN.pdf"
+  url = "/files/cv_mlatif_en.pdf" # "/project/default_soon/"         
   weight = 90
 
 [[main]]
