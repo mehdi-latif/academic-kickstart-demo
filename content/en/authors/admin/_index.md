@@ -55,9 +55,9 @@ social:
 - icon: orcid
   icon_pack: ai
   link: https://orcid.org/0009-0001-1480-9770
-- icon: researchgate
-  icon_pack: ai
-  link: https://www.researchgate.net/profile/Mehdi-Latif
+# - icon: researchgate
+#   icon_pack: ai
+#   link: https://www.researchgate.net/profile/Mehdi-Latif
 - icon: google-scholar
   icon_pack: ai
   link: https://scholar.google.com/citations?user=GqB6M5MAAAAJ
